@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marcos Herradón DJ</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
       background-color: #111;
       color: #eee;
     }
@@ -20,6 +24,10 @@
       font-family: 'Horizon', sans-serif;
       font-weight: bold;
       margin: 0 0 10px;
+    }
+
+    h3 {
+      margin-bottom: 20px;
     }
 
     .hero {
@@ -59,7 +67,7 @@
     .hero h2 {
       font-size: 1.5rem;
       color: #ccc;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
 
     .menu {
@@ -152,7 +160,7 @@
     .event-info p {
       margin: 5px 0 0;
       color: #aaa;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
 
     .contact form {
@@ -166,7 +174,7 @@
       background-color: #222;
       border: none;
       color: #fff;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
 
     .contact button {
@@ -175,14 +183,14 @@
       color: #fff;
       border: none;
       cursor: pointer;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
 
     .socials a {
       margin-right: 15px;
       color: #aaa;
       text-decoration: none;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Nunito', sans-serif;
     }
 
     footer {
@@ -219,8 +227,8 @@
     </header>
 
     <section id="about" class="about">
+      <h3>Sobre mí</h3>
       <div class="about-text">
-        <h3>Sobre mí</h3>
         <p>
           Marcos Herradón es un DJ emergente de Talavera de la Reina que, en tan solo un año de trayectoria, ha conseguido hacerse un hueco en la escena urbana local. Especializado en ritmos urbanos desde reguetón y trap hasta dembow, Marcos combina técnica y selección musical para crear sesiones vibrantes que mantienen la pista en movimiento de principio a fin.
         </p>
@@ -240,7 +248,7 @@
       </div>
     </section>
 
-   <section class="events">
+    <section class="events">
     <h3>Próximos Eventos</h3>
     <div class="event-card">
       <div class="event-date">18 OCT</div>
@@ -270,19 +278,24 @@
         <p>****</p>
       </div>
     </div>
-  </section>
-    
-   <section class="contact">
+  </section> 
+
+     <section class="contact">
     <h3>¡Hablemos!</h3>
-    <form id="contact-form" action="https://formspree.io/f/mzzjygnk" method="POST">
+    <form action="https://formspree.io/f/mzzjygnk" method="POST">
       <input type="text" name="name" placeholder="Tu nombre" required />
       <input type="email" name="email" placeholder="Tu email" required />
       <textarea name="message" placeholder="Tu mensaje" required></textarea>
       <button type="submit">Enviar</button>
     </form>
-    <div class="success-message" id="success-message">
-      ¡Gracias por enviar tu solicitud. Te contactaremos lo antes posible!
-    </div>
     <div class="socials">
       <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
-      <a
+      <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Marcos Herradón DJ · <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
+  </footer>
+</body>
+</html>

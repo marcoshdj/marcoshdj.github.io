@@ -20,6 +20,10 @@
       font-family: 'Inter', sans-serif;
       background-color: #111;
       color: #eee;
+      background-image: url('https://i.imgur.com/hsUkF5K.png');
+      background-size: contain;
+      background-repeat: repeat;
+      background-attachment: fixed;
     }
 
     h1, h2, h3, h4 {
@@ -29,33 +33,8 @@
     }
 
     .hero {
-      position: relative;
-      height: 100vh;
-      background-image: url('https://i.imgur.com/0qS2SeR.jpeg');
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    @media (min-width: 1024px) {
-      .hero {
-        height: 80vh;
-      }
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
+      padding: 100px 20px 60px;
       text-align: center;
-      top: 40%;
     }
 
     .hero h1 {
@@ -153,6 +132,16 @@
       font-family: 'Inter', sans-serif;
     }
 
+    .success-message {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #2a2a2a;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 6px;
+      display: none;
+    }
+
     .socials a {
       margin-right: 15px;
       color: #aaa;
@@ -175,11 +164,8 @@
 </head>
 <body>
   <header class="hero">
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>Marcos Herradón DJ</h1>
-      <h2>Urban DJ & Producer</h2>
-    </div>
+    <h1>Marcos Herradón DJ</h1>
+    <h2>Urban DJ & Producer</h2>
   </header>
 
   <section class="about">
@@ -207,43 +193,46 @@
   <section class="events">
     <h3>Próximos Eventos</h3>
     <div class="event-card">
+      <div class="event-date">18 OCT</div>
+      <div class="event-info">
+        <h4>MOMBAY DISCOTECA | RODEO PARTY with DJ GRILLO</h4>
+        <p>Nombela - Toledo</p>
+      </div>
+    </div>
+    <div class="event-card">
       <div class="event-date">31 OCT</div>
       <div class="event-info">
-        <h4>HALLOWFEST @TAMUJOSOEDITION</h4>
-        <p>Belvís De La Jara - Toledo</p>
+        <h4>MOMBAY DISCOTECA | PRE-HALLOWEEN all night</h4>
+        <p>Nombela - Toledo</p>
       </div>
     </div>
     <div class="event-card">
-      <div class="event-date">07 NOV</div>
+      <div class="event-date">01 NOV</div>
       <div class="event-info">
-        <h4>SALA WONDERLAND</h4>
-        <p>Talavera De La Reina</p>
+        <h4>MOMBAY DISCOTECA | HALLOWEEN NIGHT with GONZA SILVA</h4>
+        <p>Nombela - Toledo</p>
       </div>
     </div>
     <div class="event-card">
-      <div class="event-date">08 NOV</div>
+      <div class="event-date">XX XXX</div>
       <div class="event-info">
-        <h4>SALA LA JUNGLA</h4>
-        <p>Hinojosa De San Vicente - Toledo</p>
-      </div>
-    </div>
-    <div class="event-card">
-      <div class="event-date">15 NOV</div>
-      <div class="event-info">
-        <h4>Próximamente...</h4>
-        <p>**********</p>
+        <h4>XXXXXX</h4>
+        <p>xxxxx - xxxx</p>
       </div>
     </div>
   </section>
 
   <section class="contact">
     <h3>¡Hablemos!</h3>
-    <form>
-      <input type="text" placeholder="Tu nombre" required />
-      <input type="email" placeholder="Tu email" required />
-      <textarea placeholder="Tu mensaje" required></textarea>
+    <form id="contact-form" action="https://formspree.io/f/mzzjygnk" method="POST">
+      <input type="text" name="name" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu email" required />
+      <textarea name="message" placeholder="Tu mensaje" required></textarea>
       <button type="submit">Enviar</button>
     </form>
+    <div class="success-message" id="success-message">
+      ¡Gracias por enviar tu solicitud. Te contactaremos lo antes posible!
+    </div>
     <div class="socials">
       <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
       <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
@@ -256,5 +245,11 @@
     <p>© 2025 Marcos Herradón. Todos los derechos reservados.</p>
     <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
   </footer>
-</body>
-</html>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marcos Herradón DJ</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
@@ -20,42 +20,6 @@
       font-family: 'Horizon', sans-serif;
       font-weight: bold;
       margin: 0 0 10px;
-    }
-
-    .sidebar {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 160px;
-      height: auto;
-      background-color: rgba(0, 0, 0, 0); /* fondo completamente transparente */
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 20px 0;
-      z-index: 10;
-
-    }
-
-    .sidebar a {
-      display: block;
-      padding: 15px 20px;
-      .sidebar a {
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-      text-decoration: none;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      transition: background 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #222;
-    }
-
-    main {
-      margin-left: 160px;
     }
 
     .hero {
@@ -96,6 +60,37 @@
       font-size: 1.5rem;
       color: #ccc;
       font-family: 'Inter', sans-serif;
+    }
+
+    .menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
+      z-index: 10;
+    }
+
+    .menu a {
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+      transition: transform 0.3s;
+    }
+
+    .menu a:hover {
+      transform: scale(1.1);
+    }
+
+    main {
+      margin: 0;
     }
 
     section {
@@ -204,7 +199,7 @@
   </style>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="menu">
     <a href="#about">Sobre mí</a>
     <a href="#music">Música</a>
     <a href="#events">Eventos</a>
@@ -277,23 +272,17 @@
     </div>
   </section>
     
-  <section id="contact" class="contact">
-      <h3>¡Hablemos!</h3>
-      <form action="https://formspree.io/f/mzzjygnk" method="POST">
-        <input type="text" name="name" placeholder="Tu nombre" required />
-        <input type="email" name="email" placeholder="Tu email" required />
-        <textarea name="message" placeholder="Tu mensaje" required></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-      <div class="socials">
-        <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
-        <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
-      </div>
-    </section>
-
-    <footer>
-      © 2025 Marcos Herradón DJ · <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
-    </footer>
-  </main>
-</body>
-</html>
+   <section class="contact">
+    <h3>¡Hablemos!</h3>
+    <form id="contact-form" action="https://formspree.io/f/mzzjygnk" method="POST">
+      <input type="text" name="name" placeholder="Tu nombre" required />
+      <input type="email" name="email" placeholder="Tu email" required />
+      <textarea name="message" placeholder="Tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <div class="success-message" id="success-message">
+      ¡Gracias por enviar tu solicitud. Te contactaremos lo antes posible!
+    </div>
+    <div class="socials">
+      <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
+      <a

@@ -6,6 +6,8 @@
   <title>Marcos Herradón DJ</title>
   <link rel="icon" href="favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -15,9 +17,39 @@
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Arial Black', sans-serif;
+      font-family: 'Horizon', sans-serif;
       font-weight: bold;
       margin: 0 0 10px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 160px;
+      height: 100%;
+      background-color: #000;
+      padding-top: 40px;
+      z-index: 10;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #222;
+    }
+
+    main {
+      margin-left: 160px;
     }
 
     .hero {
@@ -57,6 +89,7 @@
     .hero h2 {
       font-size: 1.5rem;
       color: #ccc;
+      font-family: 'Inter', sans-serif;
     }
 
     section {
@@ -65,7 +98,28 @@
       margin: auto;
     }
 
-    .event-card {
+    .about {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-img img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .music .tracks iframe {
+      margin-bottom: 20px;
+      width: 100%;
+      height: 166px;
+    }
+
+    .events .event-card {
       display: flex;
       align-items: center;
       background-color: rgba(0, 0, 0, 0.4);
@@ -85,6 +139,7 @@
       margin-right: 20px;
       min-width: 100px;
       text-align: center;
+      font-family: 'Horizon', sans-serif;
     }
 
     .event-info h4 {
@@ -96,6 +151,7 @@
     .event-info p {
       margin: 5px 0 0;
       color: #aaa;
+      font-family: 'Inter', sans-serif;
     }
 
     .contact form {
@@ -109,6 +165,7 @@
       background-color: #222;
       border: none;
       color: #fff;
+      font-family: 'Inter', sans-serif;
     }
 
     .contact button {
@@ -117,12 +174,14 @@
       color: #fff;
       border: none;
       cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
 
     .socials a {
       margin-right: 15px;
       color: #aaa;
       text-decoration: none;
+      font-family: 'Inter', sans-serif;
     }
 
     footer {
@@ -139,18 +198,48 @@
   </style>
 </head>
 <body>
-  <header class="hero">
-    <video autoplay muted loop playsinline class="bg-video">
-      <source src="https://marcoshdj.github.io/IMG_0204.mp4" type="video/mp4" />
-    </video>
-    <div class="overlay"></div>
-    <div class="hero-content">
-      <h1>Marcos Herradón DJ</h1>
-      <h2>Urban DJ & Producer</h2>
-    </div>
-  </header>
+  <div class="sidebar">
+    <a href="#about">Sobre mí</a>
+    <a href="#music">Música</a>
+    <a href="#events">Eventos</a>
+    <a href="#contact">Contacto</a>
+  </div>
 
-<section class="events">
+  <main>
+    <header class="hero">
+      <video autoplay muted loop playsinline class="bg-video">
+        <source src="https://marcoshdj.github.io/IMG_0204.mp4" type="video/mp4" />
+      </video>
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <h1>Marcos Herradón DJ</h1>
+        <h2>Urban DJ & Producer</h2>
+      </div>
+    </header>
+
+    <section id="about" class="about">
+      <div class="about-text">
+        <h3>Sobre mí</h3>
+        <p>
+          Marcos Herradón es un DJ emergente de Talavera de la Reina que, en tan solo un año de trayectoria, ha conseguido hacerse un hueco en la escena urbana local. Especializado en ritmos urbanos desde reguetón y trap hasta dembow, Marcos combina técnica y selección musical para crear sesiones vibrantes que mantienen la pista en movimiento de principio a fin.
+        </p>
+      </div>
+      <div class="about-img">
+        <img src="https://i.imgur.com/X6urxBe.jpeg" alt="Marcos Herradón DJ" />
+      </div>
+    </section>
+
+    <section id="music" class="music">
+      <h3>Mi Música</h3>
+      <div class="tracks">
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://on.soundcloud.com/Qp7HJxcMBtaDii7KTG"></iframe>
+        <iframe scrolling="no" frameborder="no" allow="autoplay"
+          src="https://on.soundcloud.com/QNQfVcHjGvoktmz2Gl"></iframe>
+      </div>
+    </section>
+
+   <section class="events">
     <h3>Próximos Eventos</h3>
     <div class="event-card">
       <div class="event-date">18 OCT</div>
@@ -181,24 +270,24 @@
       </div>
     </div>
   </section>
+    
+  <section id="contact" class="contact">
+      <h3>¡Hablemos!</h3>
+      <form action="https://formspree.io/f/mzzjygnk" method="POST">
+        <input type="text" name="name" placeholder="Tu nombre" required />
+        <input type="email" name="email" placeholder="Tu email" required />
+        <textarea name="message" placeholder="Tu mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+      <div class="socials">
+        <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
+      </div>
+    </section>
 
-
-  <section class="contact">
-    <h3>¡Hablemos!</h3>
-    <form action="https://formspree.io/f/mzzjygnk" method="POST">
-      <input type="text" name="name" placeholder="Tu nombre" required />
-      <input type="email" name="email" placeholder="Tu email" required />
-      <textarea name="message" placeholder="Tu mensaje" required></textarea>
-      <button type="submit">Enviar</button>
-    </form>
-    <div class="socials">
-      <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
-      <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 Marcos Herradón DJ · <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
-  </footer>
+    <footer>
+      © 2025 Marcos Herradón DJ · <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
+    </footer>
+  </main>
 </body>
 </html>

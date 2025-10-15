@@ -24,19 +24,25 @@
 
     .sidebar {
       position: fixed;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 160px;
-      height: 100%;
-      background-color: #000;
-      padding-top: 40px;
+      height: auto;
+      background-color: rgba(0, 0, 0, 0); /* fondo completamente transparente */
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px 0;
       z-index: 10;
+
     }
 
     .sidebar a {
       display: block;
       padding: 15px 20px;
+      .sidebar a {
       color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
       text-decoration: none;
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.2rem;

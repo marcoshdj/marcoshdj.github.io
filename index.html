@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/horizon" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
+
   <style>
     html { scroll-behavior: smooth; }
     body {
@@ -16,12 +17,16 @@
       background-color: #111;
       color: #eee;
     }
+
     h1, h2, h3, h4 {
       font-family: 'Horizon', sans-serif;
       font-weight: bold;
       margin: 0 0 10px;
     }
+
     h3 { margin-bottom: 20px; }
+
+    /* HERO */
     .hero {
       position: relative;
       height: 100vh;
@@ -48,7 +53,9 @@
       top: 40%;
     }
     .hero h1 { font-size: 3rem; color: #fff; }
-    .hero h2 { font-size: 1.5rem; color: #ccc; font-family: 'Nunito', sans-serif; }
+    .hero h2 { font-size: 1.5rem; color: #ccc; }
+
+    /* MENU */
     .menu {
       position: fixed;
       bottom: 0; left: 0;
@@ -70,12 +77,15 @@
       transition: transform 0.3s;
     }
     .menu a:hover { transform: scale(1.1); }
-    main { margin: 0; }
+
+    /* SECTIONS */
     section {
       padding: 60px 20px;
       max-width: 1000px;
       margin: auto;
     }
+
+    /* ABOUT */
     .about {
       display: flex;
       flex-wrap: wrap;
@@ -86,10 +96,48 @@
       max-width: 300px;
       border-radius: 10px;
     }
-    .music .tracks iframe {
-      margin-bottom: 20px;
-      width: 100%;
+
+    /* MUSIC – DISEÑO PRO */
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
     }
+
+    .track-card {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .track-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+    }
+
+    .track-card iframe {
+      width: 100%;
+      height: 166px;
+      border-radius: 8px;
+    }
+
+    .track-info {
+      font-size: 11px;
+      color: #ccc;
+      margin-top: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-info a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    /* EVENTS */
     .events .event-card {
       display: flex;
       align-items: center;
@@ -109,10 +157,9 @@
       margin-right: 20px;
       min-width: 100px;
       text-align: center;
-      font-family: 'Horizon', sans-serif;
     }
-    .event-info h4 { margin: 0; font-size: 1.2rem; color: #eee; }
-    .event-info p { margin: 5px 0 0; color: #aaa; font-family: 'Nunito', sans-serif; }
+
+    /* CONTACT */
     .contact form {
       display: flex;
       flex-direction: column;
@@ -123,7 +170,6 @@
       background-color: #222;
       border: none;
       color: #fff;
-      font-family: 'Nunito', sans-serif;
     }
     .contact button {
       padding: 10px;
@@ -131,14 +177,14 @@
       color: #fff;
       border: none;
       cursor: pointer;
-      font-family: 'Nunito', sans-serif;
     }
+
     .socials a {
       margin-right: 15px;
       color: #aaa;
       text-decoration: none;
-      font-family: 'Nunito', sans-serif;
     }
+
     footer {
       text-align: center;
       padding: 30px 10px;
@@ -150,6 +196,7 @@
 </head>
 
 <body>
+
   <div class="menu">
     <a href="#about">Sobre mí</a>
     <a href="#music">Música</a>
@@ -158,6 +205,8 @@
   </div>
 
   <main>
+
+    <!-- HERO -->
     <header class="hero">
       <video autoplay muted loop playsinline class="bg-video">
         <source src="https://marcoshdj.github.io/IMG_0204.mp4" type="video/mp4" />
@@ -169,6 +218,7 @@
       </div>
     </header>
 
+    <!-- ABOUT -->
     <section id="about" class="about">
       <h3>Sobre mí</h3>
       <div class="about-text">
@@ -181,29 +231,56 @@
       </div>
     </section>
 
+    <!-- MUSIC -->
     <section id="music" class="music">
       <h3>Mi Música</h3>
+
       <div class="tracks">
 
-        <!-- PISTA 1 -->
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2166804993&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+        <!-- TRACK 1 -->
+        <div class="track-card">
+          <iframe scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2166804993&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+          <div class="track-info">
+            <a href="https://soundcloud.com/djmarcosherradon" target="_blank">Marcos Herradon DJ</a> ·
+            <a href="https://soundcloud.com/djmarcosherradon/me-mareo-x-deseo-marcos-herradon-mashup" target="_blank">ME MAREO x DESEO</a>
+          </div>
+        </div>
 
-        <!-- PISTA 2 -->
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2162492967&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+        <!-- TRACK 2 -->
+        <div class="track-card">
+          <iframe scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2162492967&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+          <div class="track-info">
+            <a href="https://soundcloud.com/djmarcosherradon" target="_blank">Marcos Herradon DJ</a> ·
+            <a href="https://soundcloud.com/djmarcosherradon/chorrito-pa-las-animas-x-una-noche-en-medellin-marcos-herradon-mashup" target="_blank">Chorrito Pa' Las Ánimas x Medellín</a>
+          </div>
+        </div>
 
-        <!-- PISTA 3 -->
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2269410731&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <!-- TRACK 3 -->
+        <div class="track-card">
+          <iframe scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2269410731&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+          <div class="track-info">
+            <a href="https://soundcloud.com/djmarcosherradon" target="_blank">Marcos Herradon DJ</a> ·
+            <a href="https://soundcloud.com/djmarcosherradon/te-estoy-amando-locamente-x-2" target="_blank">Te Estoy Amando Locamente x Yo Voy</a>
+          </div>
+        </div>
 
-        <!-- PISTA 4 (NUEVA) -->
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2272730915&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        <!-- TRACK 4 (NUEVA) -->
+        <div class="track-card">
+          <iframe scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2272730915&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+          <div class="track-info">
+            <a href="https://soundcloud.com/djmarcosherradon" target="_blank">Marcos Herradon DJ</a> ·
+            <a href="https://soundcloud.com/djmarcosherradon/pirueta-x-junto-al-amanecer" target="_blank">Pirueta x Junto Al Amanecer</a>
+          </div>
+        </div>
 
       </div>
     </section>
 
+    <!-- EVENTS -->
     <section id="events" class="events">
       <h3>Próximos Eventos</h3>
       <div class="event-card">
@@ -215,6 +292,7 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" class="contact">
       <h3>¡Hablemos!</h3>
       <form action="https://formspree.io/f/mzzjygnk" method="POST">

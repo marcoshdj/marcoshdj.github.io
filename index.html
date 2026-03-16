@@ -23,27 +23,41 @@
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
       position: relative;
-    }
-
-    /* FONDO SUAVE CON TRANSPARENCIA */
-    .background-image {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://github.com/marcoshdj/marcoshdj.github.io/blob/main/_DSC2253-ALTA%20JPG-2_(2).jpg?raw=true');
-      background-size: 70%; /* AJUSTE PERFECTO: ni grande ni pequeño */
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0.12; /* TRANSPARENCIA SUAVE */
-      z-index: -1;
-      filter: blur(1px); /* SUTIL, ELEGANTE */
+      min-height: 100vh;
     }
 
     a {
       color: inherit;
       text-decoration: none;
+    }
+
+    /* VIDEO DE FONDO */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.35); /* oscurece un poco para que se lea el texto */
+    }
+
+    /* CAPA OSCURA SUAVE (por si acaso) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+      z-index: -1;
     }
 
     /* NAV */
@@ -58,7 +72,7 @@
     nav a {
       margin-left: 30px;
       font-size: 14px;
-      opacity: 0.7;
+      opacity: 0.8;
       transition: 0.3s;
     }
 
@@ -92,7 +106,7 @@
 
     .hero h2 {
       font-size: 18px;
-      opacity: 0.7;
+      opacity: 0.8;
       margin-top: 20px;
     }
 
@@ -113,6 +127,7 @@
     /* SECTION TITLES */
     section {
       padding: 120px 8vw;
+      backdrop-filter: blur(2px);
     }
 
     section h3 {
@@ -126,7 +141,7 @@
       max-width: 700px;
       font-size: 18px;
       line-height: 1.6;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     /* MUSIC GRID */
@@ -156,10 +171,9 @@
 
     .track-artist {
       font-size: 13px;
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
-    /* EXPANDED PLAYER */
     .player {
       margin-top: 20px;
       display: none;
@@ -177,7 +191,7 @@
     }
 
     .event-place {
-      opacity: 0.7;
+      opacity: 0.8;
       margin-top: 5px;
     }
 
@@ -185,7 +199,7 @@
     .contact a {
       display: block;
       margin-bottom: 10px;
-      opacity: 0.7;
+      opacity: 0.8;
       transition: 0.3s;
     }
 
@@ -197,17 +211,13 @@
     footer {
       text-align: center;
       padding: 40px;
-      opacity: 0.5;
+      opacity: 0.6;
       font-size: 14px;
+      backdrop-filter: blur(2px);
     }
 
-    /* 📱 MOBILE OPTIMIZATION */
+    /* 📱 MOBILE */
     @media (max-width: 768px) {
-
-      .background-image {
-        background-size: 120%; /* Más grande en móvil para que se vea bien */
-        opacity: 0.10;
-      }
 
       nav {
         padding: 20px;
@@ -259,8 +269,13 @@
 
 <body>
 
-  <!-- FONDO SUAVE -->
-  <div class="background-image"></div>
+  <!-- VIDEO DE FONDO -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="https://github.com/marcoshdj/marcoshdj.github.io/raw/main/IMG_0204.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay"></div>
 
   <!-- NAV -->
   <nav>

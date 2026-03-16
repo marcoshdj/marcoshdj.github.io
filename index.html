@@ -22,24 +22,6 @@
       color: #fff;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
-      position: relative;
-
-      /* FONDO PEQUEÑO CENTRADO */
-      background-image: url('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 350px; /* TAMAÑO DEL LOGO */
-    }
-
-    /* CAPA OSCURA */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.65);
-      z-index: -1;
-      backdrop-filter: blur(2px);
     }
 
     a {
@@ -78,17 +60,23 @@
       padding: 0 20px;
     }
 
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 80px;
-      letter-spacing: 2px;
-      line-height: 0.9;
+    /* LOGO */
+    .hero img {
+      width: 260px; /* AJUSTA EL TAMAÑO AQUÍ */
+      max-width: 80%;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero h2 {
       font-size: 18px;
       opacity: 0.7;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
     .hero .btn {
@@ -161,11 +149,6 @@
       animation: fadeIn 0.4s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* EVENTS */
     .event {
       margin-bottom: 40px;
@@ -204,10 +187,6 @@
     /* 📱 MOBILE OPTIMIZATION */
     @media (max-width: 768px) {
 
-      body {
-        background-size: 220px; /* MÁS PEQUEÑO EN MÓVIL */
-      }
-
       nav {
         padding: 20px;
       }
@@ -217,8 +196,8 @@
         font-size: 12px;
       }
 
-      .hero h1 {
-        font-size: 55px;
+      .hero img {
+        width: 180px;
       }
 
       .hero h2 {
@@ -268,7 +247,7 @@
 
   <!-- HERO -->
   <header class="hero">
-    <h1>MARCOS<br>HERRADÓN DJ</h1>
+    <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/logoweb.png" alt="Logo Marcos Herradón DJ">
     <h2>Urban DJ & Producer</h2>
     <a href="#about" class="btn">Saber más</a>
   </header>

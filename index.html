@@ -23,14 +23,14 @@
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
 
-      /* FONDO CON TU FOTO */
+      /* FONDO PARALLAX */
       background-image: url('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_4276.JPG');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
     }
 
-    /* CAPA OSCURA PARA TRANSPARENCIA */
+    /* CAPA OSCURA */
     body::before {
       content: "";
       position: fixed;
@@ -197,6 +197,52 @@
       opacity: 0.5;
       font-size: 14px;
     }
+
+    /* 📱 MOBILE OPTIMIZATION */
+    @media (max-width: 768px) {
+
+      nav {
+        padding: 20px;
+      }
+
+      nav a {
+        margin-left: 15px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding-left: 6vw;
+      }
+
+      .hero h1 {
+        font-size: 70px;
+      }
+
+      .hero h2 {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 80px 6vw;
+      }
+
+      section h3 {
+        font-size: 42px;
+      }
+
+      .about-text {
+        font-size: 16px;
+      }
+
+      .music-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .event-date {
+        font-size: 32px;
+      }
+    }
   </style>
 
   <script>
@@ -232,7 +278,7 @@
     </p>
   </section>
 
-  <!-- MUSIC (MOVIDO AQUÍ) -->
+  <!-- MUSIC -->
   <section id="music">
     <h3>Música</h3>
 
@@ -311,7 +357,7 @@
   </section>
 
   <footer>
-    © 2025 Marcos Herradón DJ
+    © 2026 Marcos Herradón DJ
   </footer>
 
 </body>

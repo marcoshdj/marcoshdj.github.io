@@ -23,25 +23,17 @@
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
       position: relative;
-    }
 
-    /* PARALLAX BACKGROUND */
-    .parallax-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 120vh;
+      /* FONDO PEQUEÑO CENTRADO */
       background-image: url('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png');
-      background-size: cover;
+      background-repeat: no-repeat;
       background-position: center;
-      z-index: -2;
-      transform: translateY(0px);
-      transition: transform 0.1s linear;
+      background-size: 350px; /* TAMAÑO DEL LOGO */
     }
 
     /* CAPA OSCURA */
-    .overlay {
+    body::before {
+      content: "";
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
@@ -88,7 +80,7 @@
 
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 80px; /* MÁS PEQUEÑO */
+      font-size: 80px;
       letter-spacing: 2px;
       line-height: 0.9;
     }
@@ -212,6 +204,10 @@
     /* 📱 MOBILE OPTIMIZATION */
     @media (max-width: 768px) {
 
+      body {
+        background-size: 220px; /* MÁS PEQUEÑO EN MÓVIL */
+      }
+
       nav {
         padding: 20px;
       }
@@ -222,7 +218,7 @@
       }
 
       .hero h1 {
-        font-size: 55px; /* MÁS PEQUEÑO EN MÓVIL */
+        font-size: 55px;
       }
 
       .hero h2 {
@@ -253,13 +249,6 @@
   </style>
 
   <script>
-    /* PARALLAX REAL */
-    window.addEventListener("scroll", () => {
-      const scrolled = window.scrollY;
-      const bg = document.querySelector(".parallax-bg");
-      bg.style.transform = `translateY(${scrolled * 0.3}px)`;
-    });
-
     function togglePlayer(id) {
       const player = document.getElementById(id);
       player.style.display = player.style.display === "block" ? "none" : "block";
@@ -268,10 +257,6 @@
 </head>
 
 <body>
-
-  <!-- PARALLAX BACKGROUND -->
-  <div class="parallax-bg"></div>
-  <div class="overlay"></div>
 
   <!-- NAV -->
   <nav>

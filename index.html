@@ -10,12 +10,7 @@
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
 
   <style>
-    /* RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #000;
@@ -26,35 +21,27 @@
       min-height: 100vh;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     /* VIDEO DE FONDO */
     .video-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       overflow: hidden;
       z-index: -2;
     }
 
     .video-bg video {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       filter: brightness(0.35);
     }
 
     .overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
       z-index: -1;
     }
@@ -62,8 +49,7 @@
     /* NAV */
     nav {
       position: fixed;
-      top: 0;
-      right: 0;
+      top: 0; right: 0;
       padding: 30px;
       z-index: 10;
     }
@@ -75,9 +61,7 @@
       transition: 0.3s;
     }
 
-    nav a:hover {
-      opacity: 1;
-    }
+    nav a:hover { opacity: 1; }
 
     /* HERO */
     .hero {
@@ -110,19 +94,14 @@
 
     .hero .btn {
       margin-top: 40px;
-      display: inline-block;
       padding: 12px 28px;
       border: 1px solid #fff;
       font-size: 14px;
       transition: 0.3s;
     }
 
-    .hero .btn:hover {
-      background: #fff;
-      color: #000;
-    }
+    .hero .btn:hover { background: #fff; color: #000; }
 
-    /* SECTION TITLES */
     section {
       padding: 120px 8vw;
       backdrop-filter: blur(2px);
@@ -134,7 +113,6 @@
       margin-bottom: 40px;
     }
 
-    /* ABOUT */
     .about-text {
       max-width: 700px;
       font-size: 18px;
@@ -149,29 +127,16 @@
       gap: 40px;
     }
 
-    .track {
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
     .track img {
       width: 100%;
       aspect-ratio: 1/1;
       object-fit: cover;
-      background: #111;
       border-radius: 14px;
+      background: #111;
     }
 
-    .track-title {
-      margin-top: 12px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .track-artist {
-      font-size: 13px;
-      opacity: 0.6;
-    }
+    .track-title { margin-top: 12px; font-size: 16px; opacity: 0.9; }
+    .track-artist { font-size: 13px; opacity: 0.6; }
 
     .player {
       margin-top: 20px;
@@ -179,34 +144,6 @@
       animation: fadeIn 0.4s ease;
     }
 
-    /* EVENTS */
-    .event {
-      margin-bottom: 40px;
-    }
-
-    .event-date {
-      font-size: 40px;
-      font-family: 'Bebas Neue';
-    }
-
-    .event-place {
-      opacity: 0.8;
-      margin-top: 5px;
-    }
-
-    /* CONTACT */
-    .contact a {
-      display: block;
-      margin-bottom: 10px;
-      opacity: 0.8;
-      transition: 0.3s;
-    }
-
-    .contact a:hover {
-      opacity: 1;
-    }
-
-    /* FOOTER */
     footer {
       text-align: center;
       padding: 40px;
@@ -215,60 +152,29 @@
       backdrop-filter: blur(2px);
     }
 
-    /* 📱 MOBILE */
     @media (max-width: 768px) {
-
-      nav {
-        padding: 20px;
-      }
-
-      nav a {
-        margin-left: 15px;
-        font-size: 12px;
-      }
-
-      .hero img {
-        width: 180px;
-      }
-
-      .hero h2 {
-        font-size: 14px;
-      }
-
-      section {
-        padding: 80px 6vw;
-      }
-
-      section h3 {
-        font-size: 42px;
-      }
-
-      .about-text {
-        font-size: 16px;
-      }
-
-      .music-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .event-date {
-        font-size: 32px;
-      }
+      nav { padding: 20px; }
+      nav a { margin-left: 15px; font-size: 12px; }
+      .hero img { width: 180px; }
+      .hero h2 { font-size: 14px; }
+      section { padding: 80px 6vw; }
+      section h3 { font-size: 42px; }
+      .about-text { font-size: 16px; }
+      .music-grid { grid-template-columns: 1fr; gap: 30px; }
     }
   </style>
 
   <script>
     function togglePlayer(id) {
-      const player = document.getElementById(id);
-      player.style.display = player.style.display === "block" ? "none" : "block";
+      const p = document.getElementById(id);
+      p.style.display = p.style.display === "block" ? "none" : "block";
     }
   </script>
 </head>
 
 <body>
 
-  <!-- VIDEO DE FONDO -->
+  <!-- VIDEO -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="https://github.com/marcoshdj/marcoshdj.github.io/raw/main/IMG_0204.mp4" type="video/mp4">
@@ -286,7 +192,7 @@
 
   <!-- HERO -->
   <header class="hero">
-    <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/fondoweb.png?raw=true" alt="Logo Marcos Herradón DJ">
+    <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/fondoweb.png?raw=true">
     <h2>Urban DJ & Producer</h2>
     <a href="#about" class="btn">Saber más</a>
   </header>
@@ -295,7 +201,7 @@
   <section id="about">
     <h3>Sobre mí</h3>
     <p class="about-text">
-      Marcos Herradón es un DJ emergente de Talavera de la Reina que, en tan solo un año de trayectoria, ha conseguido hacerse un hueco en la escena urbana local. Especializado en ritmos urbanos desde reguetón y trap hasta dembow, Marcos combina técnica y selección musical para crear sesiones vibrantes que mantienen la pista en movimiento de principio a fin.
+      Marcos Herradón es un DJ emergente de Talavera de la Reina que, en tan solo un año de trayectoria, ha conseguido hacerse un hueco en la escena urbana local.
     </p>
   </section>
 
@@ -307,61 +213,60 @@
 
       <!-- TRACK 1 -->
       <div class="track" onclick="togglePlayer('p1')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true" alt="Portada 1">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true">
         <div class="track-title">Me Mareo x Deseo</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p1">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%23ffffff&auto_play=false">
+          <iframe width="100%" height="166" frameborder="0"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993">
           </iframe>
         </div>
       </div>
 
       <!-- TRACK 2 -->
       <div class="track" onclick="togglePlayer('p2')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202.jpg?raw=true" alt="Portada 2">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202.jpg?raw=true">
         <div class="track-title">Chorrito Pa' Las Ánimas x Medellín</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p2">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%23ffffff&auto_play=false">
+          <iframe width="100%" height="166" frameborder="0"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967">
           </iframe>
         </div>
       </div>
 
       <!-- TRACK 3 -->
       <div class="track" onclick="togglePlayer('p3')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%203.jpg?raw=true" alt="Portada 3">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%203.jpg?raw=true">
         <div class="track-title">Te Estoy Amando Locamente x Yo Voy</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p3">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%23ffffff&auto_play=false">
+          <iframe width="100%" height="166" frameborder="0"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731">
           </iframe>
         </div>
       </div>
 
       <!-- TRACK 4 -->
       <div class="track" onclick="togglePlayer('p4')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%204.jpg?raw=true" alt="Portada 4">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%204.jpg?raw=true">
         <div class="track-title">Pirueta x Junto al Amanecer</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p4">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%23ffffff&auto_play=false">
+          <iframe width="100%" height="166" frameborder="0"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915">
           </iframe>
         </div>
       </div>
 
-      <!-- TRACK 5 (NUEVA) -->
+      <!-- TRACK 5 -->
       <div class="track" onclick="togglePlayer('p5')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%206.jpg?raw=true" alt="Portada 5">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%206.jpg?raw=true">
         <div class="track-title">Muchacha x Toca Toca</div>
         <div class="track-artist">Marcos Herradón DJ</div>
-
         <div class="player" id="p5">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2285054828&color=%2370a6c9&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+          <iframe width="100%" height="166" frameborder="0"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2285054828">
           </iframe>
         </div>
       </div>
@@ -372,27 +277,18 @@
   <!-- EVENTS -->
   <section id="events">
     <h3>Eventos</h3>
-
-    <div class="event">
-      <div class="event-date">Próximamente</div>
-      <div class="event-place">Nuevas fechas muy pronto</div>
-    </div>
-
+    <p>Próximamente</p>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
     <h3>Contacto</h3>
-    <div class="contact">
-      <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
-      <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
-      <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
-    </div>
+    <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
+    <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
+    <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
   </section>
 
-  <footer>
-    © 2025 Marcos Herradón DJ
-  </footer>
+  <footer>© 2025 Marcos Herradón DJ</footer>
 
 </body>
 </html>

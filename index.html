@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Marcos Herradón DJ</title>
 
-  <!-- Tipos -->
+  <!-- Tipografías -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
 
   <style>
-    /* RESET */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html,body { height: 100%; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -21,17 +18,16 @@
       color: #fff;
       overflow-x: hidden;
       min-height: 100vh;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    /* VIDEO BACKGROUND */
+    /* VIDEO FONDO */
     .video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
     .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
 
-    .overlay { position: fixed; inset: 0; z-index: -1;
+    .overlay {
+      position: fixed; inset: 0; z-index: -1;
       background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
     }
 
@@ -72,7 +68,7 @@
 
     .about-text { max-width: 720px; font-size: 17px; line-height: 1.6; opacity: .9; }
 
-    /* MUSIC GRID (mantener) */
+    /* MUSIC GRID */
     .music-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 28px; }
 
     .track { cursor:pointer; }
@@ -83,7 +79,7 @@
 
     .player { margin-top:14px; display:none; }
 
-    /* EVENTS: cajitas estilo foto */
+    /* EVENTS */
     .events-grid {
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -128,64 +124,12 @@
       margin-top: 4px;
     }
 
-    .event-info {
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
+    .event-info { flex:1; display:flex; flex-direction:column; justify-content:center; }
+    .event-venue { font-weight:600; font-size:16px; letter-spacing: .4px; }
+    .event-location { font-size:13px; opacity:.75; margin-top:6px; }
 
-    .event-venue {
-      font-weight:600;
-      font-size:16px;
-      letter-spacing: .4px;
-    }
-
-    .event-location {
-      font-size:13px;
-      opacity:.75;
-      margin-top:6px;
-    }
-
-    /* Formulario para añadir eventos */
-    .event-form {
-      margin-top: 18px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .event-form input[type="date"],
-    .event-form input[type="text"] {
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-      color: #fff;
-      min-width: 180px;
-    }
-
-    .event-form .small {
-      min-width: 140px;
-    }
-
-    .event-form button {
-      padding:10px 14px;
-      border-radius:8px;
-      border: none;
-      background: #fff;
-      color: #000;
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    .event-note { margin-top:10px; font-size:13px; opacity:.6; }
-
-    /* FOOTER */
     footer { text-align:center; padding:40px 6vw; opacity:.6; font-size:14px; }
 
-    /* RESPONSIVE */
     @media (max-width: 720px) {
       .event-card { gap:12px; padding:14px; }
       .event-date { min-width:72px; }
@@ -197,7 +141,7 @@
 </head>
 <body>
 
-  <!-- VIDEO DE FONDO -->
+  <!-- VIDEO -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="https://github.com/marcoshdj/marcoshdj.github.io/raw/main/IMG_0204.mp4" type="video/mp4">
@@ -231,7 +175,9 @@
   <!-- MUSIC -->
   <section id="music">
     <h3>Música</h3>
+
     <div class="music-grid">
+
       <!-- TRACK 1 -->
       <div class="track" onclick="togglePlayer('p1')">
         <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true" alt="Portada 1">
@@ -294,7 +240,7 @@
 
       <!-- TRACK 6 -->
       <div class="track" onclick="togglePlayer('p6')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%20duofav.jpg?raw=true" alt="Portada duofav">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%20duofav.jpg?raw=true" alt="Portada DUO">
         <div class="track-title">TU DUO FAVORITO x DALE DON DALE</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p6">
@@ -315,19 +261,18 @@
           </iframe>
         </div>
       </div>
-      <!-- TRACK 8 -->
-<div class="track" onclick="togglePlayer('p8')">
-  <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/dioslosbendiga.jpg?raw=true" alt="Portada Dios Los Bendiga" style="border-radius:14px;">
-  
-  <div class="track-title">Dios Los Bendiga x Scandic</div>
-  <div class="track-artist">Marcos Herradón DJ</div>
 
-  <div class="player" id="p8">
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2290477859&color=%232c2c2c&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-    </iframe>
-  </div>
-</div>
+      <!-- TRACK 8 -->
+      <div class="track" onclick="togglePlayer('p8')">
+        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/dioslosbendiga.jpg?raw=true" alt="Portada Dios Los Bendiga">
+        <div class="track-title">Dios Los Bendiga x Scandic</div>
+        <div class="track-artist">Marcos Herradón DJ</div>
+        <div class="player" id="p8">
+          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2290477859&color=%232c2c2c&auto_play=false">
+          </iframe>
+        </div>
+      </div>
 
     </div>
   </section>
@@ -336,21 +281,8 @@
   <section id="events">
     <h3>Eventos</h3>
 
-    <!-- Formulario para añadir eventos (se guarda en localStorage) -->
-    <div>
-      <form id="addEventForm" class="event-form" onsubmit="return false;">
-        <input id="evDate" type="date" required>
-        <input id="evVenue" type="text" placeholder="Sala / Evento" required>
-        <input id="evLocation" type="text" placeholder="Localidad - Provincia" required class="small">
-        <button id="addBtn" type="button">Añadir evento</button>
-      </form>
-      <div class="event-note">Los eventos añadidos se guardan en tu navegador. Si quieres que los publique en la web pública, súbelos al repositorio o dímelo y lo integro.</div>
-    </div>
-
-    <div style="height:18px"></div>
-
-    <div id="eventsContainer" class="events-grid" aria-live="polite">
-      <!-- Las tarjetas se renderizan aquí -->
+    <div id="eventsContainer" class="events-grid">
+      <!-- Aquí se insertan automáticamente -->
     </div>
   </section>
 
@@ -364,115 +296,51 @@
 
   <footer>© 2025 Marcos Herradón DJ</footer>
 
+  <!-- SCRIPT PARA CARGAR EVENTS.JSON -->
   <script>
-    /* Toggle reproductores */
     function togglePlayer(id) {
       const p = document.getElementById(id);
       p.style.display = p.style.display === 'block' ? 'none' : 'block';
     }
 
-    /* UTIL: formatea fecha a día y mes (ej: 2026-03-21 -> {day:21, month: 'MAR'}) */
-    function formatDateParts(isoDate) {
-      const d = new Date(isoDate + 'T00:00:00');
-      if (isNaN(d)) return { day: '', month: '' };
-      const day = d.getDate();
-      const monthNames = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-      const month = monthNames[d.getMonth()];
-      return { day, month };
-    }
-
-    /* Eventos por defecto (ejemplos) */
-    const defaultEvents = [
-      { date: 'XX-XX-XXXX', venue: 'XXXX', location: 'XXXXX - XXXX' },
-      { date: 'XX-XX-XXXX', venue: 'XXXX', location: 'XXXXX - XXXX' }
-    ];
-
-    /* Cargar eventos desde localStorage o usar por defecto */
-    function loadEvents() {
+    async function loadEvents() {
       try {
-        const raw = localStorage.getItem('mh_events_v1');
-        if (!raw) {
-          localStorage.setItem('mh_events_v1', JSON.stringify(defaultEvents));
-          return defaultEvents.slice();
-        }
-        return JSON.parse(raw);
-      } catch (e) {
-        console.error('Error leyendo eventos:', e);
-        return defaultEvents.slice();
+        const response = await fetch('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/events.json');
+        const events = await response.json();
+
+        events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        const container = document.getElementById('eventsContainer');
+        container.innerHTML = '';
+
+        events.forEach(ev => {
+          const d = new Date(ev.date + 'T00:00:00');
+          const day = d.getDate();
+          const monthNames = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+          const month = monthNames[d.getMonth()];
+
+          const card = document.createElement('div');
+          card.className = 'event-card';
+          card.innerHTML = `
+            <div class="event-date">
+              <div class="event-day">${day}</div>
+              <div class="event-month">${month}</div>
+            </div>
+            <div class="event-info">
+              <div class="event-venue">${ev.venue}</div>
+              <div class="event-location">${ev.location}</div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error('Error cargando eventos:', err);
       }
     }
 
-    function saveEvents(list) {
-      localStorage.setItem('mh_events_v1', JSON.stringify(list));
-    }
-
-    /* Renderiza las tarjetas en el contenedor */
-    function renderEvents() {
-      const container = document.getElementById('eventsContainer');
-      container.innerHTML = '';
-      const events = loadEvents();
-
-      // ordenar por fecha ascendente
-      events.sort((a,b) => new Date(a.date) - new Date(b.date));
-
-      events.forEach((ev, idx) => {
-        const parts = formatDateParts(ev.date);
-        const card = document.createElement('article');
-        card.className = 'event-card';
-        card.innerHTML = `
-          <div class="event-date" aria-hidden="true">
-            <div class="event-day">${parts.day}</div>
-            <div class="event-month">${parts.month}</div>
-          </div>
-          <div class="event-info">
-            <div class="event-venue">${escapeHtml(ev.venue)}</div>
-            <div class="event-location">${escapeHtml(ev.location)}</div>
-          </div>
-        `;
-        // data attribute para posible edición/eliminación futura
-        card.dataset.index = idx;
-        container.appendChild(card);
-      });
-    }
-
-    /* Añadir evento desde el formulario */
-    document.getElementById('addBtn').addEventListener('click', () => {
-      const dateInput = document.getElementById('evDate');
-      const venueInput = document.getElementById('evVenue');
-      const locInput = document.getElementById('evLocation');
-
-      const date = dateInput.value;
-      const venue = venueInput.value.trim();
-      const location = locInput.value.trim();
-
-      if (!date || !venue || !location) {
-        alert('Rellena fecha, sala y localidad.');
-        return;
-      }
-
-      const events = loadEvents();
-      events.push({ date, venue, location });
-      saveEvents(events);
-      renderEvents();
-
-      // limpiar
-      dateInput.value = '';
-      venueInput.value = '';
-      locInput.value = '';
-    });
-
-    /* Escape básico para evitar inyección en texto */
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
-    // Inicializa
-    renderEvents();
+    loadEvents();
   </script>
+
 </body>
 </html>

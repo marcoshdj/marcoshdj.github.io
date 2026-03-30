@@ -3,38 +3,50 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Marcos Herradón DJ</title>
+  <title>Marcos Herradón DJ | Official Website</title>
 
-  <!-- Tipografías -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet">
 
   <style>
+    :root {
+      --accent: #fff;
+      --bg: #000;
+      --card-bg: rgba(255,255,255,0.05);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #000;
+      background: var(--bg);
       color: #fff;
       overflow-x: hidden;
       min-height: 100vh;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a { color: inherit; text-decoration: none; transition: 0.3s; }
 
     /* VIDEO FONDO */
     .video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
-    .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
+    .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
 
     .overlay {
       position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
+      background: radial-gradient(circle at center, rgba(0,0,0,0.1), rgba(0,0,0,0.9));
     }
 
     /* NAV */
-    nav { position: fixed; top: 0; right: 0; padding: 28px; z-index: 20; }
-    nav a { margin-left: 22px; font-size: 14px; opacity: 0.85; transition: opacity .18s; }
-    nav a:hover { opacity: 1; }
+    nav { 
+      position: fixed; top: 0; width: 100%; padding: 20px 6vw; 
+      z-index: 100; display: flex; justify-content: flex-end;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); padding: 15px 6vw; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    nav a { margin-left: 25px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; }
+    nav a:hover { opacity: 1; color: var(--accent); }
 
     /* HERO */
     .hero {
@@ -45,103 +57,91 @@
       flex-direction:column;
       text-align:center;
       padding: 0 20px;
-      gap: 18px;
     }
 
-    .hero img { width: 260px; max-width: 80%; border-radius: 6px; animation: fadeIn .9s ease forwards; opacity: 0; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+    .hero img { width: 280px; max-width: 80%; filter: drop-shadow(0 0 25px rgba(255,255,255,0.15)); animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
+    
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(15px); filter: blur(10px); } 
+      to { opacity: 1; transform: translateY(0); filter: blur(0); } 
+    }
 
-    .hero h2 { font-size: 16px; opacity: .8; margin-top: 6px; }
+    .hero h2 { font-size: 14px; letter-spacing: 5px; text-transform: uppercase; opacity: .6; margin-top: 25px; font-weight: 300; }
 
-    .btn { margin-top: 18px; padding: 10px 22px; border: 1px solid #fff; display:inline-block; transition: .18s; }
-    .btn:hover { background: #fff; color:#000; }
+    .btn { margin-top: 35px; padding: 14px 34px; border: 1px solid #fff; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; transition: .3s; cursor: pointer; }
+    .btn:hover { background: #fff; color:#000; transform: scale(1.05); }
 
     /* SECCIONES */
-    section { padding: 90px 6vw; position: relative; z-index: 10; }
+    section { padding: 120px 8vw; position: relative; z-index: 10; }
 
     section h3 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px;
-      margin-bottom: 28px;
-      letter-spacing: 1px;
+      font-size: clamp(42px, 7vw, 72px);
+      margin-bottom: 45px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    .about-text { max-width: 720px; font-size: 17px; line-height: 1.6; opacity: .9; }
+    .about-text { max-width: 650px; font-size: 18px; line-height: 1.8; opacity: .8; font-weight: 300; }
 
     /* MUSIC GRID */
-    .music-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 28px; }
+    .music-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 40px; }
 
     .track { cursor:pointer; }
-    .track img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:14px; background:#111; display:block; }
+    .track-img-container { overflow: hidden; border-radius: 14px; margin-bottom: 18px; position: relative; background: #111; }
+    .track img { width:100%; aspect-ratio:1/1; object-fit:cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); display: block; }
+    .track:hover img { transform: scale(1.08); }
 
-    .track-title { margin-top:10px; font-size:15px; opacity:.95; }
-    .track-artist { font-size:13px; opacity:.6; }
+    .track-title { font-size:16px; font-weight: 600; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .track-artist { font-size:13px; opacity:.5; text-transform: uppercase; letter-spacing: 1px; }
 
-    .player { margin-top:14px; display:none; }
+    .player { margin-top:15px; display:none; animation: slideDown 0.4s ease forwards; overflow: hidden; border-radius: 8px; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
     /* EVENTS */
-    .events-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      align-items:start;
-    }
+    .events-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
 
     .event-card {
-      display:flex;
-      gap:18px;
-      align-items:center;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.04);
-      padding: 18px;
-      border-radius: 12px;
-      min-height: 96px;
-      transition: transform .18s, box-shadow .18s;
-      backdrop-filter: blur(4px);
+      display:flex; gap:22px; align-items:center;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 22px; border-radius: 16px;
+      transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); backdrop-filter: blur(10px);
     }
 
-    .event-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    .event-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); border-color: rgba(255,255,255,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
 
     .event-date {
-      min-width: 86px;
-      text-align:center;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.04);
+      min-width: 85px; text-align:center;
+      padding: 12px; border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.05);
     }
 
-    .event-day {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 34px;
-      line-height: 1;
-      letter-spacing: 1px;
-    }
+    .event-day { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; color: var(--accent); }
+    .event-month { font-size: 12px; opacity: .6; margin-top: 5px; font-weight: 600; letter-spacing: 1px; }
 
-    .event-month {
-      font-size: 12px;
-      opacity: .8;
-      margin-top: 4px;
-    }
+    .event-venue { font-weight:600; font-size:18px; margin-bottom: 5px; letter-spacing: 0.3px; }
+    .event-location { font-size:13px; opacity:.5; }
 
-    .event-info { flex:1; display:flex; flex-direction:column; justify-content:center; }
-    .event-venue { font-weight:600; font-size:16px; letter-spacing: .4px; }
-    .event-location { font-size:13px; opacity:.75; margin-top:6px; }
+    /* CONTACT */
+    .contact-links { display: flex; flex-direction: column; gap: 20px; }
+    .contact-links a { font-size: clamp(18px, 3vw, 24px); opacity: 0.6; width: fit-content; font-weight: 300; }
+    .contact-links a:hover { opacity: 1; transform: translateX(12px); color: #fff; }
 
-    footer { text-align:center; padding:40px 6vw; opacity:.6; font-size:14px; }
+    footer { text-align:center; padding:80px 6vw; opacity:.3; font-size:11px; letter-spacing: 2px; text-transform: uppercase; }
 
     @media (max-width: 720px) {
-      .event-card { gap:12px; padding:14px; }
-      .event-date { min-width:72px; }
-      .event-day { font-size:28px; }
-      section { padding: 60px 5vw; }
-      .hero img { width: 180px; }
+      nav { justify-content: center; padding: 20px; }
+      nav a { margin: 0 12px; font-size: 11px; }
+      section { padding: 90px 6vw; }
+      .hero img { width: 220px; }
+      .hero h2 { font-size: 12px; letter-spacing: 3px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- VIDEO -->
   <div class="video-bg">
     <video autoplay muted loop playsinline>
       <source src="https://github.com/marcoshdj/marcoshdj.github.io/raw/main/IMG_0204.mp4" type="video/mp4">
@@ -149,165 +149,160 @@
   </div>
   <div class="overlay"></div>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#about">Sobre mí</a>
+  <nav id="navbar">
+    <a href="#about">Bio</a>
     <a href="#music">Música</a>
-    <a href="#events">Eventos</a>
+    <a href="#events">Gira</a>
     <a href="#contact">Contacto</a>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
     <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/fondoweb.png?raw=true" alt="Logo Marcos Herradón DJ">
     <h2>Urban DJ & Producer</h2>
-    <a class="btn" href="#about">Saber más</a>
+    <a class="btn" href="#music">Explorar Música</a>
   </header>
 
-  <!-- ABOUT -->
   <section id="about">
     <h3>Sobre mí</h3>
     <p class="about-text">
-      Marcos Herradón es un DJ emergente de Talavera de la Reina. Aquí tienes mis últimas mezclas y próximos eventos.
+      Marcos Herradón es un DJ y productor emergente de Talavera de la Reina. Especializado en sonidos urbanos, sus mezclas fusionan la energía del club con la esencia de la calle, creando una experiencia única en cada set.
     </p>
   </section>
 
-  <!-- MUSIC -->
   <section id="music">
     <h3>Música</h3>
-
     <div class="music-grid">
 
-      <!-- TRACK 1 -->
       <div class="track" onclick="togglePlayer('p1')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true" alt="Portada 1">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true" alt="Portada 1"></div>
         <div class="track-title">Me Mareo x Deseo</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p1">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%23ffffff&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 2 -->
       <div class="track" onclick="togglePlayer('p2')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202.jpg?raw=true" alt="Portada 2">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202.jpg?raw=true" alt="Portada 2"></div>
         <div class="track-title">Chorrito Pa' Las Ánimas x Medellín</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p2">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%23ffffff&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 3 -->
       <div class="track" onclick="togglePlayer('p3')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%203.jpg?raw=true" alt="Portada 3">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%203.jpg?raw=true" alt="Portada 3"></div>
         <div class="track-title">Te Estoy Amando Locamente x Yo Voy</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p3">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%23ffffff&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 4 -->
       <div class="track" onclick="togglePlayer('p4')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%204.jpg?raw=true" alt="Portada 4">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%204.jpg?raw=true" alt="Portada 4"></div>
         <div class="track-title">Pirueta x Junto al Amanecer</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p4">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%23ffffff&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 5 -->
       <div class="track" onclick="togglePlayer('p5')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%206.jpg?raw=true" alt="Portada 5">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%206.jpg?raw=true" alt="Portada 5"></div>
         <div class="track-title">Muchacha x Toca Toca</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p5">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2285054828&color=%2370a6c9&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2285054828&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 6 -->
       <div class="track" onclick="togglePlayer('p6')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%20duofav.jpg?raw=true" alt="Portada DUO">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%20duofav.jpg?raw=true" alt="Portada DUO"></div>
         <div class="track-title">TU DUO FAVORITO x DALE DON DALE</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p6">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2287048385&color=%232c2c2c&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287048385&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 7 -->
       <div class="track" onclick="togglePlayer('p7')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202%20(1).jpg?raw=true" alt="Portada 7">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202%20(1).jpg?raw=true" alt="Portada 7"></div>
         <div class="track-title">Forever Tu Gantel x Practícalo</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p7">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2287662929&color=%232c2c2c&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287662929&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
         </div>
       </div>
 
-      <!-- TRACK 8 -->
       <div class="track" onclick="togglePlayer('p8')">
-        <img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/dioslosbendiga.jpg?raw=true" alt="Portada Dios Los Bendiga">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/dioslosbendiga.jpg?raw=true" alt="Portada Dios Los Bendiga"></div>
         <div class="track-title">Dios Los Bendiga x Scandic</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p8">
-          <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2290477859&color=%232c2c2c&auto_play=false">
-          </iframe>
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2290477859&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
+        </div>
+      </div>
+
+      <div class="track" onclick="togglePlayer('p9')">
+        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/portada_mashup_madura.jpg?raw=true" alt="Portada Madura"></div>
+        <div class="track-title">MADURA x HACE MUCHO TIEMPO</div>
+        <div class="track-artist">Marcos Herradón DJ</div>
+        <div class="player" id="p9">
+          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2293229240&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- EVENTS -->
   <section id="events">
-    <h3>Eventos</h3>
-
+    <h3>Próximos Eventos</h3>
     <div id="eventsContainer" class="events-grid">
-      <!-- Aquí se insertan automáticamente -->
+      </div>
+  </section>
+
+  <section id="contact">
+    <h3>Contacto</h3>
+    <div class="contact-links">
+        <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a>
+        <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram / @marcosherradon_</a>
+        <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube / Marcos Herradón</a>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <h3>Contacto</h3>
-    <a href="mailto:infodjmh@gmail.com">infodjmh@gmail.com</a><br>
-    <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a><br>
-    <a href="https://youtube.com/@marcosherradondj" target="_blank">YouTube</a>
-  </section>
+  <footer>© 2026 MARCOS HERRADÓN DJ</footer>
 
-  <footer>© 2025 Marcos Herradón DJ</footer>
-
-  <!-- SCRIPT PARA CARGAR EVENTS.JSON -->
   <script>
+    // Control visual del Navbar al hacer scroll
+    window.onscroll = function() {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 80) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+
+    // Función para abrir/cerrar reproductores (solo uno abierto a la vez)
     function togglePlayer(id) {
-      const p = document.getElementById(id);
-      p.style.display = p.style.display === 'block' ? 'none' : 'block';
+      const target = document.getElementById(id);
+      const isVisible = target.style.display === 'block';
+      
+      // Cerrar todos los demás
+      document.querySelectorAll('.player').forEach(p => p.style.display = 'none');
+      
+      // Alternar el actual
+      target.style.display = isVisible ? 'none' : 'block';
     }
 
+    // Carga de eventos desde JSON
     async function loadEvents() {
       try {
         const response = await fetch('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/events.json');
+        if (!response.ok) throw new Error('No se pudo cargar el archivo de eventos');
+        
         const events = await response.json();
-
+        
+        // Ordenar por fecha (más cercanos primero)
         events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
         const container = document.getElementById('eventsContainer');
@@ -333,14 +328,14 @@
           `;
           container.appendChild(card);
         });
-
       } catch (err) {
         console.error('Error cargando eventos:', err);
+        document.getElementById('eventsContainer').innerHTML = '<p style="opacity:0.5">Próximamente nuevas fechas...</p>';
       }
     }
 
+    // Inicializar
     loadEvents();
   </script>
-
 </body>
 </html>

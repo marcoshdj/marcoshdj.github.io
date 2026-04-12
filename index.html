@@ -10,9 +10,10 @@
 
   <style>
     :root {
-      --accent: #fff;
+      --accent: #4a86f7; /* Azul tipo Fourvenues */
       --bg: #000;
-      --card-bg: rgba(255,255,255,0.04);
+      --card-bg: #0a0a0a;
+      --border: rgba(255,255,255,0.06);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,120 +24,85 @@
       background: var(--bg);
       color: #fff;
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
     a { color: inherit; text-decoration: none; transition: 0.3s; }
 
     /* VIDEO FONDO */
     .video-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; }
-    .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
-
-    .overlay {
-      position: fixed; inset: 0; z-index: -1;
-      background: radial-gradient(circle at center, rgba(0,0,0,0.1), rgba(0,0,0,0.85));
-    }
+    .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3); }
+    .overlay { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at center, rgba(0,0,0,0.1), rgba(0,0,0,0.85)); }
 
     /* NAV */
     nav { 
       position: fixed; top: 0; width: 100%; padding: 15px 6vw; 
       z-index: 100; display: flex; justify-content: flex-end;
-      transition: all 0.3s ease;
+      transition: 0.3s;
     }
-    nav.scrolled { background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); padding: 12px 6vw; }
+    nav.scrolled { background: rgba(0,0,0,0.8); backdrop-filter: blur(12px); padding: 10px 6vw; border-bottom: 1px solid var(--border); }
     nav a { margin-left: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; opacity: 0.6; }
-    nav a:hover { opacity: 1; color: var(--accent); }
+    nav a:hover { opacity: 1; color: #fff; }
 
-    /* HERO (Reducido) */
-    .hero {
-      height: 100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      text-align:center;
-      padding: 0 20px;
-    }
-
+    /* HERO */
+    .hero { height: 100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding: 0 20px; }
     .hero img { width: 220px; max-width: 70%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); animation: fadeIn 1.2s ease-out forwards; opacity: 0; }
-    
-    @keyframes fadeIn { 
-      from { opacity: 0; transform: translateY(10px); filter: blur(5px); } 
-      to { opacity: 1; transform: translateY(0); filter: blur(0); } 
-    }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     .hero h2 { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; opacity: .5; margin-top: 20px; font-weight: 300; }
-
-    .btn { margin-top: 25px; padding: 12px 28px; border: 1px solid #fff; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: .3s; cursor: pointer; }
+    .btn { margin-top: 25px; padding: 12px 28px; border: 1px solid #fff; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
     .btn:hover { background: #fff; color:#000; }
 
-    /* SECCIONES (Padding reducido) */
+    /* SECCIONES */
     section { padding: 80px 8vw; position: relative; z-index: 10; }
+    section h3 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; margin-bottom: 35px; letter-spacing: 1.5px; }
 
-    section h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(32px, 5vw, 52px);
-      margin-bottom: 35px;
-      letter-spacing: 1.5px;
-    }
-
-    .about-text { max-width: 600px; font-size: 16px; line-height: 1.7; opacity: .7; font-weight: 300; }
-
-    /* MUSIC GRID (Más pequeño y compacto) */
-    .music-grid { 
-      display:grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-      gap: 30px; 
-    }
-
+    /* MÚSICA GRID (Compacto) */
+    .music-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 30px; }
     .track { cursor:pointer; }
-    .track-img-container { overflow: hidden; border-radius: 10px; margin-bottom: 12px; position: relative; background: #111; }
+    .track-img-container { overflow: hidden; border-radius: 10px; margin-bottom: 12px; background: #111; position: relative; }
     .track img { width:100%; aspect-ratio:1/1; object-fit:cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); display: block; }
     .track:hover img { transform: scale(1.05); }
-
     .track-title { font-size:14px; font-weight: 600; margin-bottom: 3px; }
     .track-artist { font-size:12px; opacity:.4; text-transform: uppercase; letter-spacing: 1px; }
-
-    .player { margin-top:12px; display:none; animation: slideDown 0.4s ease forwards; overflow: hidden; border-radius: 8px; }
+    .player { margin-top:12px; display:none; animation: slideDown 0.4s ease forwards; border-radius: 8px; overflow: hidden; }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* EVENTS */
-    .events-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-
-    .event-card {
-      display:flex; gap:18px; align-items:center;
-      background: var(--card-bg);
-      border: 1px solid rgba(255,255,255,0.04);
-      padding: 15px; border-radius: 12px;
-      transition: 0.3s; backdrop-filter: blur(8px);
+    /* EVENTOS (Estilo Fourvenues) */
+    .events-grid { display: flex; flex-direction: column; gap: 15px; max-width: 850px; }
+    .event-card { 
+      display: flex; background: var(--card-bg); border: 1px solid var(--border); 
+      border-radius: 12px; overflow: hidden; transition: 0.3s; 
+    }
+    .event-card:hover { border-color: rgba(255,255,255,0.2); transform: translateX(5px); }
+    
+    .event-poster { width: 130px; min-width: 130px; height: 130px; }
+    .event-poster img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .event-info { padding: 15px 20px; display: flex; flex-direction: column; justify-content: center; gap: 10px; flex: 1; }
+    
+    .badge-row { display: flex; align-items: center; gap: 12px; font-size: 11px; font-weight: 700; }
+    .date-badge { background: var(--accent); color: #000; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; }
+    .time-text { color: #fff; opacity: 0.7; font-weight: 400; }
+    
+    .event-venue { font-size: 19px; font-weight: 600; color: #fff; letter-spacing: 0.5px; }
+    .next-badge { 
+      background: rgba(74, 134, 247, 0.1); color: var(--accent); 
+      border: 1px solid rgba(74, 134, 247, 0.3); padding: 2px 8px; 
+      border-radius: 4px; width: fit-content; font-size: 10px; letter-spacing: 1px;
     }
 
-    .event-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
-
-    .event-date {
-      min-width: 70px; text-align:center;
-      padding: 8px; border-radius: 8px;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .event-day { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; }
-    .event-month { font-size: 10px; opacity: .5; margin-top: 3px; font-weight: 600; }
-
-    .event-venue { font-weight:600; font-size:15px; }
-    .event-location { font-size:12px; opacity:.4; }
-
-    /* CONTACT */
+    /* CONTACTO */
     .contact-links { display: flex; flex-direction: column; gap: 12px; }
     .contact-links a { font-size: 18px; opacity: 0.5; width: fit-content; }
-    .contact-links a:hover { opacity: 1; transform: translateX(8px); }
+    .contact-links a:hover { opacity: 1; transform: translateX(8px); color: var(--accent); }
 
-    footer { text-align:center; padding:60px 6vw; opacity:.3; font-size:10px; letter-spacing: 2px; }
+    footer { text-align:center; padding:60px 6vw; opacity:.2; font-size:10px; letter-spacing: 2px; }
 
-    @media (max-width: 720px) {
-      nav { justify-content: center; }
+    @media (max-width: 600px) {
+      .event-poster { width: 100px; min-width: 100px; height: 100px; }
+      .event-info { padding: 12px; }
+      .event-venue { font-size: 16px; }
+      .badge-row { font-size: 10px; gap: 8px; }
       section { padding: 60px 6vw; }
-      .hero img { width: 180px; }
-      .music-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
     }
   </style>
 </head>
@@ -164,85 +130,17 @@
 
   <section id="about">
     <h3>Sobre mí</h3>
-    <p class="about-text">
-      Marcos Herradón es un DJ y productor de Talavera de la Reina. Sonido urbano y sets dinámicos diseñados para el club.
-    </p>
+    <p style="max-width:600px; opacity:0.7; line-height:1.7;">Marcos Herradón es un DJ y productor de Talavera de la Reina. Sonido urbano y sets dinámicos diseñados para el club.</p>
   </section>
 
   <section id="music">
     <h3>Música</h3>
     <div class="music-grid">
-
       <div class="track" onclick="togglePlayer('p1')">
         <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%201.jpg?raw=true"></div>
         <div class="track-title">Me Mareo x Deseo</div>
         <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p1">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p2')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202.jpg?raw=true"></div>
-        <div class="track-title">Chorrito Pa' Las Ánimas x Medellín</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p2">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p3')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%203.jpg?raw=true"></div>
-        <div class="track-title">Te Estoy Amando Locamente x Yo Voy</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p3">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p4')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%204.jpg?raw=true"></div>
-        <div class="track-title">Pirueta x Junto al Amanecer</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p4">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p5')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%206.jpg?raw=true"></div>
-        <div class="track-title">Muchacha x Toca Toca</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p5">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2285054828&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p6')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%20duofav.jpg?raw=true"></div>
-        <div class="track-title">TU DUO FAVORITO x DALE DON DALE</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p6">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287048385&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p7')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/PORTADA%202%20(1).jpg?raw=true"></div>
-        <div class="track-title">Forever Tu Gantel x Practícalo</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p7">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287662929&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
-      </div>
-
-      <div class="track" onclick="togglePlayer('p8')">
-        <div class="track-img-container"><img src="https://github.com/marcoshdj/marcoshdj.github.io/blob/main/dioslosbendiga.jpg?raw=true"></div>
-        <div class="track-title">Dios Los Bendiga x Scandic</div>
-        <div class="track-artist">Marcos Herradón DJ</div>
-        <div class="player" id="p8">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2290477859&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false"></iframe>
-        </div>
+        <div class="player" id="p1"><iframe width="100%" height="120" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%232c2c2c&hide_related=true"></iframe></div>
       </div>
 
       <div class="track" onclick="togglePlayer('p9')">
@@ -252,16 +150,16 @@
         <div class="track-title">MADURA x HACE MUCHO TIEMPO</div>
         <div class="track-artist">Marcos Herradón DJ</div>
         <div class="player" id="p9">
-          <iframe width="100%" height="120" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2293229240&color=%232c2c2c&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe>
+          <iframe width="100%" height="120" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2293229240&color=%232c2c2c&hide_related=true&show_teaser=false"></iframe>
         </div>
       </div>
-
     </div>
   </section>
 
   <section id="events">
-    <h3>Eventos</h3>
-    <div id="eventsContainer" class="events-grid"></div>
+    <h3>Próximos Eventos</h3>
+    <div id="eventsContainer" class="events-grid">
+      </div>
   </section>
 
   <section id="contact">
@@ -292,25 +190,29 @@
       try {
         const response = await fetch('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/events.json');
         const events = await response.json();
-        events.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
         const container = document.getElementById('eventsContainer');
         container.innerHTML = '';
 
         events.forEach(ev => {
           const d = new Date(ev.date + 'T00:00:00');
-          const day = d.getDate();
-          const monthNames = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-          const month = monthNames[d.getMonth()];
+          const dayName = d.toLocaleDateString('es-ES', { weekday: 'short' }).toUpperCase().replace('.','');
+          const dayNum = d.getDate();
+          const monthName = d.toLocaleDateString('es-ES', { month: 'short' }).toUpperCase().replace('.','');
+
           const card = document.createElement('div');
           card.className = 'event-card';
           card.innerHTML = `
-            <div class="event-date">
-              <div class="event-day">${day}</div>
-              <div class="event-month">${month}</div>
+            <div class="event-poster">
+              <img src="${ev.image || 'https://via.placeholder.com/300'}" alt="Cartel">
             </div>
             <div class="event-info">
+              <div class="badge-row">
+                <span class="date-badge">${dayName}. ${dayNum} ${monthName}.</span>
+                <span class="time-text">${ev.time || '18:00 -> CIERRE'}</span>
+              </div>
               <div class="event-venue">${ev.venue}</div>
-              <div class="event-location">${ev.location}</div>
+              ${ev.next ? '<div class="next-badge">NEXT</div>' : ''}
             </div>
           `;
           container.appendChild(card);

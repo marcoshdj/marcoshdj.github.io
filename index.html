@@ -34,7 +34,7 @@
     .video-bg video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3); }
     .overlay { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at center, rgba(0,0,0,0.1), rgba(0,0,0,0.85)); }
 
-    /* NAV */
+    /* NAVEGACIÓN */
     nav { 
       position: fixed; top: 0; width: 100%; padding: 15px 6vw; 
       z-index: 100; display: flex; justify-content: flex-end;
@@ -92,7 +92,7 @@
     .event-venue { font-size: 18px; font-weight: 600; color: #fff; text-transform: uppercase; }
     .location-badge { background: rgba(74, 134, 247, 0.1); color: var(--accent); border: 1px solid rgba(74, 134, 247, 0.3); padding: 3px 10px; border-radius: 4px; width: fit-content; font-size: 10px; }
 
-    /* Panel detalles */
+    /* Detalles Gira */
     .event-details { 
       max-height: 0; overflow: hidden; transition: all 0.4s ease; 
       background: rgba(255,255,255,0.02); font-size: 14px; line-height: 1.6; opacity: 0;
@@ -108,7 +108,6 @@
 
     @media (max-width: 600px) {
       .event-poster { width: 90px; min-width: 90px; }
-      .event-card { min-height: 100px; }
       .event-venue { font-size: 15px; }
       section { padding: 40px 6vw; }
       .music-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
@@ -277,7 +276,7 @@
               </div>
             </div>
             <div class="event-details">
-              ${ev.description || 'No hay información adicional disponible.'}
+              ${ev.description || 'Pulsa para ver más detalles sobre este evento.'}
             </div>
           `;
           container.appendChild(card);
@@ -286,5 +285,8 @@
     }
     loadEvents();
   </script>
+
+  <script src="//code.tidio.co/czldnxvhtrjyhjmbsoxqnv7rjtvcqig8.js" async></script>
+
 </body>
 </html>

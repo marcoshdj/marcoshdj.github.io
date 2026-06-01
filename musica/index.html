@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Música & Mashups | Marcos Herradón DJ</title>
+  <meta name="description" content="Escucha las últimas producciones, edits y sets exclusivos de Marcos Herradón DJ." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&display=swap" />
+
+  <style>
+    :root {
+      --blue:    #4a86f7;
+      --blue2:  #7aa8ff;
+      --bg:      #050507;
+      --bg2:    #0d0d11;
+      --glass:  rgba(255,255,255,0.035);
+      --glass2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.07);
+      --borderB:rgba(74,134,247,0.32);
+      --text:    #f5f3f0;
+      --muted:  rgba(245,243,240,0.42);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Syne', sans-serif; background: var(--bg); color: var(--text); padding-top: 100px; }
+    a { color: inherit; text-decoration: none; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; padding: 1rem 5vw; background: rgba(5,5,7,.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo img { height: 30px; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+    .nav-links a.active { color: var(--text); }
+    .nav-cta { font-size: .68rem; font-weight: 700; text-transform: uppercase; color: var(--blue); border: 1px solid var(--borderB); padding: .55rem 1.4rem; }
+
+    section { padding: 3rem 5vw; }
+    .sec-head { margin-bottom: 3rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--border); }
+    .sec-kicker { font-size: .62rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--blue); }
+    .sec-title { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; }
+
+    .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+    .track { cursor: pointer; background: var(--glass); border: 1px solid var(--border); transition: .25s; }
+    .track:hover { border-color: var(--borderB); transform: translateY(-3px); }
+    .t-thumb { position: relative; aspect-ratio: 1/1; overflow: hidden; }
+    .t-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .t-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); opacity: 0; transition: .3s; }
+    .track:hover .t-overlay { opacity: 1; }
+    .t-play { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; }
+    .t-tri { width: 0; height: 0; border-style: solid; border-width: 7px 0 7px 13px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
+    .t-info { padding: 1rem; }
+    .t-name { font-size: .95rem; font-weight: 700; margin-bottom: .2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .t-artist { font-size: .68rem; color: var(--muted); text-transform: uppercase; }
+    .t-player { display: none; border-top: 1px solid var(--border); }
+    .t-player.open { display: block; }
+
+    footer { padding: 2.5rem 5vw; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); margin-top: 5rem; }
+    .f-copy { font-size: .62rem; color: var(--muted); text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .music-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="https://marcoshdj.github.io/" class="nav-logo">
+      <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Logo" width="120" height="30" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://marcoshdj.github.io/">Inicio</a></li>
+      <li><a href="#" class="active">Música</a></li>
+      <li><a href="https://marcoshdj.github.io/booking/">Booking</a></li>
+    </ul>
+    <a href="https://marcoshdj.github.io/booking/" class="nav-cta">Contratar</a>
+  </nav>
+
+  <section id="music">
+    <div class="sec-head">
+      <p class="sec-kicker">// Lanzamientos y Edits</p>
+      <h1 class="sec-title">Todos los Mashups</h1>
+    </div>
+
+    <div class="music-grid" role="list">
+      <!-- TRACK 1 -->
+      <article class="track" onclick="toggleTrack('p1')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Me Mareo x Deseo</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p1"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 2 -->
+      <article class="track" onclick="toggleTrack('p2')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Chorrito x Medellín</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p2"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 3 -->
+      <article class="track" onclick="toggleTrack('p3')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%203.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Amando Locamente x Yo Voy</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p3"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 4 -->
+      <article class="track" onclick="toggleTrack('p4')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%204.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Pirueta x Amanecer</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p4"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 5 -->
+      <article class="track" onclick="toggleTrack('p5')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%206.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Muchacha x Toca Toca</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p5"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2285054828&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 6 -->
+      <article class="track" onclick="toggleTrack('p6')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%20duofav.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Tu Duo Favorito x Dale Don</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p6"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287048385&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 7 -->
+      <article class="track" onclick="toggleTrack('p7')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202%20(1).jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Forever x Practícalo</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p7"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287662929&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 8 -->
+      <article class="track" onclick="toggleTrack('p8')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/dioslosbendiga.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Dios Los Bendiga x Scandic</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p8"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2290477859&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+
+      <!-- TRACK 9 -->
+      <article class="track" onclick="toggleTrack('p9')">
+        <div class="t-thumb">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/portada_mashup_madura.jpg" alt="Portada" loading="lazy">
+          <div class="t-overlay"><div class="t-play"><div class="t-tri"></div></div></div>
+        </div>
+        <div class="t-info"><h3 class="t-name">Madura x Hace Mucho Tiempo</h3><p class="t-artist">Marcos Herradón</p></div>
+        <div class="t-player" id="p9"><iframe width="100%" height="100" scrolling="no" frameborder="no" loading="lazy" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2293229240&color=%234a86f7&hide_related=true&show_comments=false&show_user=false"></iframe></div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <p class="f-copy">© 2026 Marcos Herradón DJ · Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    function toggleTrack(id) {
+      const el = document.getElementById(id);
+      const open = el.classList.contains('open');
+      document.querySelectorAll('.t-player').forEach(p => p.classList.remove('open'));
+      if (!open) el.classList.add('open');
+    }
+  </script>
+</body>
+</html>

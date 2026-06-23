@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcos Herradón DJ | Coming Soon</title>
+    <!-- Google Fonts para tipografía moderna y de estilo electrónico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #08080a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fondos animados simulando luces de discoteca/club */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 0, 127, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -10%;
+            left: -10%;
+            animation: floatLight 12s infinite alternate ease-in-out;
+            z-index: 1;
+        }
+
+        body::after {
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            bottom: -10%;
+            right: -10%;
+            top: auto;
+            left: auto;
+            animation: floatLight 15s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatLight {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Header / Logo */
+        header {
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #ffffff, #a3a3a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-logo {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #ff007f;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        /* Bloque Central (Coming Soon) */
+        .content-box {
+            margin: 60px 0;
+        }
+
+        .coming-soon {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            letter-spacing: 12px;
+            line-height: 1;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2),
+                         0 0 40px rgba(255, 0, 127, 0.6),
+                         0 0 80px rgba(0, 240, 255, 0.4);
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 0, 127, 0.5), 0 0 80px rgba(0, 240, 255, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 0, 127, 0.8), 0 0 100px rgba(0, 240, 255, 0.6);
+                transform: scale(1.01);
+            }
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #d1d1d6;
+            margin-top: 30px;
+            text-transform: uppercase;
+        }
+
+        .tagline span {
+            color: #00f0ff;
+            font-weight: 500;
+        }
+
+        /* Footer / Redes Sociales */
+        footer {
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+        }
+
+        .social-title {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #ff007f, #00f0ff);
+            transition: width 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00f0ff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .social-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Adaptabilidad para Pantallas Pequeñas (Móviles) */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 4px;
+            }
+            .coming-soon {
+                font-size: 2.5rem;
+                letter-spacing: 6px;
+            }
+            .tagline {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+            .social-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header con el nombre de marca -->
+    <header>
+        <div class="logo">Marcos Herradón</div>
+        <div class="sub-logo">Official Website</div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <div class="content-box">
+            <h1 class="coming-soon">Coming Soon</h1>
+            <p class="tagline">El nuevo sonido está listo para <span>despegar</span></p>
+        </div>
+    </div>
+
+    <!-- Footer con enlaces (puedes cambiar los # por tus redes reales) -->
+    <footer>
+        <p class="social-title">Sigue el ritmo en redes</p>
+        <ul class="social-links">
+            <li><a href="#" target="_blank">Instagram</a></li>
+            <li><a href="#" target="_blank">SoundCloud</a></li>
+            <li><a href="#" target="_blank">Spotify</a></li>
+            <li><a href="#" target="_blank">YouTube</a></li>
+        </ul>
+    </footer>
+
+</body>
+</html>

@@ -6,12 +6,10 @@
   <title>Marcos Herradón DJ | Official Website</title>
   <meta name="description" content="Marcos Herradón — DJ & Producer urbano · Talavera de la Reina. Mashups, gira 2026 y bookings." />
   
-  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
   <style>
@@ -52,7 +50,7 @@
       background-color: var(--bg);
       color: var(--white);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden; /* Evita scroll horizontal */
+      overflow-x: hidden; 
       position: relative;
     }
 
@@ -65,7 +63,7 @@
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none;
-      z-index: 50; /* Sobre el contenido, sin bloquear clics */
+      z-index: 50; 
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
     }
 
@@ -73,7 +71,7 @@
     .video-background {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -1; /* Al fondo de todo */
+      z-index: -1; 
       background-color: #000;
       overflow: hidden;
     }
@@ -177,7 +175,7 @@
       padding-top: var(--th);
       min-height: 100vh;
       position: relative;
-      z-index: 10; /* Se asegura de estar encima del vídeo */
+      z-index: 10; 
     }
 
     /* SECCIÓN HERO */
@@ -238,7 +236,7 @@
     .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
     .track-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; transition: 0.3s; }
     .track-card:hover { border-color: var(--border-g); background: var(--card-h); transform: translateY(-3px); }
-    .track-img { width: 100%; aspect-ratio: 1; border-radius: 8px; overflow: hidden; position: relative; margin-bottom: 15px; }
+    .track-img { width: 100%; aspect-ratio: 1; border-radius: 8px; overflow: hidden; position: relative; margin-bottom: 15px; cursor: pointer; }
     .track-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
     .track-card:hover .track-img img { filter: brightness(0.5); transform: scale(1.05); }
     .track-info h4 { font-family: var(--fa); font-size: 0.9rem; font-weight: 700; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
@@ -266,7 +264,7 @@
     .contact-info h3 { font-family: var(--fd); font-size: 1.5rem; margin-bottom: 15px; }
     .contact-info p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 30px; }
     
-    /* BOTONES DE CONTACTO */
+    /* BOTONES DE CONTACTO (Interactivos) */
     .c-item { 
       display: flex; align-items: center; gap: 15px; background: var(--card); 
       padding: 15px; border-radius: 8px; border: 1px solid var(--border); 
@@ -301,28 +299,53 @@
     footer a { font-family: var(--fa); font-size: 0.7rem; color: #666; text-transform: uppercase; margin-left: 15px; transition: 0.3s; }
     footer a:hover { color: var(--gold); }
 
-    /* ADAPTACIÓN MÓVIL */
+    /* ADAPTACIÓN MÓVIL CORRECTA */
     @media (max-width: 900px) {
-      :root { --sw: 0px; --th: 70px; }
+      :root { --sw: 0px; --th: 60px; }
       
-      .topbar { padding: 0 20px; }
+      /* La barra del Logo y el Menú (Arriba del todo) */
       .sidebar { 
-        height: var(--th); flex-direction: row; align-items: center; justify-content: space-between;
-        padding: 0 20px; border-right: none; border-bottom: 1px solid var(--border); z-index: 200;
+        width: 100%; /* ¡Clave para que no se compriman las letras! */
+        height: var(--th); 
+        flex-direction: row; align-items: center; justify-content: space-between;
+        padding: 0 20px; border-right: none; border-bottom: 1px solid var(--border); 
+        z-index: 200; 
+        background: #000; /* Fondo sólido para que se lea siempre bien */
       }
       .brand-logo img { width: 50px; margin-bottom: 0; }
       .social-links { display: none; }
       .burger { display: block; }
       
-      .nav-menu {
-        position: fixed; top: var(--th); left: 0; width: 100%; height: calc(100vh - var(--th));
-        background: rgba(7,7,7,0.98); padding: 40px 20px;
-        transform: translateX(-100%); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      /* La barra de "Próximo evento" (Justo debajo del logo) */
+      .topbar { 
+        top: var(--th); 
+        height: 40px; 
+        padding: 0 15px; 
+        z-index: 150;
       }
-      .menu-open .nav-menu { transform: translateX(0); }
+      .topbar-tag { display: none; } /* Ocultamos "Tour 2026" en móvil para ahorrar espacio */
+      .topbar-label { font-size: 0.55rem; }
+
+      /* El Menú desplegable a pantalla completa */
+      .nav-menu {
+        position: fixed; 
+        top: var(--th); 
+        left: -100%; /* Oculto por la izquierda */
+        width: 100%; 
+        height: calc(100vh - var(--th));
+        background: rgba(7,7,7,0.98); 
+        padding: 40px 20px;
+        transition: left 0.4s var(--ease); /* Animación de desplazamiento suave */
+        z-index: 190;
+      }
+      .menu-open .nav-menu { left: 0; } /* Al abrir el menú, viene al centro */
       .nav-menu a { font-size: 1.5rem; padding: 15px; }
       
-      .main-content { margin-left: 0; }
+      /* Ajuste de espaciado general */
+      .main-content { 
+        margin-left: 0; 
+        padding-top: calc(var(--th) + 40px); /* Espacio para las 2 barras superiores */
+      }
       .hero { padding: 40px 20px; }
       .section { padding: 70px 20px; }
       .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -332,14 +355,12 @@
 </head>
 <body>
 
-  <!-- LOADER -->
   <div id="loader">
     <img class="ld-logo" src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Logo MH">
     <div class="ld-name">Marcos Herradón DJ</div>
     <div class="ld-bar"><div class="ld-fill"></div></div>
   </div>
 
-  <!-- RUIDO Y VIDEO FONDO -->
   <div class="grain-overlay"></div>
   <div class="video-background">
     <video autoplay muted loop playsinline>
@@ -347,15 +368,6 @@
     </video>
     <div class="video-overlay"></div>
   </div>
-
-  <!-- BARRAS FIJAS -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <div class="led"></div>
-      <span class="topbar-label">Próximo evento: <strong id="live-event">Cargando...</strong></span>
-    </div>
-    <span class="topbar-tag">Tour 2026</span>
-  </header>
 
   <aside class="sidebar">
     <a href="#hero" class="brand-logo">
@@ -377,10 +389,16 @@
     </div>
   </aside>
 
-  <!-- CONTENIDO PRINCIPAL SCROLLEABLE -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="led"></div>
+      <span class="topbar-label">Próximo evento: <strong id="live-event">Cargando...</strong></span>
+    </div>
+    <span class="topbar-tag">Tour 2026</span>
+  </header>
+
   <main class="main-content">
     
-    <!-- HERO -->
     <section id="hero" class="hero">
       <div class="hero-tag">DJ & Producer · Talavera de la Reina</div>
       <h1 class="hero-title">
@@ -395,17 +413,14 @@
       </div>
     </section>
 
-    <!-- EVENTOS -->
     <section id="eventos" class="section">
       <div class="sec-label">Gira 2026</div>
       <h2 class="sec-title">Fechas</h2>
       <div class="event-list" id="eventos-contenedor">
-        <!-- Relleno por JS -->
         <p style="color:var(--muted); font-size:0.9rem;">Cargando próximas fechas...</p>
       </div>
     </section>
 
-    <!-- SOBRE MI -->
     <section id="sobre" class="section">
       <div class="about-layout">
         <div class="about-text">
@@ -432,13 +447,11 @@
       </div>
     </section>
 
-    <!-- MÚSICA -->
     <section id="musica" class="section">
       <div class="sec-label">Mashups & Edits</div>
       <h2 class="sec-title">Música</h2>
       <div class="music-grid">
         
-        <!-- Track 1 -->
         <div class="track-card">
           <div class="track-img" onclick="togglePlay('p1')">
             <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Me Mareo x Deseo">
@@ -449,7 +462,6 @@
           </div>
         </div>
 
-        <!-- Track 2 -->
         <div class="track-card">
           <div class="track-img" onclick="togglePlay('p2')">
             <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202.jpg" alt="Chorrito x Medellín">
@@ -460,7 +472,6 @@
           </div>
         </div>
 
-        <!-- Track 3 -->
         <div class="track-card">
           <div class="track-img" onclick="togglePlay('p3')">
             <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%203.jpg" alt="Amando x Yo Voy">
@@ -471,7 +482,6 @@
           </div>
         </div>
 
-        <!-- Track 4 -->
         <div class="track-card">
           <div class="track-img" onclick="togglePlay('p4')">
             <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%204.jpg" alt="Pirueta x Amanecer">
@@ -485,7 +495,6 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
     <section id="contacto" class="section">
       <div class="sec-label">Booking</div>
       <h2 class="sec-title">Contacto</h2>
@@ -495,7 +504,6 @@
           <h3>¿Hablamos?</h3>
           <p>Si tienes un evento, sala o festival, escríbeme y organizamos los detalles. Contesto siempre en menos de 24 horas.</p>
           
-          <!-- Botón de Email -->
           <a href="mailto:infodjmh@gmail.com" class="c-item">
             <div class="c-icon">
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -503,7 +511,6 @@
             <div class="c-text"><span>Email Directo</span><strong>infodjmh@gmail.com</strong></div>
           </a>
 
-          <!-- Botón de Teléfono -->
           <a href="tel:+34643822841" class="c-item">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -511,7 +518,6 @@
             <div class="c-text"><span>Teléfono</span><strong>+34 643 822 841</strong></div>
           </a>
 
-          <!-- Botón de Instagram -->
           <a href="https://instagram.com/marcosherradon_" target="_blank" class="c-item">
             <div class="c-icon">
               <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
@@ -534,7 +540,6 @@
       </div>
     </section>
 
-    <!-- MARQUEE Y FOOTER -->
     <div class="marquee">
       <div class="marquee-content">
         <div class="m-item">Marcos Herradón DJ</div>
@@ -556,7 +561,6 @@
 
   </main>
 
-  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // Quitar el loader
@@ -592,6 +596,17 @@
       document.getElementById(id).classList.toggle('active');
     }
 
+    // Lector de fechas infalible para evitar "NaN" o "Invalid Date"
+    function parseSafeDate(dateStr) {
+      if (!dateStr) return new Date();
+      const parts = dateStr.split(/[-/]/);
+      if (parts.length === 3) {
+        if (parts[0].length === 4) return new Date(parts[0], parts[1]-1, parts[2]); // Formato YYYY-MM-DD
+        if (parts[2].length === 4) return new Date(parts[2], parts[1]-1, parts[0]); // Formato DD-MM-YYYY
+      }
+      return new Date(dateStr);
+    }
+
     // Cargar Eventos desde el JSON
     fetch('https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/events.json')
       .then(res => res.json())
@@ -605,20 +620,26 @@
           return;
         }
 
-        // Ordenar por fecha
-        data.sort((a,b) => new Date(a.date) - new Date(b.date));
+        // Ordenar por fecha usando la nueva función segura
+        data.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
         container.innerHTML = '';
 
         // Actualizar Topbar con el primer evento
         const first = data[0];
-        const fd = new Date(first.date + 'T00:00:00');
-        topbarLive.innerText = `${fd.getDate()} ${fd.toLocaleString('es-ES',{month:'short'}).toUpperCase()} — ${first.venue} (${first.location})`;
+        const fd = parseSafeDate(first.date);
+        
+        // Evita texto raro si el parseo sigue fallando por cualquier motivo extremo
+        if(isNaN(fd)) {
+           topbarLive.innerText = `${first.venue} (${first.location})`;
+        } else {
+           topbarLive.innerText = `${fd.getDate()} ${fd.toLocaleString('es-ES',{month:'short'}).toUpperCase()} — ${first.venue} (${first.location})`;
+        }
 
         // Pintar lista
         data.forEach(ev => {
-          const d = new Date(ev.date + 'T00:00:00');
-          const day = d.getDate();
-          const month = d.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
+          const d = parseSafeDate(ev.date);
+          const day = isNaN(d) ? '?' : d.getDate();
+          const month = isNaN(d) ? '' : d.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
           
           container.innerHTML += `
             <div class="event-item">
@@ -638,7 +659,6 @@
       });
   </script>
   
-  <!-- TIDIO CHAT -->
   <script src="//code.tidio.co/czldnxvhtrjyhjmbsoxqnv7rjtvcqig8.js" async></script>
 
 </body>

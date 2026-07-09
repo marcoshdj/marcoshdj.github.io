@@ -14,6 +14,11 @@
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
+  <!-- Snipcart CSS -->
+  <link rel="preconnect" href="https://app.snipcart.com" />
+  <link rel="preconnect" href="https://cdn.snipcart.com" />
+  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.3/default/snipcart.css" />
+
   <style>
     /* VARIABLES */
     :root {
@@ -162,7 +167,7 @@
     .sc-player.active { max-height: 150px; margin-top: 15px; }
 
     /* TIENDA / COUNTDOWN */
-    .shop-coming-soon { text-align: center; padding: 60px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: 0.3s; }
+    .shop-coming-soon { text-align: center; padding: 40px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: 0.3s; margin-bottom: 40px; }
     .shop-coming-soon:hover { border-color: var(--border-g); background: var(--card-h); }
     .shop-coming-soon p { color: var(--muted); margin-bottom: 30px; font-size: 0.95rem; }
     .countdown { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
@@ -285,6 +290,11 @@
       <a href="#musica" class="nav-link">Música</a>
       <a href="#tienda" class="nav-link">Tienda</a>
       <a href="#contacto" class="nav-link">Contacto</a>
+      
+      <!-- Botón de Snipcart añadido para abrir el carrito -->
+      <a href="#" class="nav-link snipcart-checkout" style="color: var(--gold);">
+        🛒 Carrito (<span class="snipcart-items-count">0</span>)
+      </a>
     </nav>
     <div class="social-links">
       <a href="https://instagram.com/marcosherradon_" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
@@ -404,20 +414,44 @@
       </div>
     </section>
 
-    <!-- TIENDA / MASHUPS -->
+    <!-- TIENDA / SNIPCART -->
     <section id="tienda" class="section">
       <div class="sec-label">Packs & Merch</div>
       <h2 class="sec-title">Tienda</h2>
       
-      <div class="shop-coming-soon">
-        <h3 style="font-family: var(--fd); font-size: 1.8rem; margin-bottom: 10px;">Próximamente</h3>
-        <p>Mis nuevos Mashup Packs y Edits exclusivos estarán disponibles muy pronto. ¡Prepárate!</p>
-        
+      <!-- Cuenta atrás promocional -->
+      <div class="shop-coming-soon" style="margin-bottom: 40px;">
+        <h3 style="font-family: var(--fd); font-size: 1.8rem; margin-bottom: 10px;">Lanzamiento Oficial</h3>
+        <p>¡El Pack ya está aquí! La promoción de lanzamiento termina en:</p>
         <div class="countdown" id="countdown">
           <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Días</div></div>
           <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Horas</div></div>
           <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Min</div></div>
           <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seg</div></div>
+        </div>
+      </div>
+
+      <!-- Producto real con Snipcart -->
+      <div class="music-grid">
+        <div class="track-card">
+          <div class="track-img">
+            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Urban Mashup Pack">
+          </div>
+          <div class="track-info" style="margin-bottom: 15px;">
+            <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Urban Mashup Pack Vol. 1</h4>
+            <p style="color: var(--gold); font-size: 1rem; font-weight: bold;">15.00 €</p>
+          </div>
+          
+          <button class="snipcart-add-item btn btn-solid" style="width: 100%;"
+            data-item-id="pack-01"
+            data-item-price="15.00"
+            data-item-url="https://marcoshdj.github.io"
+            data-item-description="Pack exclusivo de Mashups urbanos en alta calidad."
+            data-item-image="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg"
+            data-item-name="Urban Mashup Pack Vol. 1"
+            data-item-file-guid="c42ad744-0d4a-4182-af3b-dabcb3e08096">
+            Añadir al carrito
+          </button>
         </div>
       </div>
     </section>
@@ -490,7 +524,18 @@
 
   </main>
 
-  <!-- SCRIPTS FUNCIONALES -->
+  <!-- SNIPCART JS ENGINE (Optimizado) -->
+  <script>
+      window.SnipcartSettings = {
+          publicApiKey: 'YTA5MTA5NDMtNDhlYi00ODFiLTg1MDktODEzYjNmYjcwZGRiNjM5MTkyMDg0OTcyMjc3NzAw',
+          loadStrategy: 'on-user-interaction',
+          modalStyle: 'side',
+      };
+
+      (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
+  </script>
+
+  <!-- SCRIPTS FUNCIONALES DE LA WEB -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // Inicializar Swiper
@@ -530,7 +575,7 @@
       return new Date(dateStr);
     }
 
-    // Cargar Eventos desde el JSON con ruta local y truco para evitar la caché de GitHub
+    // Cargar Eventos desde el JSON con ruta local y anti-caché
     const urlJson = 'events.json?v=' + new Date().getTime();
     fetch(urlJson)
       .then(res => res.json())
@@ -547,7 +592,7 @@
         data.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
         container.innerHTML = '';
 
-        // --- ACTUALIZAR LA BARRA SUPERIOR (TOPBAR) AL INSTANTE ---
+        // Actualizar la barra superior (Topbar)
         const first = data[0];
         const fd = parseSafeDate(first.date);
         
@@ -556,11 +601,10 @@
         } else {
            const dia = fd.getDate();
            const mes = fd.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
-           // Formato: 11 JUL — SABADO DE PERREO (Terraza Amable - Nombela)
            topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
         }
 
-        // --- CREAR LA LISTA DE CARTELERÍA ---
+        // Crear la lista de eventos
         data.forEach(ev => {
           const d = parseSafeDate(ev.date);
           const day = isNaN(d) ? '?' : d.getDate();
@@ -583,8 +627,8 @@
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 
-    /* --- CUENTA ATRÁS PARA LA TIENDA --- */
-    const countDownDate = new Date("Jul 13, 2026 12:00:00").getTime();
+    /* --- CUENTA ATRÁS PARA EL FINAL DE LA PROMOCIÓN --- */
+    const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();
@@ -594,7 +638,7 @@
         clearInterval(countdownTimer);
         const container = document.getElementById("countdown");
         if (container) {
-          container.innerHTML = "<p style='color:var(--gold); font-size: 1.4rem; font-weight:bold; letter-spacing:1px;'>¡PACK DISPONIBLE EN LA SECCIÓN DE CONTACTO!</p>";
+          container.innerHTML = "<p style='color:var(--gold); font-size: 1.1rem; font-weight:bold; letter-spacing:1px;'>¡El Pack ya está a la venta a su precio habitual!</p>";
         }
         return;
       }

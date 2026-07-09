@@ -37,73 +37,27 @@
     }
 
     /* RESET BÁSICO */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--fb);
-      background-color: var(--bg);
-      color: var(--white);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden; 
-      position: relative;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--fb); background-color: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
     button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
 
     /* RUIDO VISUAL (GRAIN) */
     .grain-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 50; 
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; 
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
     }
 
     /* VÍDEO DE FONDO */
-    .video-background {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -1; 
-      background-color: #000;
-      overflow: hidden;
-    }
-    .video-background video {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.2) contrast(1.1);
-    }
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.95) 100%);
-    }
+    .video-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; overflow: hidden; }
+    .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2) contrast(1.1); }
+    .video-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.95) 100%); }
 
     /* PANTALLA DE CARGA (LOADER) */
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    #loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+    #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
+    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .ld-logo { width: 65px; margin-bottom: 24px; animation: fadeIn 0.5s 0.2s both; }
     .ld-name { font-family: var(--fd); font-weight: 800; font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; animation: fadeIn 0.5s 0.4s both; }
     .ld-bar { width: 120px; height: 2px; background: var(--border); overflow: hidden; animation: fadeIn 0.5s 0.6s both; }
@@ -113,14 +67,9 @@
 
     /* BARRAS DE NAVEGACIÓN (TOPBAR Y SIDEBAR) */
     .topbar {
-      position: fixed;
-      top: 0; left: var(--sw); right: 0; height: var(--th);
-      background: rgba(7,7,7,0.85);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 30px;
+      position: fixed; top: 0; left: var(--sw); right: 0; height: var(--th); background: rgba(7,7,7,0.85);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border);
+      z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
     }
     .topbar-left { display: flex; align-items: center; gap: 10px; }
     .led { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: pulse 2s infinite; }
@@ -130,28 +79,18 @@
     .topbar-tag { font-family: var(--fa); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); }
 
     .sidebar {
-      position: fixed;
-      top: 0; left: 0; bottom: 0; width: var(--sw);
-      background: rgba(7,7,7,0.95);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-      border-right: 1px solid var(--border);
-      z-index: 110;
-      padding: 30px 20px;
-      display: flex; flex-direction: column;
+      position: fixed; top: 0; left: 0; bottom: 0; width: var(--sw); background: rgba(7,7,7,0.95);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-right: 1px solid var(--border);
+      z-index: 110; padding: 30px 20px; display: flex; flex-direction: column;
     }
     .brand-logo img { width: 70px; margin-bottom: 40px; }
     
     .nav-menu { display: flex; flex-direction: column; gap: 8px; flex: 1; }
     .nav-menu a {
-      font-family: var(--fd); font-size: 0.85rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
-      padding: 10px; border-radius: 6px; transition: 0.3s;
-      position: relative;
+      font-family: var(--fd); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
+      padding: 10px; border-radius: 6px; transition: 0.3s; position: relative;
     }
-    .nav-menu a::before {
-      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 2px; height: 0; background: var(--gold); transition: 0.3s;
-    }
+    .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--gold); transition: 0.3s; }
     .nav-menu a:hover, .nav-menu a.active { color: var(--white); background: var(--card-h); padding-left: 15px; }
     .nav-menu a:hover::before, .nav-menu a.active::before { height: 16px; }
 
@@ -172,40 +111,19 @@
     .menu-open .burger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     /* CONTENEDOR PRINCIPAL */
-    .main-content {
-      margin-left: var(--sw);
-      padding-top: var(--th);
-      min-height: 100vh;
-      position: relative;
-      z-index: 10; 
-    }
+    .main-content { margin-left: var(--sw); padding-top: var(--th); min-height: 100vh; position: relative; z-index: 10; }
 
     /* SECCIÓN HERO */
-    .hero {
-      min-height: calc(100vh - var(--th));
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 60px 5vw;
-      position: relative;
-    }
-    .hero-tag {
-      font-family: var(--fa); font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 2px; color: var(--gold); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
+    .hero { min-height: calc(100vh - var(--th)); display: flex; flex-direction: column; justify-content: flex-end; padding: 60px 5vw; position: relative; }
+    .hero-tag { font-family: var(--fa); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
-    .hero-title {
-      font-family: var(--fd); font-size: clamp(3rem, 8vw, 8rem); font-weight: 800;
-      line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 30px;
-    }
+    .hero-title { font-family: var(--fd); font-size: clamp(3rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 30px; }
     .hero-title span { display: block; }
     .hero-title span.hl { color: var(--gold); }
     .hero-desc { font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 400px; margin-bottom: 30px; }
     
     .btn-group { display: flex; gap: 15px; }
-    .btn {
-      padding: 12px 24px; border-radius: 6px; font-family: var(--fa); font-size: 0.75rem;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-    }
+    .btn { padding: 12px 24px; border-radius: 6px; font-family: var(--fa); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
     .btn-solid { background: var(--gold); color: #000; }
     .btn-solid:hover { background: #d9bc88; transform: translateY(-2px); }
     .btn-outline { background: transparent; border: 1px solid var(--border-g); color: var(--gold); }
@@ -213,10 +131,7 @@
 
     /* SECCIONES GENÉRICAS */
     .section { padding: 100px 5vw; border-top: 1px solid var(--border); }
-    .sec-label {
-      font-family: var(--fa); font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
-    }
+    .sec-label { font-family: var(--fa); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
     .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.5; }
     .sec-title { font-family: var(--fd); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; text-transform: uppercase; margin-bottom: 40px; }
 
@@ -247,27 +162,17 @@
     .sc-player.active { max-height: 150px; margin-top: 15px; }
 
     /* TIENDA / COUNTDOWN */
-    .shop-coming-soon { 
-      text-align: center; padding: 60px 20px; 
-      background: var(--card); border: 1px solid var(--border); 
-      border-radius: 12px; transition: 0.3s;
-    }
+    .shop-coming-soon { text-align: center; padding: 60px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: 0.3s; }
     .shop-coming-soon:hover { border-color: var(--border-g); background: var(--card-h); }
     .shop-coming-soon p { color: var(--muted); margin-bottom: 30px; font-size: 0.95rem; }
     .countdown { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .cd-box { 
-      background: #000; border: 1px solid var(--border-g); 
-      border-radius: 8px; padding: 15px 20px; min-width: 90px; 
-    }
+    .cd-box { background: #000; border: 1px solid var(--border-g); border-radius: 8px; padding: 15px 20px; min-width: 90px; }
     .cd-num { font-family: var(--fd); font-size: 2.2rem; color: var(--gold); font-weight: 800; line-height: 1; }
     .cd-label { font-family: var(--fa); font-size: 0.65rem; text-transform: uppercase; color: var(--muted); margin-top: 5px; letter-spacing: 1px; }
 
     /* EVENTOS */
     .event-list { display: flex; flex-direction: column; gap: 12px; }
-    .event-item {
-      display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px;
-      padding: 15px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; transition: 0.3s;
-    }
+    .event-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px; padding: 15px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; transition: 0.3s; }
     .event-item:hover { border-color: var(--border-g); background: var(--card-h); }
     .ev-img { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; }
     .ev-img img { width: 100%; height: 100%; object-fit: cover; }
@@ -283,12 +188,7 @@
     .contact-info p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 30px; }
     
     /* BOTONES DE CONTACTO (Interactivos) */
-    .c-item { 
-      display: flex; align-items: center; gap: 15px; background: var(--card); 
-      padding: 15px; border-radius: 8px; border: 1px solid var(--border); 
-      margin-bottom: 10px; text-decoration: none; color: inherit; 
-      transition: 0.3s; cursor: pointer; 
-    }
+    .c-item { display: flex; align-items: center; gap: 15px; background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
     .c-item:hover { border-color: var(--border-g); background: var(--card-h); transform: translateY(-2px); }
     .c-icon { width: 40px; height: 40px; background: var(--gold-dim); border: 1px solid var(--border-g); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .c-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; }
@@ -297,11 +197,7 @@
     
     .form-group { margin-bottom: 15px; }
     .form-group label { display: block; font-family: var(--fa); font-size: 0.7rem; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid var(--border);
-      background: var(--card); color: var(--white); font-family: var(--fb); font-size: 0.9rem;
-      outline: none; transition: 0.3s;
-    }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--white); font-family: var(--fb); font-size: 0.9rem; outline: none; transition: 0.3s; }
     .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
     .form-group textarea { min-height: 120px; resize: vertical; }
 
@@ -320,46 +216,17 @@
     /* ADAPTACIÓN MÓVIL CORRECTA */
     @media (max-width: 900px) {
       :root { --sw: 0px; --th: 60px; }
-      
-      .sidebar { 
-        width: 100%; 
-        height: var(--th); 
-        flex-direction: row; align-items: center; justify-content: space-between;
-        padding: 0 20px; border-right: none; border-bottom: 1px solid var(--border); 
-        z-index: 200; 
-        background: #000; 
-      }
+      .sidebar { width: 100%; height: var(--th); flex-direction: row; align-items: center; justify-content: space-between; padding: 0 20px; border-right: none; border-bottom: 1px solid var(--border); z-index: 200; background: #000; }
       .brand-logo img { width: 50px; margin-bottom: 0; }
       .social-links { display: none; }
       .burger { display: block; }
-      
-      .topbar { 
-        top: var(--th); 
-        height: 40px; 
-        padding: 0 15px; 
-        z-index: 150;
-      }
+      .topbar { top: var(--th); height: 40px; padding: 0 15px; z-index: 150; }
       .topbar-tag { display: none; } 
       .topbar-label { font-size: 0.55rem; }
-
-      .nav-menu {
-        position: fixed; 
-        top: var(--th); 
-        left: -100%; 
-        width: 100%; 
-        height: calc(100vh - var(--th));
-        background: rgba(7,7,7,0.98); 
-        padding: 40px 20px;
-        transition: left 0.4s var(--ease); 
-        z-index: 190;
-      }
+      .nav-menu { position: fixed; top: var(--th); left: -100%; width: 100%; height: calc(100vh - var(--th)); background: rgba(7,7,7,0.98); padding: 40px 20px; transition: left 0.4s var(--ease); z-index: 190; }
       .menu-open .nav-menu { left: 0; } 
       .nav-menu a { font-size: 1.5rem; padding: 15px; }
-      
-      .main-content { 
-        margin-left: 0; 
-        padding-top: calc(var(--th) + 40px); 
-      }
+      .main-content { margin-left: 0; padding-top: calc(var(--th) + 40px); }
       .hero { padding: 40px 20px; }
       .section { padding: 70px 20px; }
       .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
@@ -378,6 +245,24 @@
     <div class="ld-name">Marcos Herradón DJ</div>
     <div class="ld-bar"><div class="ld-fill"></div></div>
   </div>
+
+  <!-- SCRIPT PARA OCULTAR EL LOADER (Separado por seguridad) -->
+  <script>
+    // Se ejecuta en cuanto carga el contenido
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var loader = document.getElementById('loader');
+        if (loader) loader.classList.add('hidden');
+      }, 1000);
+    });
+    // Fallback de emergencia: si algo bloquea el JS abajo, esto asegura que el loader se quite a los 3 segundos
+    setTimeout(function() {
+      var loader = document.getElementById('loader');
+      if (loader && !loader.classList.contains('hidden')) {
+        loader.classList.add('hidden');
+      }
+    }, 3000);
+  </script>
 
   <!-- RUIDO Y VIDEO FONDO -->
   <div class="grain-overlay"></div>
@@ -608,16 +493,9 @@
 
   </main>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS FUNCIONALES -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    // Quitar el loader
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
-      }, 1000);
-    });
-
     // Inicializar Swiper
     new Swiper('.swiper', {
       loop: true,
@@ -702,15 +580,13 @@
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 
-    // CUENTA ATRÁS PARA LA TIENDA
-    // Ajusta esta fecha a cuando quieras hacer el lanzamiento real
+    // CUENTA ATRÁS PARA LA TIENDA (Completado y arreglado)
     const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
 
-      // Si la cuenta atrás termina, mostramos un mensaje
       if (distance < 0) {
         clearInterval(countdownTimer);
         document.getElementById("countdown").innerHTML = "<p style='color:var(--gold); font-size: 1.2rem; font-weight:bold;'>¡Ya disponible!</p>";
@@ -720,4 +596,4 @@
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+      const seconds = Math.floor((distance % (1000 * 60Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.

@@ -580,20 +580,22 @@
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 
-    // CUENTA ATRÁS PARA LA TIENDA (Completado y arreglado)
+    // CUENTA ATRÁS PARA LA TIENDA
     const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
 
+      // Si la cuenta atrás termina
       if (distance < 0) {
         clearInterval(countdownTimer);
         document.getElementById("countdown").innerHTML = "<p style='color:var(--gold); font-size: 1.2rem; font-weight:bold;'>¡Ya disponible!</p>";
         return;
       }
 
+      // Cálculos de tiempo
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+      const seconds = Math.floor

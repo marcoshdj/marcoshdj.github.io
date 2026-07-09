@@ -421,27 +421,22 @@
         </div>
       </div>
 
-      <!-- Producto real con Snipcart -->
+   <!-- Producto con enlace a tu nueva página de pago -->
       <div class="music-grid">
         <div class="track-card">
           <div class="track-img">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Urban Mashup Pack">
+            <!-- He puesto la imagen nueva que me pediste antes, si prefieres PORTADA 1 déjala como estaba -->
+            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack">
           </div>
           <div class="track-info" style="margin-bottom: 15px;">
             <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Urban Mashup Pack Vol. 1</h4>
             <p style="color: var(--gold); font-size: 1rem; font-weight: bold;">15.00 €</p>
           </div>
           
-          <button class="snipcart-add-item btn btn-solid" style="width: 100%;"
-            data-item-id="pack-01"
-            data-item-price="15.00"
-            data-item-url="https://marcoshdj.github.io"
-            data-item-description="Pack exclusivo de Mashups urbanos en alta calidad."
-            data-item-image="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg"
-            data-item-name="Urban Mashup Pack Vol. 1"
-            data-item-file-guid="c42ad744-0d4a-4182-af3b-dabcb3e08096">
-            Añadir al carrito
-          </button>
+          <!-- ESTE ES EL NUEVO BOTÓN -->
+          <a href="pack.html" class="btn btn-solid" style="display:block; text-align:center; width: 100%; box-sizing: border-box;">
+            VER PACK
+          </a>
         </div>
       </div>
     </section>
@@ -514,17 +509,7 @@
 
   </main>
 
-  <!-- SNIPCART JS ENGINE (Optimizado) -->
-  <script>
-      window.SnipcartSettings = {
-          publicApiKey: 'YTA5MTA5NDMtNDhlYi00ODFiLTg1MDktODEzYjNmYjcwZGRiNjM5MTkyMDg0OTcyMjc3NzAw',
-          loadStrategy: 'on-user-interaction',
-          modalStyle: 'side',
-      };
-
-      (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
-  </script>
-
+  
   <!-- SCRIPTS FUNCIONALES DE LA WEB -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>

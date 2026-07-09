@@ -291,9 +291,9 @@
       <a href="#tienda" class="nav-link">Tienda</a>
       <a href="#contacto" class="nav-link">Contacto</a>
       
-      <!-- ESTE ES EL ENLACE CORREGIDO: Redirige a carrito.html directamente -->
-      <a href="carrito.html" class="nav-link" style="color: var(--gold);">
-        🛒 Ir al carrito (<span class="snipcart-items-count">0</span>)
+      <!-- Botón de Snipcart añadido para abrir el carrito -->
+      <a href="#" class="nav-link snipcart-checkout" style="color: var(--gold);">
+        🛒 Carrito (<span class="snipcart-items-count">0</span>)
       </a>
     </nav>
     <div class="social-links">
@@ -628,7 +628,7 @@
       });
 
     /* --- CUENTA ATRÁS PARA EL FINAL DE LA PROMOCIÓN --- */
-    const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
+    const countDownDate = new Date("Jul 13, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();

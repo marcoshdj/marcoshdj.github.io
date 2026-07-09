@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tu Carrito | Marcos Herradón DJ</title>
   
-  <!-- Tipografía -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   
   <!-- Snipcart CSS -->
   <link rel="preconnect" href="https://app.snipcart.com" />
@@ -14,37 +14,71 @@
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.3/default/snipcart.css" />
 
   <style>
+    /* VARIABLES */
+    :root {
+      --gold: #c8a96e;
+      --bg: #070707;
+      --fd: 'Syne', sans-serif;
+      --fb: 'Inter', sans-serif;
+    }
+
+    /* RESET BÁSICO */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
-      background-color: #070707; 
+      background-color: var(--bg); 
       color: #f5f3ef; 
-      font-family: 'Inter', sans-serif; 
+      font-family: var(--fb); 
+      min-height: 100vh; 
       display: flex; 
       flex-direction: column; 
       align-items: center; 
       justify-content: center; 
-      min-height: 100vh; 
-      margin: 0; 
       text-align: center;
       padding: 20px;
+      position: relative;
+      overflow: hidden;
     }
-    .brand-logo { width: 80px; margin-bottom: 20px; }
-    h1 { font-size: 2rem; margin-bottom: 10px; }
-    p { color: #c8a96e; margin-bottom: 30px; font-size: 1.1rem; }
+
+    /* RUIDO VISUAL (GRAIN) */
+    .grain-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; 
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+    }
+
+    /* VÍDEO DE FONDO */
+    .video-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; overflow: hidden; }
+    .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2) contrast(1.1); }
+    .video-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.95) 100%); }
+
+    /* CONTENEDOR PRINCIPAL (Para que esté por encima del vídeo) */
+    .content-wrapper {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .brand-logo { width: 80px; margin-bottom: 20px; animation: fadeIn 0.8s ease forwards; }
+    h1 { font-family: var(--fd); font-size: 2.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; letter-spacing: -1px; }
+    p.subtitle { color: var(--gold); margin-bottom: 30px; font-size: 1.1rem; }
     
     .btn-solid { 
-      background: #c8a96e; 
+      background: var(--gold); 
       color: #000; 
       padding: 15px 50px; 
       border-radius: 6px; 
-      font-weight: bold; 
+      font-weight: 800; 
+      font-family: var(--fd);
       text-transform: uppercase; 
       cursor: pointer; 
       border: none; 
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       transition: 0.3s;
       letter-spacing: 1px;
     }
-    .btn-solid:hover { background: #d9bc88; transform: translateY(-2px); }
+    .btn-solid:hover { background: #d9bc88; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
     
     .back-link { 
       color: rgba(245,243,239,0.5); 
@@ -53,24 +87,27 @@
       font-size: 0.9rem;
       transition: 0.3s;
     }
-    .back-link:hover { color: #c8a96e; }
+    .back-link:hover { color: var(--gold); }
 
     /* Estilos para el ticket resumen del carrito */
     #cart-summary {
       width: 100%;
       max-width: 400px;
       margin-bottom: 30px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 20px;
+      background: rgba(7,7,7,0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 12px;
+      padding: 25px;
       text-align: left;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
     .cart-item {
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(255,255,255,0.05);
-      padding: 10px 0;
+      padding: 12px 0;
       font-size: 0.95rem;
     }
     .cart-item:last-child { border-bottom: none; }
@@ -80,30 +117,47 @@
       justify-content: space-between;
       padding-top: 15px;
       margin-top: 10px;
-      border-top: 1px solid rgba(200,169,110,0.3);
-      font-weight: bold;
-      font-size: 1.2rem;
+      border-top: 1px solid rgba(200,169,110,0.5);
+      font-family: var(--fd);
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-transform: uppercase;
     }
-    .gold-text { color: #c8a96e; }
+    .gold-text { color: var(--gold); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
-  <!-- Logo y Mensaje -->
-  <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón" class="brand-logo">
-  <h1>Tu Carrito de Compra</h1>
-  <p>Revisa tu pedido antes de finalizar.</p>
-  
-  <!-- Contenedor donde aparecerán los productos automáticamente -->
-  <div id="cart-summary">
-    <p style="text-align: center; color: rgba(245,243,239,0.5); font-size: 0.9rem;">Cargando productos...</p>
+  <!-- RUIDO Y VIDEO FONDO -->
+  <div class="grain-overlay"></div>
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_0204.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
   </div>
-  
-  <!-- Botón de Pago directo -->
-  <button class="snipcart-checkout btn-solid">PAGAR</button>
 
-  <!-- Volver a la web -->
-  <a href="index.html" class="back-link">← Volver a la web principal</a>
+  <!-- CONTENIDO DEL CARRITO -->
+  <div class="content-wrapper">
+    <!-- Logo -->
+    <a href="index.html"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón" class="brand-logo"></a>
+    
+    <h1>Tu Carrito</h1>
+    <p class="subtitle">Revisa tu pedido antes de finalizar.</p>
+    
+    <!-- Contenedor donde aparecerán los productos automáticamente -->
+    <div id="cart-summary">
+      <p style="text-align: center; color: rgba(245,243,239,0.5); font-size: 0.9rem; margin: 0;">Cargando productos...</p>
+    </div>
+    
+    <!-- Botón de Pago directo -->
+    <button class="snipcart-checkout btn-solid">PAGAR</button>
+
+    <!-- Volver a la web -->
+    <a href="index.html" class="back-link">← Volver a la web principal</a>
+  </div>
 
   <!-- SNIPCART ENGINE -->
   <script>

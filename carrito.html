@@ -2,48 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carrito | Marcos Herradón DJ</title>
-  <link rel="preconnect" href="https://app.snipcart.com" />
-  <link rel="preconnect" href="https://cdn.snipcart.com" />
+  <title>Finalizar Pago | Marcos Herradón DJ</title>
   <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.3/default/snipcart.css" />
   <style>
-    body { background-color: #070707; color: #f5f3ef; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; }
-    .brand-logo { width: 80px; margin-bottom: 20px; }
-    h1 { font-family: 'Syne', sans-serif; font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; }
-    #cart-summary { width: 100%; max-width: 400px; margin-bottom: 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(200,169,110,0.3); border-radius: 10px; padding: 20px; text-align: left; }
-    .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .btn-solid { background: #c8a96e; color: #000; padding: 15px 50px; border-radius: 6px; font-weight: bold; text-transform: uppercase; cursor: pointer; border: none; font-size: 1.1rem; }
-    .back-link { color: rgba(245,243,239,0.5); margin-top: 20px; text-decoration: none; }
+    body { background: #000; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+    .btn-solid { background: #c8a96e; color: #000; padding: 20px 40px; border-radius: 8px; font-weight: bold; cursor: pointer; border: none; font-size: 1.2rem; }
   </style>
 </head>
 <body>
-  <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Logo" class="brand-logo">
-  <h1>Tu Carrito</h1>
-  <div id="cart-summary"><p>Cargando productos...</p></div>
+  <h1>Finalizar Pedido</h1>
   
-<!-- Botón directo de Snipcart nativo -->
-<button class="snipcart-checkout btn-solid" style="cursor: pointer;">
-  PAGAR AHORA
-</button>
-  
-  <a href="index.html" class="back-link">← Volver</a>
+  <button class="snipcart-add-item btn-solid"
+    data-item-id="pack-01"
+    data-item-price="15.00"
+    data-item-url="https://marcoshdj.github.io/carrito.html"
+    data-item-name="Urban Mashup Pack Vol. 1"
+    data-item-file-guid="c42ad744-0d4a-4182-af3b-dabcb3e08096">
+    PAGAR URBAN MASHUP PACK (15€)
+  </button>
 
-  <script>
-      window.SnipcartSettings = { publicApiKey: 'YTA5MTA5NDMtNDhlYi00ODFiLTg1MDktODEzYjNmYjcwZGRiNjM5MTkyMDg0OTcyMjc3NzAw', loadStrategy: 'default', modalStyle: 'full' };
-      (()=>{var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).timeoutDuration)!=null||(s.timeoutDuration=2750);var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.SnipcartSettings.version.includes("v3.0.0-ci")||window.SnipcartSettings.version!="3.0"&&window.SnipcartSettings.version.localeCompare("3.4.0",void 0,{numeric:!0,sensitivity:"base"})===-1,m=["focus","mouseover","touchmove","scroll","keydown"];window.LoadSnipcart=o;document.readyState==="loading"?document.addEventListener("DOMContentLoaded",r):r();function r(){window.SnipcartSettings.loadStrategy?window.SnipcartSettings.loadStrategy==="on-user-interaction"&&(m.forEach(t=>document.addEventListener(t,o)),setTimeout(o,window.SnipcartSettings.timeoutDuration)):o()}var a=!1;function o(){if(a)return;a=!0;let t=document.getElementsByTagName("head")[0],e=document.querySelector("#snipcart"),i=document.querySelector(`src[src^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][src$="snipcart.js"]`),n=document.querySelector(`link[href^="${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}"][href$="snipcart.css"]`);e||(e=document.createElement("div"),e.id="snipcart",e.setAttribute("hidden","true"),document.body.appendChild(e)),v(e),i||(i=document.createElement("script"),i.src=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.js`,i.async=!0,t.appendChild(i)),n||(n=document.createElement("link"),n.rel="stylesheet",n.type="text/css",n.href=`${window.SnipcartSettings.protocol}://${window.SnipcartSettings.domain}/themes/v${window.SnipcartSettings.version}/default/snipcart.css`,t.prepend(n)),m.forEach(g=>document.removeEventListener(g,o))}function v(t){!f||(t.dataset.apiKey=window.SnipcartSettings.publicApiKey,window.SnipcartSettings.addProductBehavior&&(t.dataset.configAddProductBehavior=window.SnipcartSettings.addProductBehavior),window.SnipcartSettings.modalStyle&&(t.dataset.configModalStyle=window.SnipcartSettings.modalStyle),window.SnipcartSettings.currency&&(t.dataset.currency=window.SnipcartSettings.currency),window.SnipcartSettings.templatesUrl&&(t.dataset.templatesUrl=window.SnipcartSettings.templatesUrl))}})();
-  </script>
-  <script>
-    document.addEventListener('snipcart.ready', () => {
-      const render = () => {
-        const items = Snipcart.store.getState().cart.items.items;
-        document.getElementById('cart-summary').innerHTML = items.length ? 
-          items.map(i => `<div class="cart-item"><span>${i.quantity}x ${i.name}</span><span>${i.totalPrice.toFixed(2)}€</span></div>`).join('') 
-          : 'Carrito vacío';
-      };
-      render();
-      Snipcart.store.subscribe(render);
-    });
-  </script>
+  <br><a href="index.html" style="color: #666;">Volver</a>
+
+  <script src="https://cdn.snipcart.com/themes/v3.4.3/default/snipcart.js"></script>
+  <div hidden id="snipcart" data-api-key="YTA5MTA5NDMtNDhlYi00ODFiLTg1MDktODEzYjNmYjcwZGRiNjM5MTkyMDg0OTcyMjc3NzAw"></div>
 </body>
 </html>

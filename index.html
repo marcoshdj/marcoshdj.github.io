@@ -187,7 +187,7 @@
     .contact-info h3 { font-family: var(--fd); font-size: 1.5rem; margin-bottom: 15px; }
     .contact-info p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 30px; }
     
-    /* BOTONES DE CONTACTO (Interactivos) */
+    /* BOTONES DE CONTACTO */
     .c-item { display: flex; align-items: center; gap: 15px; background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
     .c-item:hover { border-color: var(--border-g); background: var(--card-h); transform: translateY(-2px); }
     .c-icon { width: 40px; height: 40px; background: var(--gold-dim); border: 1px solid var(--border-g); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
@@ -246,16 +246,13 @@
     <div class="ld-bar"><div class="ld-fill"></div></div>
   </div>
 
-  <!-- SCRIPT PARA OCULTAR EL LOADER (Separado por seguridad) -->
   <script>
-    // Se ejecuta en cuanto carga el contenido
     window.addEventListener('load', function() {
       setTimeout(function() {
         var loader = document.getElementById('loader');
         if (loader) loader.classList.add('hidden');
       }, 1000);
     });
-    // Fallback de emergencia: si algo bloquea el JS abajo, esto asegura que el loader se quite a los 3 segundos
     setTimeout(function() {
       var loader = document.getElementById('loader');
       if (loader && !loader.classList.contains('hidden')) {
@@ -273,7 +270,7 @@
     <div class="video-overlay"></div>
   </div>
 
-  <!-- CABECERA DE LOGO Y MENÚ (SIDEBAR ADAPTADO) -->
+  <!-- CABECERA DE LOGO Y MENÚ -->
   <aside class="sidebar">
     <a href="#hero" class="brand-logo">
       <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón DJ">
@@ -304,7 +301,7 @@
     <span class="topbar-tag">Tour 2026</span>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL SCROLLEABLE -->
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="main-content">
     
     <!-- HERO -->
@@ -580,22 +577,25 @@
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 
-    // CUENTA ATRÁS PARA LA TIENDA
+    /* --- CORRECCIÓN: CUENTA ATRÁS PARA LA TIENDA TOTALMENTE CONECTADA --- */
     const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
 
-      // Si la cuenta atrás termina
+      // Si la fecha ya ha pasado o llega a cero
       if (distance < 0) {
         clearInterval(countdownTimer);
-        document.getElementById("countdown").innerHTML = "<p style='color:var(--gold); font-size: 1.2rem; font-weight:bold;'>¡Ya disponible!</p>";
+        const container = document.getElementById("countdown");
+        if (container) {
+          container.innerHTML = "<p style='color:var(--gold); font-size: 1.4rem; font-weight:bold; letter-spacing:1px;'>¡PACK DISPONIBLE EN LA SECCIÓN DE CONTACTO!</p>";
+        }
         return;
       }
 
-      // Cálculos de tiempo
+      // Cálculos de tiempo correctos
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor
+      const seconds = Math.floor((distance %Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.

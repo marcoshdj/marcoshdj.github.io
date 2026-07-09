@@ -7,67 +7,84 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     :root { --gold: #c8a96e; --bg: #070707; }
-    body { background: var(--bg); color: #f5f3ef; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 40px; margin: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: #f5f3ef; font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 40px; }
+    
+    /* VIDEO FONDO */
+    .video-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; }
+    .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2); }
     
     .product-container { 
-      display: grid; 
-      grid-template-columns: 350px 1fr; /* Imagen fija a 350px */
-      gap: 60px; 
-      max-width: 900px; 
-      width: 100%; 
-      align-items: start; 
+      display: grid; grid-template-columns: 350px 1fr; gap: 60px; 
+      max-width: 900px; width: 100%; align-items: start; background: rgba(0,0,0,0.6); 
+      padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
     }
+    
+    .logo-container { text-align: center; margin-bottom: 30px; }
+    .logo-container img { width: 80px; }
     
     .product-img { border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
     .product-img img { width: 100%; display: block; }
     
-    .product-info { display: flex; flex-direction: column; }
     .product-info h1 { font-family: 'Syne', sans-serif; font-size: 2.2rem; text-transform: uppercase; margin-bottom: 10px; }
     .price { font-size: 1.8rem; color: var(--gold); font-weight: bold; margin: 20px 0; }
     .features { list-style: none; margin: 20px 0; color: #ccc; line-height: 1.8; }
     .features li::before { content: '◆ '; color: var(--gold); }
     
-    /* Centrado del botón */
     .paypal-wrapper { display: flex; justify-content: center; margin: 20px 0; }
-    
     .back-link { color: #666; text-decoration: none; margin-top: 30px; display: inline-block; font-size: 0.8rem; text-align: center; width: 100%; }
     
-    @media (max-width: 768px) { .product-container { grid-template-columns: 1fr; gap: 30px; } }
+    @media (max-width: 768px) { .product-container { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
-  <div class="product-container">
-    <div class="product-img">
-      <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack">
+  <!-- VÍDEO DE FONDO -->
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_0204.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div style="width: 100%; max-width: 900px;">
+    <!-- LOGO -->
+    <div class="logo-container">
+      <a href="index.html"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón DJ"></a>
     </div>
-    
-    <div class="product-info">
-      <h1>Urban Mashup Pack Vol. 1</h1>
-      <p style="color: #888;">Pack exclusivo de mashups, seleccionados y mezclados por Marcos Herradón. Sonido optimizado para clubs.</p>
-      
-      <ul class="features">
-        <li>15 mashups exclusivos en alta calidad</li>
-        <li>Combos listos para pinchar (Intros/Outros)</li>
-        <li>BPM marcado para DJs</li>
-        <li>Sonido optimizado para clubs y fiestas</li>
-      </ul>
 
-      <div class="price">15,00€</div>
-
-      <!-- BOTÓN CENTRADO -->
-      <div class="paypal-wrapper">
-        <div>
-          <style>.pp-739RU5N23VJE8{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-          <form action="https://www.paypal.com/ncp/payment/739RU5N23VJE8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-            <input class="pp-739RU5N23VJE8" type="submit" value="Pagar ahora" />
-            <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
-            <section style="font-size: 0.75rem; color: #666;"> Tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-          </form>
-        </div>
+    <div class="product-container">
+      <div class="product-img">
+        <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack">
       </div>
       
-      <a href="index.html" class="back-link">← Volver a la web</a>
+      <div class="product-info">
+        <h1>Urban Mashup Pack Vol. 1</h1>
+        <p style="color: #888;">Pack exclusivo de mashups, seleccionados y mezclados por Marcos Herradón. Sonido optimizado para clubs.</p>
+        
+        <ul class="features">
+          <li>15 mashups exclusivos en alta calidad</li>
+          <li>Combos listos para pinchar (Intros/Outros)</li>
+          <li>BPM marcado para DJs</li>
+          <li>Sonido optimizado para clubs y fiestas</li>
+        </ul>
+
+        <div class="price">15,00€</div>
+
+        <!-- BOTÓN PAYPAL -->
+        <div class="paypal-wrapper">
+          <div>
+            <style>.pp-739RU5N23VJE8{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+            <form action="https://www.paypal.com/ncp/payment/739RU5N23VJE8" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+              <input class="pp-739RU5N23VJE8" type="submit" value="Pagar ahora" />
+              <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+              <section style="font-size: 0.75rem; color: #666;"> Tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            </form>
+          </div>
+        </div>
+        
+        <a href="index.html" class="back-link">← Volver a la web</a>
+      </div>
     </div>
   </div>
 

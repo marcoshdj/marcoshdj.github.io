@@ -530,8 +530,9 @@
       return new Date(dateStr);
     }
 
-    // Cargar Eventos desde el JSON
-    fetch('https://github.com/marcoshdj/marcoshdj.github.io/blob/main/events.json')
+    // Cargar Eventos desde el JSON con ruta local y truco para evitar la caché de GitHub
+    const urlJson = 'events.json?v=' + new Date().getTime();
+    fetch(urlJson)
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById('eventos-contenedor');
@@ -546,15 +547,20 @@
         data.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
         container.innerHTML = '';
 
+        // --- ACTUALIZAR LA BARRA SUPERIOR (TOPBAR) AL INSTANTE ---
         const first = data[0];
         const fd = parseSafeDate(first.date);
         
         if(isNaN(fd)) {
            topbarLive.innerText = `${first.venue} (${first.location})`;
         } else {
-           topbarLive.innerText = `${fd.getDate()} ${fd.toLocaleString('es-ES',{month:'short'}).toUpperCase()} — ${first.venue} (${first.location})`;
+           const dia = fd.getDate();
+           const mes = fd.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
+           // Formato: 11 JUL — SABADO DE PERREO (Terraza Amable - Nombela)
+           topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
         }
 
+        // --- CREAR LA LISTA DE CARTELERÍA ---
         data.forEach(ev => {
           const d = parseSafeDate(ev.date);
           const day = isNaN(d) ? '?' : d.getDate();
@@ -577,14 +583,13 @@
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 
-    /* --- CORRECCIÓN: CUENTA ATRÁS PARA LA TIENDA TOTALMENTE CONECTADA --- */
+    /* --- CUENTA ATRÁS PARA LA TIENDA --- */
     const countDownDate = new Date("Jul 10, 2026 12:00:00").getTime();
 
     const countdownTimer = setInterval(function() {
       const now = new Date().getTime();
       const distance = countDownDate - now;
 
-      // Si la fecha ya ha pasado o llega a cero
       if (distance < 0) {
         clearInterval(countdownTimer);
         const container = document.getElementById("countdown");
@@ -594,19 +599,16 @@
         return;
       }
 
-      // Cálculos de tiempo correctos
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Enviar los números al HTML (usamos padStart para que siempre tengan 2 dígitos, ej: "05")
       document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
       document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
       document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
       document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
-      
-    }, 1000); // Se actualiza cada 1000 milisegundos (1 segundo)
+    }, 1000);
   </script>
 </body>
 </html>

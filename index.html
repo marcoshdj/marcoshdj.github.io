@@ -37,12 +37,20 @@
     }
 
     /* RESET BÁSICO */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--fb); background-color: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+    }
+    html, body { 
+        width: 100%; 
+        overflow-x: hidden; /* Esto evita que la página se desplace horizontalmente */
+    }
+    img { 
+        max-width: 100%; 
+        height: auto; 
+    }
+
 
     /* RUIDO VISUAL (GRAIN) */
     .grain-overlay {

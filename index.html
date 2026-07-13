@@ -551,22 +551,36 @@
       return new Date(dateStr);
     }
 
-    // Cargar Eventos desde el JSON con ruta local y anti-caché
-    const urlJson = 'events.json?v=' + new Date().getTime();
-    fetch(urlJson)
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('eventos-contenedor');
-        const topbarLive = document.getElementById('live-event');
-        
-        if (!data || data.length === 0) {
-          container.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
-          topbarLive.innerText = 'Próximamente';
-          return;
-        }
+    // Cargar Eventos desde el JSON
+const urlJson = 'events.json?v=' + new Date().getTime();
+fetch(urlJson)
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('eventos-contenedor');
+    const topbarLive = document.getElementById('live-event');
+    
+    const hoy = new Date();
+    // Reiniciamos la hora a medianoche para comparar solo fechas
+    hoy.setHours(0,0,0,0);
 
-        data.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
-        container.innerHTML = '';
+    // FILTRO: Solo dejamos los eventos cuya fecha es hoy o futura
+    const eventosFuturos = data.filter(ev => {
+      return parseSafeDate(ev.date) >= hoy;
+    });
+
+    if (!eventosFuturos || eventosFuturos.length === 0) {
+      container.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
+      topbarLive.innerText = 'Próximamente';
+      return;
+    }
+
+    // Ordenamos los eventos que quedan
+    eventosFuturos.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
+    container.innerHTML = '';
+
+    // ... (El resto de tu código para pintar los eventos sigue igual, usando 'eventosFuturos' en lugar de 'data')
+    const first = eventosFuturos[0];
+    // ... y así sucesivamente para el resto del bucle forEach
 
         // Actualizar la barra superior (Topbar)
         const first = data[0];

@@ -551,37 +551,87 @@
       return new Date(dateStr);
     }
 
-    // Cargar Eventos desde el JSON
-const urlJson = 'events.json?v=' + new Date().getTime();
-fetch(urlJson)
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('eventos-contenedor');
-    const topbarLive = document.getElementById('live-event');
-    
-    const hoy = new Date();
-    // Reiniciamos la hora a medianoche para comparar solo fechas
-    hoy.setHours(0,0,0,0);
+   // Cargar Eventos desde el JSON
+    const urlJson = 'events.json?v=' + new Date().getTime();
+    fetch(urlJson)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('eventos-contenedor');
+        const topbarLive = document.getElementById('live-event');
+        
+        const hoy = new Date();
+        hoy.setHours(0,0,0,0);
 
-    // FILTRO: Solo dejamos los eventos cuya fecha es hoy o futura
-    const eventosFuturos = data.filter(ev => {
-      return parseSafeDate(ev.date) >= hoy;
-    });
+        // 1. Filtramos: Solo eventos de hoy en adelante
+        const eventosFuturos = data.filter(ev => parseSafeDate(ev.date) >= hoy);
 
-    if (!eventosFuturos || eventosFuturos.length === 0) {
-      container.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
-      topbarLive.innerText = 'Próximamente';
-      return;
-    }
+        if (!eventosFuturos || eventosFuturos.length === 0) {
+          container.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
+          topbarLive.innerText = 'Próximamente';
+          return;
+        }
 
-    // Ordenamos los eventos que quedan
-    eventosFuturos.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
-    container.innerHTML = '';
+        // 2. Ordenamos
+        eventosFuturos.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
+        
+        // 3. Actualizar la barra superior (Topbar) usando el primer evento de la lista filtrada
+        const first = eventosFuturos[0];
+        const fd = parseSafeDate(first.date);
+        if(isNaN(fd)) {
+           topbarLive.innerText = `${first.venue} (${first.location})`;
+        } else {
+           const dia = fd.getDate();
+           const mes = fd.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
+           topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
+        }
 
-    // ... (El resto de tu código para pintar los eventos sigue igual, usando 'eventosFuturos' en lugar de 'data')
-    const first = eventosFuturos[0];
-    // ... y así sucesivamente para el resto del bucle forEach
+        // 4. Limpiar y dibujar la lista
+        container.innerHTML = '';
+        eventosFuturos.forEach(ev => {
+          const d = parseSafeDate(ev.date);
+          const day = isNaN(d) ? '?' : d.getDate();
+          const month = isNaN(d) ? '' : d.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
+          
+          container.innerHTML += `
+            <div class="event-item">
+              <div class="ev-img"><img src="${ev.image}" alt="${ev.venue}"></div>
+              <div>
+                <div class="ev-date"><span class="ev-d1">${day} ${month}</span><span class="ev-d2">${ev.time || 'TBA'}</span></div>
+                <div class="ev-title">${ev.venue}</div>
+                <div class="ev-loc">${ev.location}</div>
+              </div>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('eventos-contenedor').innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Error al cargar eventos.</p>';
+      });
 
+    /* --- CUENTA ATRÁS --- */
+    const countDownDate = new Date("Jul 13, 2026 12:00:00").getTime();
+    const countdownTimer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      if (distance < 0) {
+        clearInterval(countdownTimer);
+        const container = document.getElementById("countdown");
+        if (container) container.innerHTML = "<p style='color:var(--gold); font-size: 1.1rem; font-weight:bold; letter-spacing:1px;'>¡El Pack ya está a la venta a su precio habitual!</p>";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
+      document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
+    }, 1000);
         // Actualizar la barra superior (Topbar)
         const first = data[0];
         const fd = parseSafeDate(first.date);

@@ -36,14 +36,17 @@
       --fb: 'Inter', sans-serif;
     }
 
-    /* RESET BÁSICO */
+    /* RESET BÁSICO Y OPTIMIZACIÓN MÓVIL */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--fb); background-color: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative; }
+    html, body { 
+        width: 100%; 
+        overflow-x: hidden; /* Evita el scroll horizontal en móviles */
+    }
+    body { font-family: var(--fb); background-color: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; position: relative; }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
+    img { max-width: 100%; height: auto; display: block; }
     button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
-
 
     /* RUIDO VISUAL (GRAIN) */
     .grain-overlay {
@@ -118,7 +121,16 @@
     .hero { min-height: calc(100vh - var(--th)); display: flex; flex-direction: column; justify-content: flex-end; padding: 60px 5vw; position: relative; }
     .hero-tag { font-family: var(--fa); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
-    .hero-title { font-family: var(--fd); font-size: clamp(3rem, 8vw, 8rem); font-weight: 800; line-height: 0.9; text-transform: uppercase; letter-spacing: -2px; margin-bottom: 30px; }
+    .hero-title { 
+        font-family: var(--fd); 
+        font-size: clamp(2.2rem, 8vw, 8rem); /* Optimizado para móvil */
+        font-weight: 800; 
+        line-height: 0.9; 
+        text-transform: uppercase; 
+        letter-spacing: -1px; 
+        margin-bottom: 30px; 
+        word-wrap: break-word; /* Evita cortes feos */
+    }
     .hero-title span { display: block; }
     .hero-title span.hl { color: var(--gold); }
     .hero-desc { font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 400px; margin-bottom: 30px; }
@@ -227,9 +239,15 @@
       .nav-menu { position: fixed; top: var(--th); left: -100%; width: 100%; height: calc(100vh - var(--th)); background: rgba(7,7,7,0.98); padding: 40px 20px; transition: left 0.4s var(--ease); z-index: 190; }
       .menu-open .nav-menu { left: 0; } 
       .nav-menu a { font-size: 1.5rem; padding: 15px; }
-      .main-content { margin-left: 0; padding-top: calc(var(--th) + 40px); }
-      .hero { padding: 40px 20px; }
-      .section { padding: 70px 20px; }
+      .main-content { 
+        margin-left: 0 !important; 
+        padding-top: calc(var(--th) + 40px); 
+        width: 100vw; 
+        padding-left: 20px; 
+        padding-right: 20px;
+      }
+      .hero { padding: 40px 0; }
+      .section { padding: 70px 0; }
       .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
       .countdown { gap: 10px; }
       .cd-box { min-width: 70px; padding: 12px 10px; }
@@ -284,9 +302,9 @@
       <a href="#eventos" class="nav-link">Fechas</a>
       <a href="#sobre" class="nav-link">Sobre mí</a>
       <a href="#musica" class="nav-link">Música</a>
-      <a href="#tienda" class="nav-link">Tienda</a>
+      <a href="pack.html" class="nav-link" style="color: var(--gold);">Tienda</a>
       <a href="#contacto" class="nav-link">Contacto</a>
-      
+    </nav>
     <div class="social-links">
       <a href="https://instagram.com/marcosherradon_" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
       <a href="https://soundcloud.com/marcosherradon" target="_blank"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M2 17c0 1.1.9 2 2 2h15c1.4 0 2.5-1.1 2.5-2.5 0-1.2-.9-2.2-2-2.4v-.1c0-3.3-2.7-6-6-6-2 0-3.8 1-4.9 2.5C8.2 10.2 7.5 10 6.8 10 5 10 3.5 11.6 3.5 13.5c0 .2 0 .4.1.5C2.7 14.3 2 15.1 2 16v1z"/></svg></a>
@@ -405,7 +423,7 @@
       </div>
     </section>
 
-    <!-- TIENDA / SNIPCART -->
+    <!-- TIENDA / PAYPAL LINK -->
     <section id="tienda" class="section">
       <div class="sec-label">Packs & Merch</div>
       <h2 class="sec-title">Tienda</h2>
@@ -422,19 +440,17 @@
         </div>
       </div>
 
-   <!-- Producto con enlace a tu nueva página de pago -->
+      <!-- Producto con enlace a la página de pago -->
       <div class="music-grid">
         <div class="track-card">
           <div class="track-img">
-            <!-- He puesto la imagen nueva que me pediste antes, si prefieres PORTADA 1 déjala como estaba -->
             <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack">
           </div>
           <div class="track-info" style="margin-bottom: 15px;">
             <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Urban Mashup Pack Vol. 1</h4>
-            <p style="color: var(--gold); font-size: 1rem; font-weight: bold;">1.00 €</p>
+            <p style="color: var(--gold); font-size: 1rem; font-weight: bold;">15.00 €</p>
           </div>
           
-          <!-- ESTE ES EL NUEVO BOTÓN -->
           <a href="pack.html" class="btn btn-solid" style="display:block; text-align:center; width: 100%; box-sizing: border-box;">
             VER PACK
           </a>
@@ -551,7 +567,7 @@
       return new Date(dateStr);
     }
 
-   // Cargar Eventos desde el JSON
+    // Cargar Eventos desde el JSON
     const urlJson = 'events.json?v=' + new Date().getTime();
     fetch(urlJson)
       .then(res => res.json())
@@ -574,7 +590,7 @@
         // 2. Ordenamos
         eventosFuturos.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
         
-        // 3. Actualizar la barra superior (Topbar) usando el primer evento de la lista filtrada
+        // 3. Actualizar la barra superior (Topbar)
         const first = eventosFuturos[0];
         const fd = parseSafeDate(first.date);
         if(isNaN(fd)) {
@@ -607,63 +623,6 @@
       .catch(err => {
         console.error(err);
         document.getElementById('eventos-contenedor').innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Error al cargar eventos.</p>';
-      });
-
-    /* --- CUENTA ATRÁS --- */
-    const countDownDate = new Date("Jul 13, 2026 12:00:00").getTime();
-    const countdownTimer = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
-
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        const container = document.getElementById("countdown");
-        if (container) container.innerHTML = "<p style='color:var(--gold); font-size: 1.1rem; font-weight:bold; letter-spacing:1px;'>¡El Pack ya está a la venta a su precio habitual!</p>";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
-      document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
-      document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
-      document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
-    }, 1000);
-        // Actualizar la barra superior (Topbar)
-        const first = data[0];
-        const fd = parseSafeDate(first.date);
-        
-        if(isNaN(fd)) {
-           topbarLive.innerText = `${first.venue} (${first.location})`;
-        } else {
-           const dia = fd.getDate();
-           const mes = fd.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
-           topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
-        }
-
-        // Crear la lista de eventos
-        data.forEach(ev => {
-          const d = parseSafeDate(ev.date);
-          const day = isNaN(d) ? '?' : d.getDate();
-          const month = isNaN(d) ? '' : d.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
-          
-          container.innerHTML += `
-            <div class="event-item">
-              <div class="ev-img"><img src="${ev.image}" alt="${ev.venue}"></div>
-              <div>
-                <div class="ev-date"><span class="ev-d1">${day} ${month}</span><span class="ev-d2">${ev.time || 'TBA'}</span></div>
-                <div class="ev-title">${ev.venue}</div>
-                <div class="ev-loc">${ev.location}</div>
-              </div>
-            </div>
-          `;
-        });
-      })
-      .catch(() => {
-        document.getElementById('eventos-contenedor').innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
         document.getElementById('live-event').innerText = 'Próximamente';
       });
 

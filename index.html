@@ -5,813 +5,680 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marcos Herradón DJ | Official Website</title>
   <meta name="description" content="Marcos Herradón — DJ & Producer urbano · Talavera de la Reina. Mashups, gira 2026 y bookings." />
-  
-  <!-- Tipografías -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-  
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
   <style>
-    /* VARIABLES */
     :root {
-      --gold: #c8a96e;
-      --gold-dim: rgba(200,169,110,0.18);
-      --gold-glow: rgba(200,169,110,0.08);
-      --white: #f5f3ef;
-      --muted: rgba(245,243,239,0.5);
-      --muted2: rgba(245,243,239,0.25);
-      --bg: #070707;
-      --card: rgba(255,255,255,0.03);
-      --card-h: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.08);
-      --border-g: rgba(200,169,110,0.3);
-      --sw: 220px; /* Sidebar width */
-      --th: 60px; /* Topbar height */
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --accent:     #ffffff;
+      --accent-dim: rgba(255,255,255,0.12);
+      --accent-glow:rgba(255,255,255,0.06);
+      --white:      #f0eeeb;
+      --muted:      rgba(240,238,235,0.45);
+      --muted2:     rgba(240,238,235,0.22);
+      --bg:         #080808;
+      --bg2:        #0f0f0f;
+      --card:       rgba(255,255,255,0.03);
+      --card-h:     rgba(255,255,255,0.07);
+      --border:     rgba(255,255,255,0.09);
+      --border-a:   rgba(255,255,255,0.28);
+      --sw: 220px;
+      --th: 60px;
+      --ease: cubic-bezier(0.16,1,0.3,1);
       --fd: 'Syne', sans-serif;
       --fa: 'Space Grotesk', sans-serif;
       --fb: 'Inter', sans-serif;
     }
 
-    /* RESET BÁSICO Y OPTIMIZACIÓN MÓVIL */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    html, body { 
-        width: 100%; 
-        overflow-x: hidden; /* Evita el scroll horizontal en móviles */
-    }
-    body { font-family: var(--fb); background-color: var(--bg); color: var(--white); -webkit-font-smoothing: antialiased; position: relative; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; height: auto; display: block; }
-    button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    html, body { width:100%; overflow-x:hidden; }
+    body { font-family:var(--fb); background:var(--bg); color:var(--white); -webkit-font-smoothing:antialiased; }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; height:auto; display:block; }
+    button { background:none; border:none; cursor:pointer; font:inherit; color:inherit; }
 
-    /* RUIDO VISUAL (GRAIN) */
-    .grain-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; 
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
+    /* ── GRAIN ── */
+    .grain {
+      position:fixed; inset:0; pointer-events:none; z-index:2;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
     }
 
-    /* VÍDEO DE FONDO */
-    .video-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; background-color: #000; overflow: hidden; }
-    .video-background video { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.2) contrast(1.1); }
-    .video-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.95) 100%); }
+    /* ── VIDEO BG ── */
+    .vbg { position:fixed; inset:0; z-index:-1; background:#000; overflow:hidden; }
+    .vbg video { width:100%; height:100%; object-fit:cover; filter:brightness(0.12) contrast(1.2) grayscale(1); }
+    .vbg-overlay { position:absolute; inset:0; background:rgba(8,8,8,0.82); }
 
-    /* PANTALLA DE CARGA (LOADER) */
-    #loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease, visibility 0.6s ease; }
-    #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .ld-logo { width: 65px; margin-bottom: 24px; animation: fadeIn 0.5s 0.2s both; }
-    .ld-name { font-family: var(--fd); font-weight: 800; font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; animation: fadeIn 0.5s 0.4s both; }
-    .ld-bar { width: 120px; height: 2px; background: var(--border); overflow: hidden; animation: fadeIn 0.5s 0.6s both; }
-    .ld-fill { height: 100%; width: 0; background: var(--gold); animation: fillBar 1.2s 0.8s var(--ease) forwards; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes fillBar { to { width: 100%; } }
+    /* ── LOADER ── */
+    #loader {
+      position:fixed; inset:0; background:#000; z-index:9999;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;
+      transition:opacity .6s, visibility .6s;
+    }
+    #loader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+    .ld-logo { width:60px; animation:fdIn .5s .2s both; }
+    .ld-name { font-family:var(--fd); font-weight:800; font-size:.7rem; letter-spacing:6px; text-transform:uppercase; color:var(--muted); animation:fdIn .5s .4s both; }
+    .ld-bar { width:100px; height:1px; background:var(--border); overflow:hidden; animation:fdIn .5s .6s both; }
+    .ld-fill { height:100%; width:0; background:#fff; animation:ldFill 1.3s .8s var(--ease) forwards; }
+    @keyframes fdIn { from{opacity:0} to{opacity:1} }
+    @keyframes ldFill { to{width:100%} }
 
-    /* BARRAS DE NAVEGACIÓN (TOPBAR Y SIDEBAR) */
+    /* ── TOPBAR ── */
     .topbar {
-      position: fixed; top: 0; left: var(--sw); right: 0; height: var(--th); background: rgba(7,7,7,0.85);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border);
-      z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
+      position:fixed; top:0; left:var(--sw); right:0; height:var(--th);
+      background:rgba(8,8,8,0.92); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border); z-index:100;
+      display:flex; align-items:center; justify-content:space-between; padding:0 32px;
     }
-    .topbar-left { display: flex; align-items: center; gap: 10px; }
-    .led { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .topbar-label { font-family: var(--fa); font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-    .topbar-label strong { color: var(--white); }
-    .topbar-tag { font-family: var(--fa); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); }
+    .topbar-left { display:flex; align-items:center; gap:10px; }
+    .led { width:5px; height:5px; border-radius:50%; background:#fff; box-shadow:0 0 8px #fff; animation:pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+    .topbar-label { font-family:var(--fa); font-size:.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); }
+    .topbar-label strong { color:var(--white); }
+    .topbar-tag { font-family:var(--fa); font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:2.5px; color:var(--muted); opacity:.6; }
 
+    /* ── SIDEBAR ── */
     .sidebar {
-      position: fixed; top: 0; left: 0; bottom: 0; width: var(--sw); background: rgba(7,7,7,0.95);
-      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-right: 1px solid var(--border);
-      z-index: 110; padding: 30px 20px; display: flex; flex-direction: column;
+      position:fixed; top:0; left:0; bottom:0; width:var(--sw);
+      background:rgba(8,8,8,0.96); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      border-right:1px solid var(--border); z-index:110; padding:28px 20px;
+      display:flex; flex-direction:column;
     }
-    .brand-logo img { width: 70px; margin-bottom: 40px; }
-    
-    .nav-menu { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .brand-logo img { width:68px; margin-bottom:40px; filter:brightness(0) invert(1); opacity:.9; }
+    .nav-menu { display:flex; flex-direction:column; gap:4px; flex:1; }
     .nav-menu a {
-      font-family: var(--fd); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
-      padding: 10px; border-radius: 6px; transition: 0.3s; position: relative;
+      font-family:var(--fd); font-size:.82rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.8px; color:var(--muted); padding:9px 10px; border-radius:5px;
+      transition:.25s; position:relative;
     }
-    .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--gold); transition: 0.3s; }
-    .nav-menu a:hover, .nav-menu a.active { color: var(--white); background: var(--card-h); padding-left: 15px; }
-    .nav-menu a:hover::before, .nav-menu a.active::before { height: 16px; }
-
-    .social-links { display: flex; gap: 10px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
-    .social-links a { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-    .social-links a:hover { background: var(--gold-dim); border-color: var(--gold); }
-    .social-links svg { width: 14px; height: 14px; fill: none; stroke: var(--muted); stroke-width: 2; transition: 0.3s; }
-    .social-links a:hover svg { stroke: var(--gold); }
-
-    /* MENU MÓVIL (HAMBURGUESA) */
-    .burger { display: none; width: 30px; height: 20px; position: relative; z-index: 120; }
-    .burger span { position: absolute; width: 100%; height: 2px; background: var(--white); left: 0; transition: 0.3s; }
-    .burger span:nth-child(1) { top: 0; }
-    .burger span:nth-child(2) { top: 9px; }
-    .burger span:nth-child(3) { top: 18px; }
-    .menu-open .burger span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .menu-open .burger span:nth-child(2) { opacity: 0; }
-    .menu-open .burger span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    /* CONTENEDOR PRINCIPAL */
-    .main-content { margin-left: var(--sw); padding-top: var(--th); min-height: 100vh; position: relative; z-index: 10; }
-
-    /* SECCIÓN HERO */
-    .hero { min-height: calc(100vh - var(--th)); display: flex; flex-direction: column; justify-content: flex-end; padding: 60px 5vw; position: relative; }
-    .hero-tag { font-family: var(--fa); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
-    .hero-title { 
-        font-family: var(--fd); 
-        font-size: clamp(1.5rem, 11vw, 8rem); /* Optimizado para móvil */
-        font-weight: 800; 
-        line-height: 0.9; 
-        text-transform: uppercase; 
-        letter-spacing: -1px; 
-        margin-bottom: 30px; 
-        word-wrap: break-word; /* Evita cortes feos */
+    .nav-menu a::before {
+      content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+      width:2px; height:0; background:#fff; transition:.25s var(--ease); border-radius:2px;
     }
-    .hero-title span { display: block; }
-    .hero-title span.hl { color: var(--gold); }
-    .hero-desc { font-size: 0.9rem; line-height: 1.6; color: var(--muted); max-width: 400px; margin-bottom: 30px; }
-    
-    .btn-group { display: flex; gap: 15px; }
-    .btn { padding: 12px 24px; border-radius: 6px; font-family: var(--fa); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-    .btn-solid { background: var(--gold); color: #000; }
-    .btn-solid:hover { background: #d9bc88; transform: translateY(-2px); }
-    .btn-outline { background: transparent; border: 1px solid var(--border-g); color: var(--gold); }
-    .btn-outline:hover { background: var(--gold-dim); transform: translateY(-2px); }
+    .nav-menu a:hover, .nav-menu a.active { color:var(--white); background:var(--card-h); padding-left:14px; }
+    .nav-menu a:hover::before, .nav-menu a.active::before { height:14px; }
+    .nav-menu a.tienda-link { color:rgba(255,255,255,.7); border:1px solid var(--border); margin-top:6px; }
+    .nav-menu a.tienda-link:hover { color:#fff; border-color:var(--border-a); background:var(--card-h); }
 
-    /* SECCIONES GENÉRICAS */
-    .section { padding: 100px 5vw; border-top: 1px solid var(--border); }
-    .sec-label { font-family: var(--fa); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-    .sec-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.5; }
-    .sec-title { font-family: var(--fd); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; text-transform: uppercase; margin-bottom: 40px; }
+    .social-links { display:flex; gap:8px; margin-top:auto; padding-top:20px; border-top:1px solid var(--border); }
+    .social-links a { width:30px; height:30px; border-radius:5px; border:1px solid var(--border); display:grid; place-items:center; transition:.25s; }
+    .social-links a:hover { background:var(--accent-dim); border-color:var(--border-a); }
+    .social-links svg { width:13px; height:13px; fill:none; stroke:var(--muted); stroke-width:2; transition:.25s; }
+    .social-links a:hover svg { stroke:#fff; }
 
-    /* GRID SOBRE MÍ */
-    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .about-text p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin-bottom: 20px; }
-    .about-text strong { color: var(--white); }
-    .about-stats { display: flex; gap: 40px; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border); }
-    .stat h3 { font-family: var(--fd); font-size: 2.5rem; color: var(--gold); line-height: 1; }
-    .stat p { font-family: var(--fa); font-size: 0.65rem; text-transform: uppercase; color: var(--muted); margin-top: 5px; }
-    
-    .swiper { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 3/4; }
-    .swiper img { width: 100%; height: 100%; object-fit: cover; }
-    .swiper-button-next, .swiper-button-prev { color: var(--white) !important; transform: scale(0.6); }
-    .swiper-pagination-bullet { background: var(--white) !important; }
-    .swiper-pagination-bullet-active { background: var(--gold) !important; }
+    /* ── BURGER ── */
+    .burger { display:none; width:28px; height:18px; position:relative; z-index:120; }
+    .burger span { position:absolute; width:100%; height:1.5px; background:#fff; left:0; transition:.3s; border-radius:2px; }
+    .burger span:nth-child(1){top:0} .burger span:nth-child(2){top:8px} .burger span:nth-child(3){top:16px}
+    .menu-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .menu-open .burger span:nth-child(2){opacity:0}
+    .menu-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 
-    /* GRID MÚSICA */
-    .music-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-    .track-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; transition: 0.3s; }
-    .track-card:hover { border-color: var(--border-g); background: var(--card-h); transform: translateY(-3px); }
-    .track-img { width: 100%; aspect-ratio: 1; border-radius: 8px; overflow: hidden; position: relative; margin-bottom: 15px; cursor: pointer; }
-    .track-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
-    .track-card:hover .track-img img { filter: brightness(0.5); transform: scale(1.05); }
-    .track-info h4 { font-family: var(--fa); font-size: 0.9rem; font-weight: 700; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
-    .track-info p { font-size: 0.7rem; color: var(--muted); margin-top: 5px; text-transform: uppercase; }
-    .sc-player { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; margin-top: 0; }
-    .sc-player.active { max-height: 150px; margin-top: 15px; }
+    /* ── MAIN ── */
+    .main-content { margin-left:var(--sw); padding-top:var(--th); position:relative; z-index:10; }
 
-    /* TIENDA / COUNTDOWN */
-    .shop-coming-soon { text-align: center; padding: 40px 20px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; transition: 0.3s; margin-bottom: 40px; }
-    .shop-coming-soon:hover { border-color: var(--border-g); background: var(--card-h); }
-    .shop-coming-soon p { color: var(--muted); margin-bottom: 30px; font-size: 0.95rem; }
-    .countdown { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-    .cd-box { background: #000; border: 1px solid var(--border-g); border-radius: 8px; padding: 15px 20px; min-width: 90px; }
-    .cd-num { font-family: var(--fd); font-size: 2.2rem; color: var(--gold); font-weight: 800; line-height: 1; }
-    .cd-label { font-family: var(--fa); font-size: 0.65rem; text-transform: uppercase; color: var(--muted); margin-top: 5px; letter-spacing: 1px; }
+    /* ── HERO ── */
+    .hero { min-height:calc(100vh - var(--th)); display:flex; flex-direction:column; justify-content:flex-end; padding:60px 5vw 70px; }
+    .hero-tag { font-family:var(--fa); font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:2.5px; color:var(--muted); margin-bottom:22px; display:flex; align-items:center; gap:12px; }
+    .hero-tag::before { content:''; width:28px; height:1px; background:rgba(255,255,255,.35); }
+    .hero-title { font-family:var(--fd); font-size:clamp(2.8rem,10vw,9rem); font-weight:800; line-height:.88; text-transform:uppercase; letter-spacing:-3px; margin-bottom:32px; }
+    .hero-title span { display:block; }
+    .hero-title span.hl { color:transparent; -webkit-text-stroke:2px rgba(255,255,255,.55); }
+    .hero-desc { font-size:.88rem; line-height:1.75; color:var(--muted); max-width:380px; margin-bottom:34px; font-weight:300; }
+    .btn-group { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn { padding:11px 24px; border-radius:5px; font-family:var(--fa); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; transition:.2s; display:inline-block; }
+    .btn-solid { background:#fff; color:#000; }
+    .btn-solid:hover { background:#e0e0e0; transform:translateY(-2px); }
+    .btn-outline { background:transparent; border:1px solid var(--border-a); color:var(--white); }
+    .btn-outline:hover { background:var(--accent-dim); transform:translateY(-2px); }
 
-    /* EVENTOS */
-    .event-list { display: flex; flex-direction: column; gap: 12px; }
-    .event-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px; padding: 15px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; transition: 0.3s; }
-    .event-item:hover { border-color: var(--border-g); background: var(--card-h); }
-    
-    .ev-img { 
-      width: 80px; 
-      height: 80px; 
-      border-radius: 8px; 
-      overflow: hidden; 
-      background-color: #000; /* Fondo oscuro por si no es cuadrada */
-      cursor: zoom-in; 
+    /* ── SECTIONS ── */
+    .section { padding:96px 5vw; border-top:1px solid var(--border); background:var(--bg); }
+    .sec-label { font-family:var(--fa); font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:2.5px; color:var(--muted); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+    .sec-label::before { content:''; width:18px; height:1px; background:rgba(255,255,255,.3); }
+    .sec-title { font-family:var(--fd); font-size:clamp(2rem,5vw,3.2rem); font-weight:800; text-transform:uppercase; margin-bottom:44px; letter-spacing:-.5px; }
+
+    /* ── SOBRE MÍ ── */
+    .about-layout { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .about-text p { font-size:.92rem; line-height:1.85; color:var(--muted); margin-bottom:18px; font-weight:300; }
+    .about-text strong { color:var(--white); font-weight:500; }
+    .about-stats { display:flex; gap:36px; margin-top:32px; padding-top:28px; border-top:1px solid var(--border); }
+    .stat h3 { font-family:var(--fd); font-size:2.2rem; color:#fff; line-height:1; font-weight:800; }
+    .stat p { font-family:var(--fa); font-size:.6rem; text-transform:uppercase; color:var(--muted); margin-top:6px; letter-spacing:1px; }
+    .swiper { width:100%; border-radius:10px; overflow:hidden; border:1px solid var(--border); aspect-ratio:3/4; }
+    .swiper img { width:100%; height:100%; object-fit:cover; filter:grayscale(.3) contrast(1.05); transition:.4s; }
+    .swiper-slide:hover img { filter:grayscale(0) contrast(1.1); }
+    .swiper-button-next,.swiper-button-prev { color:#fff !important; transform:scale(.6); }
+    .swiper-pagination-bullet { background:rgba(255,255,255,.3) !important; }
+    .swiper-pagination-bullet-active { background:#fff !important; }
+
+    /* ── MÚSICA ── */
+    .music-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+    .track-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; transition:.25s; }
+    .track-card:hover { border-color:var(--border-a); background:var(--card-h); transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,.5); }
+    .track-img { width:100%; aspect-ratio:1; border-radius:7px; overflow:hidden; position:relative; margin-bottom:14px; cursor:pointer; }
+    .track-img img { width:100%; height:100%; object-fit:cover; transition:.4s; filter:grayscale(.4); }
+    .track-card:hover .track-img img { filter:brightness(.45) grayscale(0); transform:scale(1.06); }
+    .track-play-ov { position:absolute; inset:0; display:grid; place-items:center; opacity:0; transition:.25s; }
+    .track-card:hover .track-play-ov { opacity:1; }
+    .play-btn { width:42px; height:42px; border-radius:50%; background:#fff; display:grid; place-items:center; box-shadow:0 4px 20px rgba(0,0,0,.5); transition:.2s; }
+    .play-btn:hover { transform:scale(1.1); background:#e8e8e8; }
+    .play-btn::after { content:''; width:0; height:0; border-left:11px solid #000; border-top:6.5px solid transparent; border-bottom:6.5px solid transparent; margin-left:3px; }
+    .track-info h4 { font-family:var(--fa); font-size:.88rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .track-info p { font-size:.68rem; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:.5px; }
+    .sc-player { max-height:0; overflow:hidden; transition:max-height .4s ease; }
+    .sc-player.active { max-height:150px; margin-top:14px; }
+
+    /* ── TIENDA / COUNTDOWN ── */
+    .shop-promo {
+      text-align:center; padding:64px 32px; background:var(--bg2);
+      border:1px solid var(--border); border-radius:12px; margin-bottom:40px;
+      position:relative; overflow:hidden;
     }
-    .ev-img img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: contain; /* Para que el cartel no se recorte */
+    .shop-promo::before {
+      content:''; position:absolute; top:-1px; left:10%; right:10%; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
     }
+    .shop-promo h3 { font-family:var(--fd); font-size:1.9rem; font-weight:800; text-transform:uppercase; letter-spacing:-.5px; margin-bottom:10px; }
+    .shop-promo p { color:var(--muted); margin-bottom:40px; font-size:.9rem; font-weight:300; }
+    .countdown { display:flex; justify-content:center; align-items:flex-start; gap:8px; flex-wrap:wrap; }
+    .cd-box { background:#000; border:1px solid var(--border-a); border-radius:8px; padding:20px 22px; min-width:88px; text-align:center; }
+    .cd-num { font-family:var(--fd); font-size:2.6rem; color:#fff; font-weight:800; line-height:1; display:block; font-variant-numeric:tabular-nums; }
+    .cd-label { font-family:var(--fa); font-size:.55rem; text-transform:uppercase; color:var(--muted); margin-top:8px; display:block; letter-spacing:1.5px; }
+    .cd-sep { font-family:var(--fd); font-size:2.2rem; font-weight:800; color:rgba(255,255,255,.2); padding-top:18px; animation:blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:.2} 50%{opacity:.05} }
+    .cd-expired { color:#fff; font-family:var(--fd); font-size:1.1rem; font-weight:700; letter-spacing:1px; }
 
-    .ev-date { display: inline-flex; margin-bottom: 8px; }
-    .ev-d1 { background: var(--gold); color: #000; padding: 3px 8px; border-radius: 4px 0 0 4px; font-family: var(--fa); font-size: 0.7rem; font-weight: 700; }
-    .ev-d2 { border: 1px solid var(--border-g); border-left: none; color: var(--gold); padding: 3px 8px; border-radius: 0 4px 4px 0; font-family: var(--fa); font-size: 0.7rem; }
-    .ev-title { font-family: var(--fd); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
-    .ev-loc { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; }
+    .product-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; transition:.25s; }
+    .product-card:hover { border-color:var(--border-a); background:var(--card-h); transform:translateY(-3px); }
+    .product-card .track-img { margin-bottom:14px; }
+    .product-card .track-img img { filter:grayscale(.2); border-radius:7px; }
+    .price-tag { font-family:var(--fd); font-size:1.3rem; font-weight:800; color:#fff; margin:6px 0 14px; }
 
-    /* CONTACTO */
-    .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-    .contact-info h3 { font-family: var(--fd); font-size: 1.5rem; margin-bottom: 15px; }
-    .contact-info p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 30px; }
-    
-    /* BOTONES DE CONTACTO */
-    .c-item { display: flex; align-items: center; gap: 15px; background: var(--card); padding: 15px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; text-decoration: none; color: inherit; transition: 0.3s; cursor: pointer; }
-    .c-item:hover { border-color: var(--border-g); background: var(--card-h); transform: translateY(-2px); }
-    .c-icon { width: 40px; height: 40px; background: var(--gold-dim); border: 1px solid var(--border-g); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .c-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; }
-    .c-text span { display: block; font-family: var(--fa); font-size: 0.65rem; color: var(--muted); text-transform: uppercase; }
-    .c-text strong { font-size: 0.85rem; font-weight: 600; }
-    
-    .form-group { margin-bottom: 15px; }
-    .form-group label { display: block; font-family: var(--fa); font-size: 0.7rem; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--white); font-family: var(--fb); font-size: 0.9rem; outline: none; transition: 0.3s; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
-    .form-group textarea { min-height: 120px; resize: vertical; }
+    /* ── EVENTOS ── */
+    .event-list { display:flex; flex-direction:column; gap:10px; }
+    .event-item { display:grid; grid-template-columns:76px 1fr; align-items:center; gap:20px; padding:16px; background:var(--card); border:1px solid var(--border); border-radius:10px; transition:.25s; }
+    .event-item:hover { border-color:var(--border-a); background:var(--card-h); }
+    .ev-img { width:76px; height:76px; border-radius:7px; overflow:hidden; background:#000; cursor:zoom-in; flex-shrink:0; }
+    .ev-img img { width:100%; height:100%; object-fit:contain; filter:grayscale(.5); transition:.3s; }
+    .event-item:hover .ev-img img { filter:grayscale(0); }
+    .ev-date { display:inline-flex; margin-bottom:7px; }
+    .ev-d1 { background:#fff; color:#000; padding:3px 9px; border-radius:4px 0 0 4px; font-family:var(--fa); font-size:.68rem; font-weight:700; text-transform:uppercase; }
+    .ev-d2 { border:1px solid var(--border-a); border-left:none; color:var(--white); padding:3px 9px; border-radius:0 4px 4px 0; font-family:var(--fa); font-size:.68rem; }
+    .ev-title { font-family:var(--fd); font-size:1.05rem; font-weight:800; text-transform:uppercase; margin-bottom:3px; letter-spacing:-.2px; }
+    .ev-loc { font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
 
-    /* MARQUEE Y FOOTER */
-    .marquee { background: #030303; padding: 20px 0; border-top: 1px solid var(--border); overflow: hidden; display: flex; white-space: nowrap; }
-    .marquee-content { display: flex; animation: scroll 20s linear infinite; }
-    .m-item { font-family: var(--fd); font-size: 1.2rem; font-weight: 800; text-transform: uppercase; color: rgba(255,255,255,0.05); margin-right: 3rem; display: flex; align-items: center; gap: 3rem; }
-    .m-item::after { content: '◆'; color: var(--gold); font-size: 0.6rem; opacity: 0.5; }
-    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    /* ── CONTACTO ── */
+    .contact-layout { display:grid; grid-template-columns:1fr 1.5fr; gap:64px; }
+    .contact-info h3 { font-family:var(--fd); font-size:1.4rem; font-weight:800; text-transform:uppercase; letter-spacing:-.3px; margin-bottom:12px; }
+    .contact-info p { color:var(--muted); font-size:.88rem; line-height:1.7; margin-bottom:28px; font-weight:300; }
+    .c-item { display:flex; align-items:center; gap:14px; background:var(--card); padding:14px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; transition:.25s; }
+    .c-item:hover { border-color:var(--border-a); background:var(--card-h); transform:translateY(-2px); }
+    .c-icon { width:38px; height:38px; background:var(--accent-dim); border:1px solid var(--border-a); border-radius:7px; display:grid; place-items:center; flex-shrink:0; }
+    .c-icon svg { width:16px; height:16px; stroke:#fff; fill:none; stroke-width:1.8; }
+    .c-text span { display:block; font-family:var(--fa); font-size:.58rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+    .c-text strong { font-size:.85rem; font-weight:600; }
+    .form-group { margin-bottom:14px; }
+    .form-group label { display:block; font-family:var(--fa); font-size:.62rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:7px; font-weight:600; }
+    .form-group input,.form-group textarea { width:100%; padding:11px 14px; border-radius:7px; border:1px solid var(--border); background:var(--card); color:var(--white); font-family:var(--fb); font-size:.88rem; outline:none; transition:.25s; }
+    .form-group input:focus,.form-group textarea:focus { border-color:var(--border-a); box-shadow:0 0 0 3px rgba(255,255,255,.04); }
+    .form-group input::placeholder,.form-group textarea::placeholder { color:var(--muted2); }
+    .form-group textarea { min-height:120px; resize:vertical; }
 
-    footer { background: #000; padding: 30px 5vw; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
-    footer p { font-family: var(--fa); font-size: 0.7rem; color: #666; text-transform: uppercase; }
-    footer a { font-family: var(--fa); font-size: 0.7rem; color: #666; text-transform: uppercase; margin-left: 15px; transition: 0.3s; }
-    footer a:hover { color: var(--gold); }
+    /* ── MARQUEE ── */
+    .marquee { background:#050505; padding:18px 0; border-top:1px solid var(--border); overflow:hidden; display:flex; white-space:nowrap; }
+    .marquee-content { display:flex; animation:scroll 22s linear infinite; }
+    .m-item { font-family:var(--fd); font-size:1.1rem; font-weight:800; text-transform:uppercase; color:rgba(255,255,255,.06); margin-right:3rem; display:flex; align-items:center; gap:3rem; }
+    .m-item::after { content:'◆'; color:rgba(255,255,255,.15); font-size:.5rem; }
+    @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* VENTANA EMERGENTE PARA EL CARTEL */
-    #cartel-modal {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 20px; cursor: zoom-out;
-    }
-    #cartel-modal.abierto { opacity: 1; visibility: visible; }
-    #cartel-modal img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-    .cerrar-modal { position: absolute; top: 20px; right: 30px; color: var(--gold); font-size: 2.5rem; font-weight: bold; cursor: pointer; }
+    /* ── FOOTER ── */
+    footer { background:#000; padding:28px 5vw; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+    footer p { font-family:var(--fa); font-size:.62rem; color:#3a3a3a; text-transform:uppercase; letter-spacing:1px; }
+    footer a { font-family:var(--fa); font-size:.62rem; color:#3a3a3a; text-transform:uppercase; letter-spacing:1px; margin-left:16px; transition:.2s; }
+    footer a:hover { color:#fff; }
 
-    /* AVISO DE COOKIES */
+    /* ── MODAL CARTEL ── */
+    #cartel-modal { position:fixed; inset:0; background:rgba(0,0,0,.96); z-index:10000; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:.3s; padding:20px; cursor:zoom-out; }
+    #cartel-modal.abierto { opacity:1; visibility:visible; }
+    #cartel-modal img { max-width:100%; max-height:90vh; border-radius:10px; box-shadow:0 20px 60px rgba(0,0,0,.9); }
+    .cerrar-modal { position:absolute; top:20px; right:28px; color:rgba(255,255,255,.6); font-size:2rem; cursor:pointer; transition:.2s; line-height:1; }
+    .cerrar-modal:hover { color:#fff; }
+
+    /* ── COOKIES ── */
     .cookie-banner {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translate(-50%, 20px);
-      width: calc(100% - 40px);
-      max-width: 1000px;
-      background-color: #121212;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 15px 25px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 10000;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
-      font-family: var(--fb);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+      position:fixed; bottom:20px; left:50%; transform:translate(-50%,20px);
+      width:calc(100% - 40px); max-width:960px;
+      background:#111; border:1px solid var(--border); border-radius:10px;
+      padding:16px 24px; display:flex; align-items:center; justify-content:space-between;
+      z-index:10000; box-shadow:0 16px 48px rgba(0,0,0,.8);
+      opacity:0; visibility:hidden; transition:opacity .5s, transform .5s, visibility .5s;
     }
-    .cookie-banner.mostrar {
-      opacity: 1;
-      visibility: visible;
-      transform: translate(-50%, 0);
-    }
-    .cookie-text {
-      flex: 1;
-      color: #e0e0e0;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      margin-right: 30px;
-    }
-    .cookie-text a {
-      color: #ffffff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-    .cookie-buttons {
-      display: flex;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    .btn-cookie-outline, .btn-cookie-solid {
-      font-family: var(--fb);
-      font-size: 0.85rem;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn-cookie-outline {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: var(--white);
-    }
-    .btn-cookie-outline:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.4);
-    }
-    .btn-cookie-solid {
-      background: #ffffff;
-      border: 1px solid #ffffff;
-      color: #000000;
-      font-weight: 600;
-    }
-    .btn-cookie-solid:hover {
-      background: #e6e6e6;
-    }
+    .cookie-banner.mostrar { opacity:1; visibility:visible; transform:translate(-50%,0); }
+    .cookie-text { flex:1; color:rgba(255,255,255,.65); font-size:.82rem; line-height:1.5; margin-right:28px; }
+    .cookie-text a { color:#fff; text-decoration:underline; text-underline-offset:3px; }
+    .cookie-buttons { display:flex; gap:10px; flex-shrink:0; }
+    .btn-cookie-outline { font-family:var(--fb); font-size:.8rem; padding:9px 18px; border-radius:6px; cursor:pointer; background:transparent; border:1px solid var(--border-a); color:#fff; transition:.2s; }
+    .btn-cookie-outline:hover { background:var(--card-h); }
+    .btn-cookie-solid { font-family:var(--fb); font-size:.8rem; padding:9px 18px; border-radius:6px; cursor:pointer; background:#fff; border:1px solid #fff; color:#000; font-weight:600; transition:.2s; }
+    .btn-cookie-solid:hover { background:#e0e0e0; }
 
-    /* ADAPTACIÓN MÓVIL CORRECTA */
-    @media (max-width: 900px) {
-      :root { --sw: 0px; --th: 60px; }
-      .sidebar { width: 100%; height: var(--th); flex-direction: row; align-items: center; justify-content: space-between; padding: 0 20px; border-right: none; border-bottom: 1px solid var(--border); z-index: 200; background: #000; }
-      .brand-logo img { width: 50px; margin-bottom: 0; }
-      .social-links { display: none; }
-      .burger { display: block; }
-      .topbar { top: var(--th); height: 40px; padding: 0 15px; z-index: 150; }
-      .topbar-tag { display: none; } 
-      .topbar-label { font-size: 0.55rem; }
-      .nav-menu { position: fixed; top: var(--th); left: -100%; width: 100%; height: calc(100vh - var(--th)); background: rgba(7,7,7,0.98); padding: 40px 20px; transition: left 0.4s var(--ease); z-index: 190; }
-      .menu-open .nav-menu { left: 0; } 
-      .nav-menu a { font-size: 1.5rem; padding: 15px; }
-      .main-content { 
-        margin-left: 0 !important; 
-        padding-top: calc(var(--th) + 40px); 
-        width: 100vw; 
-        padding-left: 20px; 
-        padding-right: 20px;
-      }
-      .hero { padding: 40px 0; }
-      .section { padding: 70px 0; }
-      .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 40px; }
-      .countdown { gap: 10px; }
-      .cd-box { min-width: 70px; padding: 12px 10px; }
-      .cd-num { font-size: 1.8rem; }
-      footer { flex-direction: column; gap: 15px; text-align: center; }
-      
-      /* Adaptación cookies para móvil */
-      .cookie-banner {
-        flex-direction: column;
-        bottom: 0;
-        width: 100%;
-        border-radius: 16px 16px 0 0;
-        padding: 25px 20px;
-        border-bottom: none;
-        border-left: none;
-        border-right: none;
-      }
-      .cookie-text {
-        margin-right: 0;
-        margin-bottom: 20px;
-        text-align: left;
-      }
-      .cookie-buttons {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      :root { --sw:0px; --th:60px; }
+      .sidebar { width:100%; height:var(--th); flex-direction:row; align-items:center; justify-content:space-between; padding:0 20px; border-right:none; border-bottom:1px solid var(--border); z-index:200; background:#000; }
+      .brand-logo img { width:48px; margin-bottom:0; }
+      .social-links { display:none; }
+      .burger { display:block; }
+      .topbar { top:var(--th); height:38px; padding:0 16px; left:0; z-index:150; }
+      .topbar-tag { display:none; }
+      .nav-menu { position:fixed; top:var(--th); left:-100%; width:100%; height:calc(100vh - var(--th)); background:rgba(8,8,8,.99); backdrop-filter:blur(20px); padding:40px 24px; transition:left .4s var(--ease); z-index:190; flex:unset; }
+      .menu-open .nav-menu { left:0; }
+      .nav-menu a { font-size:1.4rem; padding:14px; }
+      .main-content { margin-left:0 !important; padding-top:calc(var(--th) + 38px); }
+      .hero { padding:40px 20px 60px; }
+      .section { padding:70px 20px; }
+      .about-layout,.contact-layout { grid-template-columns:1fr; gap:40px; }
+      .countdown { gap:6px; }
+      .cd-box { min-width:72px; padding:14px 10px; }
+      .cd-num { font-size:2rem; }
+      .cd-sep { font-size:1.8rem; padding-top:12px; }
+      footer { flex-direction:column; gap:14px; text-align:center; }
+      .cookie-banner { flex-direction:column; bottom:0; width:100%; border-radius:14px 14px 0 0; padding:22px 20px; border-bottom:none; border-left:none; border-right:none; transform:translate(-50%,20px); left:50%; }
+      .cookie-text { margin-right:0; margin-bottom:16px; }
+      .cookie-buttons { width:100%; display:grid; grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:480px) {
+      .btn-group { flex-direction:column; }
+      .music-grid { grid-template-columns:1fr 1fr; }
+      .about-stats { gap:20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- AVISO DE COOKIES -->
-  <div id="cookie-banner" class="cookie-banner">
-    <div class="cookie-text">
-      🍪 Usamos cookies técnicas propias y de terceros (Spotify, TikTok, Google) para mejorar tu experiencia. <a href="#">Más información</a>.
-    </div>
-    <div class="cookie-buttons">
-      <button id="btn-cookies-necesarias" class="btn-cookie-outline">Solo necesarias</button>
-      <button id="btn-cookies-aceptar" class="btn-cookie-solid">Aceptar todas</button>
-    </div>
+<!-- COOKIES -->
+<div id="cookie-banner" class="cookie-banner">
+  <div class="cookie-text">🍪 Usamos cookies técnicas propias y de terceros para mejorar tu experiencia. <a href="#">Más información</a>.</div>
+  <div class="cookie-buttons">
+    <button id="btn-cookies-necesarias" class="btn-cookie-outline">Solo necesarias</button>
+    <button id="btn-cookies-aceptar" class="btn-cookie-solid">Aceptar todas</button>
   </div>
+</div>
 
-  <!-- MODAL PARA VER CARTEL EN GRANDE -->
-  <div id="cartel-modal" onclick="cerrarCartel()">
-    <span class="cerrar-modal">&times;</span>
-    <img id="cartel-ampliado" src="" alt="Cartel Evento">
-  </div>
+<!-- MODAL CARTEL -->
+<div id="cartel-modal" onclick="cerrarCartel()">
+  <span class="cerrar-modal">&times;</span>
+  <img id="cartel-ampliado" src="" alt="Cartel Evento">
+</div>
 
-  <!-- LOADER -->
-  <div id="loader">
-    <img class="ld-logo" src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Logo MH">
-    <div class="ld-name">Marcos Herradón DJ</div>
-    <div class="ld-bar"><div class="ld-fill"></div></div>
-  </div>
+<!-- LOADER -->
+<div id="loader">
+  <img class="ld-logo" src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="MH">
+  <div class="ld-name">Marcos Herradón DJ</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+<script>
+  window.addEventListener('load',function(){setTimeout(function(){document.getElementById('loader').classList.add('hidden');},900);});
+  setTimeout(function(){var l=document.getElementById('loader');if(l)l.classList.add('hidden');},2800);
+</script>
 
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var loader = document.getElementById('loader');
-        if (loader) loader.classList.add('hidden');
-      }, 1000);
-    });
-    setTimeout(function() {
-      var loader = document.getElementById('loader');
-      if (loader && !loader.classList.contains('hidden')) {
-        loader.classList.add('hidden');
-      }
-    }, 3000);
-  </script>
+<!-- GRAIN + VIDEO -->
+<div class="grain"></div>
+<div class="vbg">
+  <video autoplay muted loop playsinline>
+    <source src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_0204.mp4" type="video/mp4">
+  </video>
+  <div class="vbg-overlay"></div>
+</div>
 
-  <!-- RUIDO Y VIDEO FONDO -->
-  <div class="grain-overlay"></div>
-  <div class="video-background">
-    <video autoplay muted loop playsinline>
-      <source src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_0204.mp4" type="video/mp4">
-    </video>
-    <div class="video-overlay"></div>
-  </div>
-
-  <!-- CABECERA DE LOGO Y MENÚ -->
-  <aside class="sidebar">
-    <a href="#hero" class="brand-logo">
-      <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón DJ">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a href="#hero" class="brand-logo">
+    <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/fondoweb.png" alt="Marcos Herradón DJ">
+  </a>
+  <button class="burger" onclick="document.body.classList.toggle('menu-open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="nav-menu">
+    <a href="#hero"     class="nav-link active">Home</a>
+    <a href="#eventos"  class="nav-link">Fechas</a>
+    <a href="#sobre"    class="nav-link">Sobre mí</a>
+    <a href="#musica"   class="nav-link">Música</a>
+    <a href="pack.html" class="nav-link tienda-link">Tienda</a>
+    <a href="#contacto" class="nav-link">Contacto</a>
+  </nav>
+  <div class="social-links">
+    <a href="https://instagram.com/marcosherradon_" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
     </a>
-    <button class="burger" onclick="document.body.classList.toggle('menu-open')">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav-menu">
-      <a href="#hero" class="nav-link active">Home</a>
-      <a href="#eventos" class="nav-link">Fechas</a>
-      <a href="#sobre" class="nav-link">Sobre mí</a>
-      <a href="#musica" class="nav-link">Música</a>
-      <a href="pack.html" class="nav-link" style="color: var(--gold);">Tienda</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
-    </nav>
-    <div class="social-links">
-      <a href="https://instagram.com/marcosherradon_" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
-      <a href="https://soundcloud.com/marcosherradon" target="_blank"><svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M2 17c0 1.1.9 2 2 2h15c1.4 0 2.5-1.1 2.5-2.5 0-1.2-.9-2.2-2-2.4v-.1c0-3.3-2.7-6-6-6-2 0-3.8 1-4.9 2.5C8.2 10.2 7.5 10 6.8 10 5 10 3.5 11.6 3.5 13.5c0 .2 0 .4.1.5C2.7 14.3 2 15.1 2 16v1z"/></svg></a>
+    <a href="https://soundcloud.com/marcosherradon" target="_blank" aria-label="SoundCloud">
+      <svg viewBox="0 0 24 24" stroke-linecap="round"><path d="M2 17c0 1.1.9 2 2 2h15c1.4 0 2.5-1.1 2.5-2.5 0-1.2-.9-2.2-2-2.4v-.1c0-3.3-2.7-6-6-6-2 0-3.8 1-4.9 2.5C8.2 10.2 7.5 10 6.8 10 5 10 3.5 11.6 3.5 13.5c0 .2 0 .4.1.5C2.7 14.3 2 15.1 2 16v1z"/></svg>
+    </a>
+  </div>
+</aside>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="led"></div>
+    <span class="topbar-label">Próximo evento:&nbsp;<strong id="live-event">Cargando...</strong></span>
+  </div>
+  <span class="topbar-tag">Tour 2026</span>
+</header>
+
+<!-- MAIN -->
+<main class="main-content">
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-tag">DJ &amp; Producer · Talavera de la Reina</div>
+    <h1 class="hero-title">
+      <span>Marcos</span>
+      <span>Herradón</span>
+      <span class="hl">DJ</span>
+    </h1>
+    <p class="hero-desc">Urban DJ y productor especializado en reggaeton, dembow y sonidos de club. Sets diseñados para conectar con el público en cualquier formato.</p>
+    <div class="btn-group">
+      <a href="#contacto" class="btn btn-solid">Contratar</a>
+      <a href="#musica"   class="btn btn-outline">Escuchar</a>
     </div>
-  </aside>
+  </section>
 
-  <!-- BARRA DE PRÓXIMO EVENTO -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <div class="led"></div>
-      <span class="topbar-label">Próximo evento: <strong id="live-event">Cargando...</strong></span>
+  <!-- FECHAS -->
+  <section id="eventos" class="section">
+    <div class="sec-label">Gira 2026</div>
+    <h2 class="sec-title">Fechas</h2>
+    <div class="event-list" id="eventos-contenedor">
+      <p style="color:var(--muted);font-size:.9rem;">Cargando próximas fechas...</p>
     </div>
-    <span class="topbar-tag">Tour 2026</span>
-  </header>
+  </section>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="main-content">
-    
-    <!-- HERO -->
-    <section id="hero" class="hero">
-      <div class="hero-tag">DJ & Producer · Talavera de la Reina</div>
-      <h1 class="hero-title">
-        <span>Marcos</span>
-        <span>Herradón</span>
-        <span class="hl">DJ</span>
-      </h1>
-      <p class="hero-desc">Urban DJ y productor especializado en reggaeton, dembow y sonidos de club. Sets diseñados para conectar con el público en cualquier formato.</p>
-      <div class="btn-group">
-        <a href="#contacto" class="btn btn-solid">Contratar</a>
-        <a href="#musica" class="btn btn-outline">Escuchar</a>
-      </div>
-    </section>
-
-    <!-- EVENTOS -->
-    <section id="eventos" class="section">
-      <div class="sec-label">Gira 2026</div>
-      <h2 class="sec-title">Fechas</h2>
-      <div class="event-list" id="eventos-contenedor">
-        <p style="color:var(--muted); font-size:0.9rem;">Cargando próximas fechas...</p>
-      </div>
-    </section>
-
-    <!-- SOBRE MI -->
-    <section id="sobre" class="section">
-      <div class="about-layout">
-        <div class="about-text">
-          <div class="sec-label">Biografía</div>
-          <h2 class="sec-title">Sobre mí</h2>
-          <p><strong>Marcos Herradón</strong> es un DJ y productor emergente de Talavera de la Reina. Especializado en sonidos urbanos, reggaeton y dembow. Sus mezclas y mashups fusionan la potencia comercial del club con la energía cruda de la calle.</p>
-          <p>Sus sets dinámicos están diseñados para salas de baile y festivales de gran formato, garantizando una conexión instantánea con el público y una experiencia de alto impacto.</p>
-          <div class="about-stats">
-            <div class="stat"><h3>9+</h3><p>Mashups</p></div>
-            <div class="stat"><h3>'26</h3><p>Tour Activo</p></div>
-            <div class="stat"><h3>100%</h3><p>Urbano</p></div>
-          </div>
-        </div>
-        <div class="swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/295D5E0B-0263-45FD-8C44-7217D10DCE8C_1_105_c.jpeg" alt="Show 1"></div>
-            <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/807C3BB3-C9DC-4258-9531-E5E52884D7A5.JPG" alt="Show 2"></div>
-            <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/895B2EE5-817C-41D9-9DD2-750D14014F23_1_102_o.jpeg" alt="Show 3"></div>
-          </div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
+  <!-- SOBRE MÍ -->
+  <section id="sobre" class="section">
+    <div class="about-layout">
+      <div class="about-text">
+        <div class="sec-label">Biografía</div>
+        <h2 class="sec-title">Sobre mí</h2>
+        <p><strong>Marcos Herradón</strong> es un DJ y productor emergente de Talavera de la Reina. Especializado en sonidos urbanos, reggaeton y dembow. Sus mezclas y mashups fusionan la potencia comercial del club con la energía cruda de la calle.</p>
+        <p>Sus sets dinámicos están diseñados para salas de baile y festivales de gran formato, garantizando una conexión instantánea con el público y una experiencia de alto impacto.</p>
+        <div class="about-stats">
+          <div class="stat"><h3>9+</h3><p>Mashups</p></div>
+          <div class="stat"><h3>'26</h3><p>Tour Activo</p></div>
+          <div class="stat"><h3>100%</h3><p>Urbano</p></div>
         </div>
       </div>
-    </section>
-
-    <!-- MÚSICA -->
-    <section id="musica" class="section">
-      <div class="sec-label">Mashups & Edits</div>
-      <h2 class="sec-title">Música</h2>
-      <div class="music-grid">
-        
-        <div class="track-card">
-          <div class="track-img" onclick="togglePlay('p1')">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Me Mareo x Deseo">
-          </div>
-          <div class="track-info"><h4>Me Mareo x Deseo</h4><p>Mashup · 2024</p></div>
-          <div class="sc-player" id="p1">
-            <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%23c8a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
-          </div>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/295D5E0B-0263-45FD-8C44-7217D10DCE8C_1_105_c.jpeg" alt="Show 1"></div>
+          <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/807C3BB3-C9DC-4258-9531-E5E52884D7A5.JPG" alt="Show 2"></div>
+          <div class="swiper-slide"><img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/895B2EE5-817C-41D9-9DD2-750D14014F23_1_102_o.jpeg" alt="Show 3"></div>
         </div>
-
-        <div class="track-card">
-          <div class="track-img" onclick="togglePlay('p2')">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202.jpg" alt="Chorrito x Medellín">
-          </div>
-          <div class="track-info"><h4>Chorrito x Medellín</h4><p>Mashup · 2024</p></div>
-          <div class="sc-player" id="p2">
-            <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%23c8a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
-          </div>
-        </div>
-
-        <div class="track-card">
-          <div class="track-img" onclick="togglePlay('p3')">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%203.jpg" alt="Amando x Yo Voy">
-          </div>
-          <div class="track-info"><h4>Amando x Yo Voy</h4><p>Mashup · 2025</p></div>
-          <div class="sc-player" id="p3">
-            <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%23c8a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
-          </div>
-        </div>
-
-        <div class="track-card">
-          <div class="track-img" onclick="togglePlay('p4')">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%204.jpg" alt="Pirueta x Amanecer">
-          </div>
-          <div class="track-info"><h4>Pirueta x Amanecer</h4><p>Mashup · 2025</p></div>
-          <div class="sc-player" id="p4">
-            <iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%23c8a96e&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false"></iframe>
-          </div>
-        </div>
-
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- TIENDA / PAYPAL LINK -->
-    <section id="tienda" class="section">
-      <div class="sec-label">Packs & Merch</div>
-      <h2 class="sec-title">Tienda</h2>
-      
-      <!-- Cuenta atrás promocional -->
-      <div class="shop-coming-soon" style="margin-bottom: 40px;">
-        <h3 style="font-family: var(--fd); font-size: 1.8rem; margin-bottom: 10px;">Lanzamiento Oficial</h3>
-        <p>¡El Pack ya está aquí! La promoción de lanzamiento termina en:</p>
-        <div class="countdown" id="countdown">
-          <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Días</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Horas</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Min</div></div>
-          <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seg</div></div>
+  <!-- MÚSICA -->
+  <section id="musica" class="section">
+    <div class="sec-label">Mashups &amp; Edits</div>
+    <h2 class="sec-title">Música</h2>
+    <div class="music-grid">
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p1')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%201.jpg" alt="Me Mareo x Deseo">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
         </div>
+        <div class="track-info"><h4>Me Mareo x Deseo</h4><p>Mashup · 2024</p></div>
+        <div class="sc-player" id="p1"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2166804993&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
       </div>
 
-      <!-- Producto con enlace a la página de pago -->
-      <div class="music-grid">
-        <div class="track-card">
-          <div class="track-img">
-            <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack">
-          </div>
-          <div class="track-info" style="margin-bottom: 15px;">
-            <h4 style="font-size: 1.1rem; margin-bottom: 5px;">Urban Mashup Pack Vol. 1</h4>
-            <p style="color: var(--gold); font-size: 1rem; font-weight: bold;">1.00 €</p>
-          </div>
-          
-          <a href="pack.html" class="btn btn-solid" style="display:block; text-align:center; width: 100%; box-sizing: border-box;">
-            VER PACK
-          </a>
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p2')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202.jpg" alt="Chorrito x Medellín">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
         </div>
+        <div class="track-info"><h4>Chorrito x Medellín</h4><p>Mashup · 2024</p></div>
+        <div class="sc-player" id="p2"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2162492967&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
       </div>
-    </section>
 
-    <!-- CONTACTO -->
-    <section id="contacto" class="section">
-      <div class="sec-label">Booking</div>
-      <h2 class="sec-title">Contacto</h2>
-      <div class="contact-layout">
-        
-        <div class="contact-info">
-          <h3>¿Hablamos?</h3>
-          <p>Si tienes un evento, sala o festival, escríbeme y organizamos los detalles. Contesto siempre en menos de 24 horas.</p>
-          
-          <a href="mailto:infodjmh@gmail.com" class="c-item">
-            <div class="c-icon">
-              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div class="c-text"><span>Email Directo</span><strong>infodjmh@gmail.com</strong></div>
-          </a>
-
-          <a href="tel:+34643822841" class="c-item">
-            <div class="c-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            </div>
-            <div class="c-text"><span>Teléfono</span><strong>+34 643 822 841</strong></div>
-          </a>
-
-          <a href="https://instagram.com/marcosherradon_" target="_blank" class="c-item">
-            <div class="c-icon">
-              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-            </div>
-            <div class="c-text"><span>Instagram</span><strong>@marcosherradon_</strong></div>
-          </a>
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p3')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%203.jpg" alt="Amando x Yo Voy">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
         </div>
-
-        <form action="https://formsubmit.co/infodjmh@gmail.com" method="POST">
-          <input type="hidden" name="_captcha" value="false">
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-            <div class="form-group"><label>Nombre</label><input type="text" name="nombre" required></div>
-            <div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" required></div>
-          </div>
-          <div class="form-group"><label>Email</label><input type="email" name="email" required></div>
-          <div class="form-group"><label>Detalles del evento</label><textarea name="mensaje" required></textarea></div>
-          <button type="submit" class="btn btn-solid" style="width: 100%;">Enviar Mensaje</button>
-        </form>
-
+        <div class="track-info"><h4>Amando x Yo Voy</h4><p>Mashup · 2025</p></div>
+        <div class="sc-player" id="p3"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2269410731&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
       </div>
-    </section>
 
-    <!-- MARQUEE Y FOOTER -->
-    <div class="marquee">
-      <div class="marquee-content">
-        <div class="m-item">Marcos Herradón DJ</div>
-        <div class="m-item">Urban DJ & Producer</div>
-        <div class="m-item">Tour 2026</div>
-        <div class="m-item">Talavera de la Reina</div>
-        <div class="m-item">Marcos Herradón DJ</div>
-        <div class="m-item">Urban DJ & Producer</div>
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p4')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%204.jpg" alt="Pirueta x Amanecer">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Pirueta x Amanecer</h4><p>Mashup · 2025</p></div>
+        <div class="sc-player" id="p4"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2272730915&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p5')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%206.jpg" alt="Muchacha x Toca Toca">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Muchacha x Toca Toca</h4><p>Mashup · 2025</p></div>
+        <div class="sc-player" id="p5"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2285054828&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p6')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%20duofav.jpg" alt="Tu Dúo Favorito">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Tu Dúo Favorito</h4><p>Edit · 2025</p></div>
+        <div class="sc-player" id="p6"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287048385&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p7')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/PORTADA%202%20(1).jpg" alt="Forever x Practícalo">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Forever x Practícalo</h4><p>Mashup · 2025</p></div>
+        <div class="sc-player" id="p7"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2287662929&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p8')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/dioslosbendiga.jpg" alt="Dios Los Bendiga">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Dios Los Bendiga</h4><p>Edit · 2025</p></div>
+        <div class="sc-player" id="p8"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2290477859&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+      <div class="track-card">
+        <div class="track-img" onclick="togglePlay('p9')">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/portada_mashup_madura.jpg" alt="Madura x Hace Tiempo">
+          <div class="track-play-ov"><div class="play-btn"></div></div>
+        </div>
+        <div class="track-info"><h4>Madura x Hace Tiempo</h4><p>Mashup · 2025</p></div>
+        <div class="sc-player" id="p9"><iframe width="100%" height="120" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2293229240&color=%23ffffff&auto_play=false&hide_related=true&show_comments=false&show_teaser=false"></iframe></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TIENDA -->
+  <section id="tienda" class="section">
+    <div class="sec-label">Packs &amp; Merch</div>
+    <h2 class="sec-title">Tienda</h2>
+
+    <div class="shop-promo">
+      <h3>Promoción de lanzamiento</h3>
+      <p>Precio especial de lanzamiento. La oferta termina en:</p>
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">Días</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Horas</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Min</span></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Seg</span></div>
       </div>
     </div>
 
-    <footer>
-      <p>© 2026 Marcos Herradón DJ. All rights reserved.</p>
-      <div>
-        <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
-        <a href="mailto:infodjmh@gmail.com">Email</a>
+    <div class="music-grid">
+      <div class="product-card">
+        <div class="track-img">
+          <img src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/bnbxoxo.jpg" alt="Urban Mashup Pack Vol.1">
+        </div>
+        <div class="track-info">
+          <h4 style="font-size:1rem;">Urban Mashup Pack Vol. 1</h4>
+          <div class="price-tag">15.00 €</div>
+        </div>
+        <a href="pack.html" class="btn btn-solid" style="display:block;text-align:center;width:100%;">Ver Pack</a>
       </div>
-    </footer>
+    </div>
+  </section>
 
-  </main>
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <div class="sec-label">Booking</div>
+    <h2 class="sec-title">Contacto</h2>
+    <div class="contact-layout">
+      <div class="contact-info">
+        <h3>¿Hablamos?</h3>
+        <p>Si tienes un evento, sala o festival, escríbeme y organizamos los detalles. Contesto siempre en menos de 24 horas.</p>
+        <a href="mailto:infodjmh@gmail.com" class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="c-text"><span>Email</span><strong>infodjmh@gmail.com</strong></div>
+        </a>
+        <a href="tel:+34643822841" class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.13 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.08 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div class="c-text"><span>Teléfono</span><strong>+34 643 822 841</strong></div>
+        </a>
+        <a href="https://instagram.com/marcosherradon_" target="_blank" class="c-item">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></div>
+          <div class="c-text"><span>Instagram</span><strong>@marcosherradon_</strong></div>
+        </a>
+      </div>
+      <form action="https://formsubmit.co/infodjmh@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="Nuevo contacto desde marcoshdj.github.io">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-group"><label>Nombre</label><input type="text" name="nombre" placeholder="Tu nombre" required></div>
+          <div class="form-group"><label>Teléfono</label><input type="tel" name="telefono" placeholder="+34 600 000 000" required></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="tu@email.com" required></div>
+        <div class="form-group"><label>Detalles del evento</label><textarea name="mensaje" placeholder="Cuéntame el tipo de evento, fecha, aforo…" required></textarea></div>
+        <button type="submit" class="btn btn-solid" style="width:100%;">Enviar Mensaje</button>
+      </form>
+    </div>
+  </section>
 
-  <!-- SCRIPTS FUNCIONALES DE LA WEB -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script>
-    // Inicializar Swiper
-    new Swiper('.swiper', {
-      loop: true,
-      autoplay: { delay: 3500 },
-      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-      pagination: { el: '.swiper-pagination', clickable: true }
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-content">
+      <div class="m-item">Marcos Herradón DJ</div>
+      <div class="m-item">Urban DJ &amp; Producer</div>
+      <div class="m-item">Tour 2026</div>
+      <div class="m-item">Talavera de la Reina</div>
+      <div class="m-item">Marcos Herradón DJ</div>
+      <div class="m-item">Urban DJ &amp; Producer</div>
+      <div class="m-item">Tour 2026</div>
+      <div class="m-item">Talavera de la Reina</div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Marcos Herradón DJ. All rights reserved.</p>
+    <div>
+      <a href="https://instagram.com/marcosherradon_" target="_blank">Instagram</a>
+      <a href="mailto:infodjmh@gmail.com">Email</a>
+    </div>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  // Swiper
+  new Swiper('.swiper',{loop:true,autoplay:{delay:3500,disableOnInteraction:false},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},pagination:{el:'.swiper-pagination',clickable:true}});
+
+  // Nav
+  var navLinks=document.querySelectorAll('.nav-link');
+  navLinks.forEach(function(l){l.addEventListener('click',function(){document.body.classList.remove('menu-open');navLinks.forEach(function(x){x.classList.remove('active');});l.classList.add('active');});});
+
+  // Reproductores
+  function togglePlay(id){document.querySelectorAll('.sc-player').forEach(function(el){if(el.id!==id)el.classList.remove('active');});document.getElementById(id).classList.toggle('active');}
+
+  // Parseo de fechas robusto
+  function parseSafeDate(s){if(!s)return null;var p=s.split(/[-\/]/);if(p.length===3){if(p[0].length===4)return new Date(+p[0],+p[1]-1,+p[2]);if(p[2].length===4)return new Date(+p[2],+p[1]-1,+p[0]);}return new Date(s);}
+
+  // Eventos JSON
+  var urlJson='events.json?v='+Date.now();
+  fetch(urlJson).then(function(r){return r.json();}).then(function(data){
+    var cont=document.getElementById('eventos-contenedor');
+    var lbl=document.getElementById('live-event');
+    var hoy=new Date(); hoy.setHours(0,0,0,0);
+    var futuros=data.filter(function(ev){var d=parseSafeDate(ev.date);return d&&d>=hoy;});
+    if(!futuros.length){cont.innerHTML='<p style="color:var(--muted);font-size:.9rem;">Próximas fechas por anunciar...</p>';lbl.textContent='Próximamente';return;}
+    futuros.sort(function(a,b){return parseSafeDate(a.date)-parseSafeDate(b.date);});
+    var fd=parseSafeDate(futuros[0].date);
+    lbl.textContent=fd?fd.getDate()+' '+fd.toLocaleString('es-ES',{month:'short'}).toUpperCase().replace('.','')+' — '+futuros[0].venue+' ('+futuros[0].location+')':futuros[0].venue;
+    cont.innerHTML='';
+    futuros.forEach(function(ev){
+      var d=parseSafeDate(ev.date);
+      var day=d?d.getDate():'?';
+      var mon=d?d.toLocaleString('es-ES',{month:'short'}).toUpperCase().replace('.',''): '';
+      var el=document.createElement('div');
+      el.className='event-item';
+      el.innerHTML='<div class="ev-img" onclick="abrirCartel(\''+ev.image+'\')"><img src="'+ev.image+'" alt="'+ev.venue+'" loading="lazy"></div>'
+        +'<div><div class="ev-date"><span class="ev-d1">'+day+' '+mon+'</span><span class="ev-d2">'+(ev.time||'TBA')+'</span></div>'
+        +'<div class="ev-title">'+ev.venue+'</div><div class="ev-loc">'+ev.location+'</div></div>';
+      cont.appendChild(el);
     });
+  }).catch(function(){document.getElementById('eventos-contenedor').innerHTML='<p style="color:var(--muted);font-size:.9rem;">Próximas fechas por anunciar...</p>';document.getElementById('live-event').textContent='Próximamente';});
 
-    // Navegación (Cerrar menú móvil y estado activo)
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('menu-open');
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
+  // ── CUENTA ATRÁS ──────────────────────────────────────────────────────
+  // Cambia aquí la fecha: new Date(AÑO, MES-1, DIA, HORA, MINUTOS, SEGUNDOS)
+  var TARGET = new Date(2026, 7, 1, 12, 0, 0); // 1 agosto 2026 a las 12:00
 
-    // Abrir reproductores de música (Acordeón)
-    function togglePlay(id) {
-      document.querySelectorAll('.sc-player').forEach(el => {
-        if(el.id !== id) el.classList.remove('active');
-      });
-      document.getElementById(id).classList.toggle('active');
+  function pad(n){return n<10?'0'+n:String(n);}
+  function updateCD(){
+    var now=new Date();
+    var diff=TARGET.getTime()-now.getTime();
+    if(diff<=0){
+      clearInterval(cdTimer);
+      document.getElementById('countdown').innerHTML='<p class="cd-expired">¡El Pack ya está a su precio habitual!</p>';
+      return;
     }
+    document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
+  }
+  updateCD();
+  var cdTimer=setInterval(updateCD,1000);
+  // ─────────────────────────────────────────────────────────────────────
 
-    // Lector de fechas infalible
-    function parseSafeDate(dateStr) {
-      if (!dateStr) return new Date();
-      const parts = dateStr.split(/[-/]/);
-      if (parts.length === 3) {
-        if (parts[0].length === 4) return new Date(parts[0], parts[1]-1, parts[2]); 
-        if (parts[2].length === 4) return new Date(parts[2], parts[1]-1, parts[0]); 
-      }
-      return new Date(dateStr);
-    }
+  // Modal cartel
+  function abrirCartel(src){document.getElementById('cartel-ampliado').src=src;document.getElementById('cartel-modal').classList.add('abierto');}
+  function cerrarCartel(){document.getElementById('cartel-modal').classList.remove('abierto');}
 
-    // Cargar Eventos desde el JSON
-    const urlJson = 'events.json?v=' + new Date().getTime();
-    fetch(urlJson)
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById('eventos-contenedor');
-        const topbarLive = document.getElementById('live-event');
-        
-        const hoy = new Date();
-        hoy.setHours(0,0,0,0);
+  // Cookies
+  var banner=document.getElementById('cookie-banner');
+  if(!localStorage.getItem('cookies_ok')){setTimeout(function(){banner.classList.add('mostrar');},1500);}
+  function setCookies(v){localStorage.setItem('cookies_ok',v);banner.classList.remove('mostrar');}
+  document.getElementById('btn-cookies-necesarias').addEventListener('click',function(){setCookies('necesarias');});
+  document.getElementById('btn-cookies-aceptar').addEventListener('click',function(){setCookies('todas');});
+</script>
 
-        // 1. Filtramos: Solo eventos de hoy en adelante
-        const eventosFuturos = data.filter(ev => parseSafeDate(ev.date) >= hoy);
-
-        if (!eventosFuturos || eventosFuturos.length === 0) {
-          container.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Próximas fechas por anunciar...</p>';
-          topbarLive.innerText = 'Próximamente';
-          return;
-        }
-
-        // 2. Ordenamos
-        eventosFuturos.sort((a,b) => parseSafeDate(a.date) - parseSafeDate(b.date));
-        
-        // 3. Actualizar la barra superior (Topbar)
-        const first = eventosFuturos[0];
-        const fd = parseSafeDate(first.date);
-        if(isNaN(fd)) {
-           topbarLive.innerText = `${first.venue} (${first.location})`;
-        } else {
-           const dia = fd.getDate();
-           const mes = fd.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
-           topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
-        }
-
-        // 4. Limpiar y dibujar la lista (con apertura de cartel)
-        container.innerHTML = '';
-        eventosFuturos.forEach(ev => {
-          const d = parseSafeDate(ev.date);
-          const day = isNaN(d) ? '?' : d.getDate();
-          const month = isNaN(d) ? '' : d.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
-          
-          container.innerHTML += `
-            <div class="event-item">
-              <div class="ev-img" onclick="abrirCartel('${ev.image}')"><img src="${ev.image}" alt="${ev.venue}"></div>
-              <div>
-                <div class="ev-date"><span class="ev-d1">${day} ${month}</span><span class="ev-d2">${ev.time || 'TBA'}</span></div>
-                <div class="ev-title">${ev.venue}</div>
-                <div class="ev-loc">${ev.location}</div>
-              </div>
-            </div>
-          `;
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('eventos-contenedor').innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">Error al cargar eventos.</p>';
-        document.getElementById('live-event').innerText = 'Próximamente';
-      });
-
-    /* --- CUENTA ATRÁS PARA EL FINAL DE LA PROMOCIÓN --- */
-    const countDownDate = new Date("Jul 13, 2026 12:00:00").getTime();
-
-    const countdownTimer = setInterval(function() {
-      const now = new Date().getTime();
-      const distance = countDownDate - now;
-
-      if (distance < 0) {
-        clearInterval(countdownTimer);
-        const container = document.getElementById("countdown");
-        if (container) {
-          container.innerHTML = "<p style='color:var(--gold); font-size: 1.1rem; font-weight:bold; letter-spacing:1px;'>¡El Pack ya está a la venta a su precio habitual!</p>";
-        }
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
-      document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
-      document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
-      document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
-    }, 1000);
-
-    /* --- FUNCIONES PARA AMPLIAR CARTEL --- */
-    function abrirCartel(src) {
-      document.getElementById('cartel-ampliado').src = src;
-      document.getElementById('cartel-modal').classList.add('abierto');
-    }
-    function cerrarCartel() {
-      document.getElementById('cartel-modal').classList.remove('abierto');
-    }
-
-    /* --- AVISO DE COOKIES --- */
-    const cookieBanner = document.getElementById('cookie-banner');
-    const btnNecesarias = document.getElementById('btn-cookies-necesarias');
-    const btnAceptar = document.getElementById('btn-cookies-aceptar');
-
-    if (!localStorage.getItem('cookies_consentidas')) {
-      setTimeout(() => {
-        cookieBanner.classList.add('mostrar');
-      }, 1500); 
-    }
-
-    function gestionarCookies(decision) {
-      localStorage.setItem('cookies_consentidas', decision);
-      cookieBanner.classList.remove('mostrar');
-    }
-
-    btnNecesarias.addEventListener('click', () => gestionarCookies('solo_necesarias'));
-    btnAceptar.addEventListener('click', () => gestionarCookies('todas_aceptadas'));
-  </script>
+<!-- TIDIO -->
+<script src="//code.tidio.co/czldnxvhtrjyhjmbsoxqnv7rjtvcqig8.js" async></script>
 </body>
 </html>

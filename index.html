@@ -47,7 +47,7 @@
 
     /* ── VIDEO BG ── */
     .vbg { position:fixed; inset:0; z-index:-1; background:#000; overflow:hidden; }
-    .vbg video { width:100%; height:100%; object-fit:cover; filter:brightness(0.12) contrast(1.2) grayscale(1); }
+    .vbg video { width:100%; height:100%; object-fit:cover; filter:brightness(0.15) grayscale(1); }
     .vbg-overlay { position:absolute; inset:0; background:rgba(8,8,8,0.82); }
 
     /* ── LOADER ── */
@@ -119,12 +119,12 @@
     .main-content { margin-left:var(--sw); padding-top:var(--th); position:relative; z-index:10; }
 
     /* ── HERO ── */
-    .hero { min-height:calc(100vh - var(--th)); display:flex; flex-direction:column; justify-content:flex-end; padding:60px 5vw 70px; }
+    .hero { min-height:calc(100vh - var(--th)); display:flex; flex-direction:column; justify-content:flex-end; padding:60px 5vw 70px; overflow:hidden; }
     .hero-tag { font-family:var(--fa); font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:2.5px; color:var(--muted); margin-bottom:22px; display:flex; align-items:center; gap:12px; }
     .hero-tag::before { content:''; width:28px; height:1px; background:rgba(255,255,255,.35); }
-    .hero-title { font-family:var(--fd); font-size:clamp(2.8rem,10vw,9rem); font-weight:800; line-height:.88; text-transform:uppercase; letter-spacing:-3px; margin-bottom:32px; }
-    .hero-title span { display:block; }
-    .hero-title span.hl { color:transparent; -webkit-text-stroke:2px rgba(255,255,255,.55); }
+    .hero-title { font-family:var(--fd); font-size:clamp(2.2rem,7vw,6.5rem); font-weight:800; line-height:.92; text-transform:uppercase; letter-spacing:-1.5px; margin-bottom:32px; overflow:hidden; width:100%; }
+    .hero-title span { display:block; overflow:hidden; word-break:break-word; }
+    .hero-title span.hl { color:transparent; -webkit-text-stroke:1.5px rgba(255,255,255,.6); }
     .hero-desc { font-size:.88rem; line-height:1.75; color:var(--muted); max-width:380px; margin-bottom:34px; font-weight:300; }
     .btn-group { display:flex; gap:12px; flex-wrap:wrap; }
     .btn { padding:11px 24px; border-radius:5px; font-family:var(--fa); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; transition:.2s; display:inline-block; }
@@ -278,6 +278,7 @@
       .nav-menu a { font-size:1.4rem; padding:14px; }
       .main-content { margin-left:0 !important; padding-top:calc(var(--th) + 38px); }
       .hero { padding:40px 20px 60px; }
+      .hero-title { font-size:clamp(2rem,13vw,3.8rem); letter-spacing:-1px; }
       .section { padding:70px 20px; }
       .about-layout,.contact-layout { grid-template-columns:1fr; gap:40px; }
       .countdown { gap:6px; }
@@ -327,7 +328,7 @@
 <!-- GRAIN + VIDEO -->
 <div class="grain"></div>
 <div class="vbg">
-  <video autoplay muted loop playsinline>
+  <video autoplay muted loop playsinline preload="metadata">
     <source src="https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/main/IMG_0204.mp4" type="video/mp4">
   </video>
   <div class="vbg-overlay"></div>

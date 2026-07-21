@@ -123,7 +123,7 @@
     .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
     .hero-title { 
         font-family: var(--fd); 
-        font-size: clamp(2.2rem, 8vw, 8rem); /* Optimizado para móvil */
+        font-size: clamp(1.5rem, 11vw, 8rem); /* Optimizado para móvil */
         font-weight: 800; 
         line-height: 0.9; 
         text-transform: uppercase; 
@@ -187,8 +187,21 @@
     .event-list { display: flex; flex-direction: column; gap: 12px; }
     .event-item { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 20px; padding: 15px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; transition: 0.3s; }
     .event-item:hover { border-color: var(--border-g); background: var(--card-h); }
-    .ev-img { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; }
-    .ev-img img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .ev-img { 
+      width: 80px; 
+      height: 80px; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      background-color: #000; /* Fondo oscuro por si no es cuadrada */
+      cursor: zoom-in; 
+    }
+    .ev-img img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; /* Para que el cartel no se recorte */
+    }
+
     .ev-date { display: inline-flex; margin-bottom: 8px; }
     .ev-d1 { background: var(--gold); color: #000; padding: 3px 8px; border-radius: 4px 0 0 4px; font-family: var(--fa); font-size: 0.7rem; font-weight: 700; }
     .ev-d2 { border: 1px solid var(--border-g); border-left: none; color: var(--gold); padding: 3px 8px; border-radius: 0 4px 4px 0; font-family: var(--fa); font-size: 0.7rem; }
@@ -226,6 +239,87 @@
     footer a { font-family: var(--fa); font-size: 0.7rem; color: #666; text-transform: uppercase; margin-left: 15px; transition: 0.3s; }
     footer a:hover { color: var(--gold); }
 
+    /* VENTANA EMERGENTE PARA EL CARTEL */
+    #cartel-modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 20px; cursor: zoom-out;
+    }
+    #cartel-modal.abierto { opacity: 1; visibility: visible; }
+    #cartel-modal img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .cerrar-modal { position: absolute; top: 20px; right: 30px; color: var(--gold); font-size: 2.5rem; font-weight: bold; cursor: pointer; }
+
+    /* AVISO DE COOKIES */
+    .cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      width: calc(100% - 40px);
+      max-width: 1000px;
+      background-color: #121212;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10000;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      font-family: var(--fb);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+    }
+    .cookie-banner.mostrar {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+    .cookie-text {
+      flex: 1;
+      color: #e0e0e0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-right: 30px;
+    }
+    .cookie-text a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .cookie-buttons {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .btn-cookie-outline, .btn-cookie-solid {
+      font-family: var(--fb);
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-cookie-outline {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+    .btn-cookie-outline:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .btn-cookie-solid {
+      background: #ffffff;
+      border: 1px solid #ffffff;
+      color: #000000;
+      font-weight: 600;
+    }
+    .btn-cookie-solid:hover {
+      background: #e6e6e6;
+    }
+
     /* ADAPTACIÓN MÓVIL CORRECTA */
     @media (max-width: 900px) {
       :root { --sw: 0px; --th: 60px; }
@@ -253,10 +347,49 @@
       .cd-box { min-width: 70px; padding: 12px 10px; }
       .cd-num { font-size: 1.8rem; }
       footer { flex-direction: column; gap: 15px; text-align: center; }
+      
+      /* Adaptación cookies para móvil */
+      .cookie-banner {
+        flex-direction: column;
+        bottom: 0;
+        width: 100%;
+        border-radius: 16px 16px 0 0;
+        padding: 25px 20px;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+      }
+      .cookie-text {
+        margin-right: 0;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .cookie-buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- AVISO DE COOKIES -->
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-text">
+      🍪 Usamos cookies técnicas propias y de terceros (Spotify, TikTok, Google) para mejorar tu experiencia. <a href="#">Más información</a>.
+    </div>
+    <div class="cookie-buttons">
+      <button id="btn-cookies-necesarias" class="btn-cookie-outline">Solo necesarias</button>
+      <button id="btn-cookies-aceptar" class="btn-cookie-solid">Aceptar todas</button>
+    </div>
+  </div>
+
+  <!-- MODAL PARA VER CARTEL EN GRANDE -->
+  <div id="cartel-modal" onclick="cerrarCartel()">
+    <span class="cerrar-modal">&times;</span>
+    <img id="cartel-ampliado" src="" alt="Cartel Evento">
+  </div>
 
   <!-- LOADER -->
   <div id="loader">
@@ -526,7 +659,6 @@
 
   </main>
 
-  
   <!-- SCRIPTS FUNCIONALES DE LA WEB -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
@@ -601,7 +733,7 @@
            topbarLive.innerText = `${dia} ${mes} — ${first.venue} (${first.location})`;
         }
 
-        // 4. Limpiar y dibujar la lista
+        // 4. Limpiar y dibujar la lista (con apertura de cartel)
         container.innerHTML = '';
         eventosFuturos.forEach(ev => {
           const d = parseSafeDate(ev.date);
@@ -610,7 +742,7 @@
           
           container.innerHTML += `
             <div class="event-item">
-              <div class="ev-img"><img src="${ev.image}" alt="${ev.venue}"></div>
+              <div class="ev-img" onclick="abrirCartel('${ev.image}')"><img src="${ev.image}" alt="${ev.venue}"></div>
               <div>
                 <div class="ev-date"><span class="ev-d1">${day} ${month}</span><span class="ev-d2">${ev.time || 'TBA'}</span></div>
                 <div class="ev-title">${ev.venue}</div>
@@ -652,6 +784,34 @@
       document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
       document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
     }, 1000);
+
+    /* --- FUNCIONES PARA AMPLIAR CARTEL --- */
+    function abrirCartel(src) {
+      document.getElementById('cartel-ampliado').src = src;
+      document.getElementById('cartel-modal').classList.add('abierto');
+    }
+    function cerrarCartel() {
+      document.getElementById('cartel-modal').classList.remove('abierto');
+    }
+
+    /* --- AVISO DE COOKIES --- */
+    const cookieBanner = document.getElementById('cookie-banner');
+    const btnNecesarias = document.getElementById('btn-cookies-necesarias');
+    const btnAceptar = document.getElementById('btn-cookies-aceptar');
+
+    if (!localStorage.getItem('cookies_consentidas')) {
+      setTimeout(() => {
+        cookieBanner.classList.add('mostrar');
+      }, 1500); 
+    }
+
+    function gestionarCookies(decision) {
+      localStorage.setItem('cookies_consentidas', decision);
+      cookieBanner.classList.remove('mostrar');
+    }
+
+    btnNecesarias.addEventListener('click', () => gestionarCookies('solo_necesarias'));
+    btnAceptar.addEventListener('click', () => gestionarCookies('todas_aceptadas'));
   </script>
 </body>
 </html>

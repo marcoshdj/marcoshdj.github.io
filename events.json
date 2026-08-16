@@ -1,18 +1,18 @@
 [
   {
-    "date": "2026-07-31",
+    "date": "2026-08-21",
     "time": "01:00 - 06:00",
-    "venue": "FIESTAS PATRONALES 2026",
-    "location": "Plaza de Toros de Nombela",
-    "image": "https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/fiestas_patronales.jpg",
+    "venue": "Evento Privado",
+    "location": "Nombela",
+    "image": "",
     "description": "Las fiestas de Nombela vuelven. Sonido 100% urbano."
   },
   {
-    "date": "2026-07-23",
-    "time": "01:00 a 04:00 ",
-    "venue": "PreFiestas 2026",
-    "location": "Terraza Amable",
-    "image": "https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/sumparty_18jul.png",
+    "date": "2026-09-29",
+    "time": "00:00 - 01:30 ",
+    "venue": "Bolostopa Festival",
+    "location": "Nombela (Toledo)",
+    "image": "https://raw.githubusercontent.com/marcoshdj/marcoshdj.github.io/refs/heads/main/IMG_0126.jpeg",
     "description": "Llegan las fiestas patronales a Nombela. Sonido 100% urbano."
   }
 ]
